@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="Clientes" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Clientes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="IdClienteCLI" type="xs:int" />
+                <xs:element name="RazonSocialCLI" type="xs:string" minOccurs="0" />
+                <xs:element name="CUIT" type="xs:string" minOccurs="0" />
+                <xs:element name="DireccionCLI" type="xs:string" minOccurs="0" />
+                <xs:element name="LocalidadCLI" type="xs:string" minOccurs="0" />
+                <xs:element name="ProvinciaCLI" type="xs:string" minOccurs="0" />
+                <xs:element name="TransporteCLI" type="xs:string" minOccurs="0" />
+                <xs:element name="ContactoCLI" type="xs:string" minOccurs="0" />
+                <xs:element name="TelefonoCLI" type="xs:string" minOccurs="0" />
+                <xs:element name="MovilCLI" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//Clientes" />
+        <xs:field xpath="IdClienteCLI" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <Clientes>
+    <IdClienteCLI>4550</IdClienteCLI>
+    <RazonSocialCLI>JUDITH</RazonSocialCLI>
+    <CUIT />
+    <DireccionCLI />
+    <LocalidadCLI />
+    <ProvinciaCLI />
+    <TransporteCLI />
+    <ContactoCLI />
+    <TelefonoCLI />
+    <MovilCLI />
+  </Clientes>
+  <Clientes>
+    <IdClienteCLI>1</IdClienteCLI>
+    <RazonSocialCLI>PUBLICO</RazonSocialCLI>
+  </Clientes>
+</NewDataSet>
