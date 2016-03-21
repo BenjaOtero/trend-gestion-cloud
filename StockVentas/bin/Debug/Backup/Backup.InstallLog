@@ -1,0 +1,13 @@
+﻿Instalando ensamblado 'C:\Trend\Gestion-cloud\trunk\StockVentas\bin\Debug\Backup\Backup.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   logfile = C:\Trend\Gestion-cloud\trunk\StockVentas\bin\Debug\Backup\Backup.InstallLog
+   assemblypath = C:\Trend\Gestion-cloud\trunk\StockVentas\bin\Debug\Backup\Backup.exe
+Instalando el servicio AVGzh...
+El servicio AVGzh se ha instalado correctamente.
+Creando el origen de EventLog AVGzh en el registro Application...
+Confirmando ensamblado 'C:\Trend\Gestion-cloud\trunk\StockVentas\bin\Debug\Backup\Backup.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   logfile = C:\Trend\Gestion-cloud\trunk\StockVentas\bin\Debug\Backup\Backup.InstallLog
+   assemblypath = C:\Trend\Gestion-cloud\trunk\StockVentas\bin\Debug\Backup\Backup.exe
