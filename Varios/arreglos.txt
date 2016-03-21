@@ -1,0 +1,82 @@
+-Ver mail oterobenjamin@gmail.com (¡Notificación Importante! Vulnerabilidad POODLE)
+-Validar que coincidan ImagenART con ImagenColorART en frmArticulosDetalle
+- edición ventas desde arqueo (ya lo ví y no dió error. Ver nuevamente)
+- tener en cuenta en la configuracion inicial de mysql server que el directorio de instalacion del mismo puede varias entre 
+	'archivos de programas', 'program files' y 'program files(x86)'
+-error en frmAlicuotasIva al actualizar
+-backup db (crear servicio windows)
+-si modifica descripcionWebART en frmArticulosDetalle y existen imagenes en el servidor no volver a subirlas
+
+
+-probar ventas desde planillas
+-probar fondo caja
+-Update no puede encontrar TableMapping['Ventas'] o DataTable 'Ventas'.
+-agregar en requisitos previos sp3 windows xp
+-ver contraseñas 8953#AFjn
+-en tabla razon social se cambia solo el id
+-no generar stock para locales "Entradas" y "Salidas"
+-Quitar la sentencia de todos los ABM "txtProvinciaCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;"
+
+
+-vaciar base de datos
+-llevarle planilla entradas a Cecilia
+-ofuscar codigo
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

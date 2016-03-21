@@ -1,0 +1,60 @@
+-guardar ventas históricas por genero
+-Movimientos tesorería para estado de resultados
+-al hacer click en generar a partir de, introducir el articulo seleccionado en frmArticulos
+-resolver diferentes medidas de etiquetas codigo barra
+-desarrollar ayuda
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
