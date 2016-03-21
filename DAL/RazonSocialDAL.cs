@@ -42,7 +42,7 @@ namespace DAL
 
 
             // IMPLEMENTACIÓN DE LA ORDEN UPDATE
-            SqlUpdateCommand1.Parameters.Add("p_id", MySqlDbType.Int32, 2, "IdRazonSocialRAZ");
+            SqlUpdateCommand1.Parameters.Add("p_id", MySqlDbType.Int32, 11, "IdRazonSocialRAZ");
             SqlUpdateCommand1.Parameters.Add("p_razon", MySqlDbType.VarChar, 50, "RazonSocialRAZ");
             SqlUpdateCommand1.Parameters.Add("p_nombre", MySqlDbType.VarChar, 50, "NombreFantasiaRAZ");
             SqlUpdateCommand1.Parameters.Add("p_domicilio", MySqlDbType.VarChar, 50, "DomicilioRAZ");

@@ -83,6 +83,29 @@ namespace StockVentas
                 try
                 {
                     ds = BL.GetDataBLL.GetData();
+                    try
+                    {
+                        string idRazonSocial = BL.GetDataBLL.RazonSocial().Rows[0][0].ToString();
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        DataTable tblRazon = BL.GetDataBLL.RazonSocial();
+                        DataRow row = tblRazon.NewRow();
+                        Random rand = new Random();
+                        int clave = rand.Next(147483647, 2147483647);
+                        row["IdRazonSocialRAZ"] = clave;
+                        row["RazonSocialRAZ"] = "";
+                        row["NombreFantasiaRAZ"] = "";
+                        row["DomicilioRAZ"] = "";
+                        row["LocalidadRAZ"] = "";
+                        row["ProvinciaRAZ"] = "";
+                        row["IdCondicionIvaRAZ"] = DBNull.Value;
+                        row["CuitRAZ"] = "";
+                        row["IngresosBrutosRAZ"] = "";
+                        row["InicioActividadRAZ"] = DBNull.Value;
+                        tblRazon.Rows.Add(row);
+                        BL.RazonSocialBLL.GrabarDB(tblRazon);
+                    }                    
                 }
                 catch (MySqlException ex)
                 {

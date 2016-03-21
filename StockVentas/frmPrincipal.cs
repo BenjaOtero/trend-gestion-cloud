@@ -371,9 +371,7 @@ namespace StockVentas
                 string unidad = path.Substring(0, 2);
                 sb.AppendLine(unidad);
                 sb.AppendLine(@"cd " + path + @"\Backup");
-                sb.AppendLine(@"mysqldump --skip-comments -u benja -p8953#AFjn -h localhost --opt ncsoftwa_re articulos clientes formaspago generos alicuotasiva razonsocial | gzip > c:\windows\temp\" + idRazonSocial);
-               // sb.AppendLine(@"mysqldump --skip-comments -u benja -p8953#AFjn -h localhost --opt ncsoftwa_re | gzip > c:\windows\temp\" + idRazonSocial);
-                //mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
+                sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re articulos clientes formaspago generos alicuotasiva razonsocial | gzip > c:\windows\temp\" + idRazonSocial);
                 using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
                 {
                     outfile.Write(sb.ToString());
