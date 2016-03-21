@@ -1,0 +1,24 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=TrendGestion.chm
+Contents file=Contenido.hhc
+Default Window=Main
+Default topic=htm\index.htm
+Display compile progress=No
+Language=0x2c0a Español (Argentina)
+Title=Ayuda Trend Gestión
+
+[WINDOWS]
+Main="Ayuda Trend Gestión","Contenido.hhc",,"htm\index.htm",,,,,,0x2120,,0x3006,,,,,,,,0
+
+
+[FILES]
+htm\articulos_add.htm
+htm\articulos_add_exist.htm
+htm\articulos_del.htm
+htm\articulos_edit_news.htm
+htm\articulos_find.htm
+htm\index.htm
+
+[INFOTYPES]
+
