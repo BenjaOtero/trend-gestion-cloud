@@ -499,7 +499,6 @@ namespace StockVentas
                 FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 List<string> directories = new List<string>();
-
                 string line = streamReader.ReadLine();
                 while (!string.IsNullOrEmpty(line))
                 {
@@ -507,7 +506,6 @@ namespace StockVentas
                     line = streamReader.ReadLine();
                 }
                 streamReader.Close();
-
                 if (directories.Count() > 0)
                 {
                     if (Directory.Exists(@"c:\windows\temp\datos")) Directory.Delete(@"c:\windows\temp\datos", true);
@@ -531,8 +529,11 @@ namespace StockVentas
                         }
                     }
                     string[] dirs = Directory.GetFiles(@"c:\windows\temp\datos", idRazonSocial + "*");
-                }
-                
+                    foreach (string archivo in dirs)
+                    { 
+                        
+                    }
+                }                
             }
             else
                 MessageBox.Show("Verifique la conexión a internet. No se importaron datos.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
