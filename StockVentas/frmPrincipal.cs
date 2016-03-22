@@ -393,7 +393,7 @@ namespace StockVentas
             Cursor = Cursors.Arrow;
         }
 
-        public static void UploadDatosPos(string nombreLocal, string nombreServidor)
+        private static void UploadDatosPos(string nombreLocal, string nombreServidor)
         {
             string ftpServerIP;
             string ftpUserID;
@@ -530,8 +530,9 @@ namespace StockVentas
                     }
                     string[] dirs = Directory.GetFiles(@"c:\windows\temp\datos", idRazonSocial + "*");
                     foreach (string archivo in dirs)
-                    { 
-                        
+                    {
+                        RestaurarDatos(archivo);
+                        AgregarMovimientos();
                     }
                 }                
             }
@@ -539,6 +540,48 @@ namespace StockVentas
                 MessageBox.Show("Verifique la conexión a internet. No se importaron datos.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void RestaurarDatos(string archivo)
+        {
+            /*
+             * crear archivo bat
+             * escribir archivo bat con sentencias
+             * ejecutar bat
+             * borrar bat
+             */
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\datos\\restore.bat"); // creo el archivo .bat
+            sw.Close();
+            StringBuilder sb = new StringBuilder();
+            string path = Application.StartupPath;
+            string unidad = path.Substring(0, 2);
+            sb.AppendLine(unidad);
+            sb.AppendLine(@"cd " + path + @"\Mysql");
+            sb.AppendLine(@"gzip -d " + archivo);
+            archivo = archivo.Substring(0, archivo.Length - 3);
+            sb.AppendLine(@"mysql -u ncsoftwa_re -p8953#AFjn ncsoftwa_re < " + archivo);
+            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\datos\\restore.bat", true)) // escribo el archivo .bat
+            {
+                outfile.Write(sb.ToString());
+            }
+            Process process = new Process();
+            process.StartInfo.FileName = "c:\\Windows\\Temp\\datos\\restore.bat";
+            process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            process.Exited += new EventHandler(RestaurarDatos_Exited);
+            process.Start();
+            process.WaitForExit();
+        }
 
+        private void RestaurarDatos_Exited(object sender, System.EventArgs e)
+        {
+            if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
+            if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\datos.sql");
+            if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
+        }
+
+        private void AgregarMovimientos()
+        { 
+        
+        }
     }
 }

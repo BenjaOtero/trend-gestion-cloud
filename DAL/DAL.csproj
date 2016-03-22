@@ -63,8 +63,11 @@
     <Compile Include="EmpleadosDAL.cs" />
     <Compile Include="EmpleadosMovDAL.cs" />
     <Compile Include="EmpleadosMovTiposDAL.cs" />
+    <Compile Include="GetDataDAL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ImportDataDAL.cs" />
     <Compile Include="RazonSocialDAL.cs" />
-    <Compile Include="GetDataDAL.cs" />
     <Compile Include="LocalesDAL.cs" />
     <Compile Include="MantenimientoDAL.cs" />
     <Compile Include="PedidosDAL.cs" />
