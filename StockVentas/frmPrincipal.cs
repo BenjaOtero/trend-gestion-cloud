@@ -517,14 +517,16 @@ namespace StockVentas
                     using (WebClient ftpClient = new WebClient())
                     {
                         ftpClient.Credentials = new System.Net.NetworkCredential(ftpUserID, ftpPassword);
-
-                        for (int i = 0; i <= directories.Count - 1; i++)
+                        foreach (string archivo in directories) 
                         {
-                            if (directories[i].Contains(idRazonSocial))
+                            if(archivo.Contains(idRazonSocial))
                             {
-                                string path = "ftp://" + ftpServerIP + "/" + directories[i].ToString();
-                                string trnsfrpth = @"c:\windows\temp\datos\" + directories[i].ToString();
-                                ftpClient.DownloadFile(path, trnsfrpth);
+                                if (!archivo.Contains("datos"))
+                                {
+                                    string path = "ftp://" + ftpServerIP + "/" + archivo;
+                                    string trnsfrpth = @"c:\windows\temp\datos\" + archivo;
+                                    ftpClient.DownloadFile(path, trnsfrpth);
+                                }
                             }
                         }
                     }
