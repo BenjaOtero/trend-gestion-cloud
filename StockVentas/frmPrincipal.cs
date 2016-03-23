@@ -536,7 +536,9 @@ namespace StockVentas
                         string fechaImport = BL.ImportDataBLL.GetFechaImport();
                         BL.ImportDataBLL.BorrarMovimientos(fechaImport);
                         BL.ImportDataBLL.InsertarMovimientos();
+                        
                     }
+                    // borrar archivos servidor
                 }                
             }
             else
