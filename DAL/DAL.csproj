@@ -66,7 +66,9 @@
     <Compile Include="GetDataDAL.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ImportDataDAL.cs" />
+    <Compile Include="ImportDataDAL.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RazonSocialDAL.cs" />
     <Compile Include="LocalesDAL.cs" />
     <Compile Include="MantenimientoDAL.cs" />

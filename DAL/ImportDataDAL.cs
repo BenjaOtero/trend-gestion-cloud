@@ -19,33 +19,33 @@ namespace DAL
             MySqlCommand SqlSelectCommand1;
             SqlConnection1 = DALBase.GetConnection();
             SqlDataAdapter1 = new MySqlDataAdapter();
-            SqlSelectCommand1 = new MySqlCommand("exportar_fondo_caja_Listar", SqlConnection1);
+            SqlSelectCommand1 = new MySqlCommand("Exportar_Fondo_Caja_Listar", SqlConnection1);
             SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
             SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
             DataTable tbl = new DataTable();
             SqlDataAdapter1.Fill(tbl);
             SqlConnection1.Close();
-            string fecha = tbl.Rows[0][0].ToString();
-            return fecha;
+            DateTime fecha = Convert.ToDateTime(tbl.Rows[0][0].ToString());
+            string strFecha = fecha.ToString("yyyy-MM-dd");
+            return strFecha;
         }
 
-        public static void BorrarMovimientos(string accion)
+        public static void BorrarMovimientos(string fecha)
         {
             MySqlConnection SqlConnection1 = DALBase.GetConnection();
             SqlConnection1.Open();
-            MySqlCommand SqlSelectCommand1 = new MySqlCommand("ClientesFallidas_BorrarByAccion", SqlConnection1);
-            SqlSelectCommand1.Parameters.AddWithValue("p_accion", accion);
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("Exportar_Borrar_Movimientos", SqlConnection1);
+            SqlSelectCommand1.Parameters.AddWithValue("p_fecha", fecha);
             SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
             SqlSelectCommand1.ExecuteNonQuery();
             SqlConnection1.Close();
         }
 
-        public static void InsertarMovimientos(string accion)
+        public static void InsertarMovimientos()
         {
             MySqlConnection SqlConnection1 = DALBase.GetConnection();
             SqlConnection1.Open();
-            MySqlCommand SqlSelectCommand1 = new MySqlCommand("ClientesFallidas_BorrarByAccion", SqlConnection1);
-            SqlSelectCommand1.Parameters.AddWithValue("p_accion", accion);
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("Exportar_Insertar_Movimientos", SqlConnection1);
             SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
             SqlSelectCommand1.ExecuteNonQuery();
             SqlConnection1.Close();

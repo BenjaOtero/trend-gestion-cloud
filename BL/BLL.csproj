@@ -55,6 +55,7 @@
     <Compile Include="EmpleadosBLL.cs" />
     <Compile Include="EmpleadosMovBLL.cs" />
     <Compile Include="EmpleadosMovTiposBLL.cs" />
+    <Compile Include="ImportDataBLL.cs" />
     <Compile Include="RazonSocialBLL.cs" />
     <Compile Include="GetDataBLL.cs" />
     <Compile Include="LocalesBLL.cs" />

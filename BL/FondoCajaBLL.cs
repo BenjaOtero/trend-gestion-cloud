@@ -35,5 +35,12 @@ namespace BL
         {
             DAL.FondoCajaDAL.BorrarByPK(PK);
         }
+
+        public static bool GetFechaToImport(string fecha)
+        {
+            bool existenMovimientos = DAL.FondoCajaDAL.GetFechaToImport(fecha);
+            return existenMovimientos;
+        }
+
     }
 }

@@ -86,6 +86,25 @@ namespace DAL
             }
         }
 
+        public static bool GetFechaToImport(string fecha)
+        {
+            bool existenMovimientos = false;
+            MySqlConnection SqlConnection1;
+            MySqlDataAdapter SqlDataAdapter1;
+            MySqlCommand SqlSelectCommand1;
+            SqlConnection1 = DALBase.GetConnection();
+            SqlDataAdapter1 = new MySqlDataAdapter();
+            SqlSelectCommand1 = new MySqlCommand("Fondo_Caja_GetFecha", SqlConnection1);
+            SqlSelectCommand1.Parameters.AddWithValue("p_fecha", fecha);
+            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
+            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
+            DataTable tbl = new DataTable();
+            SqlDataAdapter1.Fill(tbl);
+            if(tbl.Rows.Count > 0) existenMovimientos = true;
+            SqlConnection1.Close();
+            return existenMovimientos;
+        }
+
     }
 
 }
