@@ -480,65 +480,83 @@ namespace StockVentas
         {
             if (BL.Utilitarios.HayInternet())
             {
-                string ftpServerIP;
-                string ftpUserID;
-                string ftpPassword;
-
-                /*  ftpServerIP = "trendsistemas.com/datos";
-                  ftpUserID = "benja@trendsistemas.com";
-                  ftpPassword = "8953#AFjn";*/
-
-                // FTP local
-                ftpServerIP = "127.0.0.1:22";
-                ftpUserID = "Benja";
-                ftpPassword = "8953#AFjn";
-
-                FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP);
-                ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectory;
-                FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                List<string> directories = new List<string>();
-                string line = streamReader.ReadLine();
-                while (!string.IsNullOrEmpty(line))
+                try
                 {
-                    directories.Add(line);
-                    line = streamReader.ReadLine();
-                }
-                streamReader.Close();
-                if (directories.Count() > 0)
-                {
-                    if (Directory.Exists(@"c:\windows\temp\datos")) Directory.Delete(@"c:\windows\temp\datos", true);
-                    Directory.CreateDirectory(@"c:\windows\temp\datos");
-                    DataTable tbl = BL.GetDataBLL.RazonSocial();
-                    idRazonSocial = tbl.Rows[0][0].ToString() + "_";
-                    using (WebClient ftpClient = new WebClient())
+                    string ftpServerIP;
+                    string ftpUserID;
+                    string ftpPassword;
+
+                    /*  ftpServerIP = "trendsistemas.com/datos";
+                      ftpUserID = "benja@trendsistemas.com";
+                      ftpPassword = "8953#AFjn";*/
+
+                    // FTP local
+                    ftpServerIP = "127.0.0.1:22";
+                    ftpUserID = "Benja";
+                    ftpPassword = "8953#AFjn";
+
+                    FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP);
+                    ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                    ftpRequest.Method = WebRequestMethods.Ftp.ListDirectory;
+                    FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    List<string> directories = new List<string>();
+                    string line = streamReader.ReadLine();
+                    while (!string.IsNullOrEmpty(line))
                     {
-                        ftpClient.Credentials = new System.Net.NetworkCredential(ftpUserID, ftpPassword);
-                        foreach (string archivo in directories) 
+                        directories.Add(line);
+                        line = streamReader.ReadLine();
+                    }
+                    streamReader.Close();
+                    if (directories.Count() > 0)
+                    {
+                        if (Directory.Exists(@"c:\windows\temp\datos")) Directory.Delete(@"c:\windows\temp\datos", true);
+                        Directory.CreateDirectory(@"c:\windows\temp\datos");
+                        DataTable tbl = BL.GetDataBLL.RazonSocial();
+                        idRazonSocial = tbl.Rows[0][0].ToString() + "_";
+                        using (WebClient ftpClient = new WebClient())
                         {
-                            if(archivo.Contains(idRazonSocial))
+                            ftpClient.Credentials = new System.Net.NetworkCredential(ftpUserID, ftpPassword);
+                            foreach (string archivo in directories)
                             {
-                                if (!archivo.Contains("datos"))
+                                if (archivo.Contains(idRazonSocial))
                                 {
-                                    string path = "ftp://" + ftpServerIP + "/" + archivo;
-                                    string trnsfrpth = @"c:\windows\temp\datos\" + archivo;
-                                    ftpClient.DownloadFile(path, trnsfrpth);
+                                    if (!archivo.Contains("datos"))
+                                    {
+                                        string ftpPath = "ftp://" + ftpServerIP + "/" + archivo;
+                                        string localPath = @"c:\windows\temp\datos\" + archivo;
+                                        ftpClient.DownloadFile(ftpPath, localPath);
+                                    }
                                 }
                             }
                         }
-                    }
-                    string[] dirs = Directory.GetFiles(@"c:\windows\temp\datos", idRazonSocial + "*");
-                    foreach (string archivo in dirs)
-                    {
-                        RestaurarDatos(archivo);
-                        AgregarMovimientos();
-                        string fechaImport = BL.ImportDataBLL.GetFechaImport();
-                        BL.ImportDataBLL.BorrarMovimientos(fechaImport);
-                        BL.ImportDataBLL.InsertarMovimientos();                        
-                    }
-                    // borrar archivos servidor
-                }                
+                        string[] dirs = Directory.GetFiles(@"c:\windows\temp\datos", idRazonSocial + "*");
+                        foreach (string archivo in dirs)
+                        {
+                            RestaurarDatos(archivo);
+                            BL.ImportDataBLL.InsertarMovimientos();
+                        }
+                        foreach (string archivo in directories)
+                        {
+                            if (archivo.Contains(idRazonSocial))
+                            {
+                                if (!archivo.Contains("datos"))
+                                {
+                                    string ftpPath = "ftp://" + ftpServerIP + "/" + archivo;
+                                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+                                    request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                                    request.Method = WebRequestMethods.Ftp.DeleteFile;
+                                    FtpWebResponse respuesta = (FtpWebResponse)request.GetResponse();
+                                }
+                            }
+                        }
+                    }                
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Se produjo un error al importar los datos", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             else
                 MessageBox.Show("Verifique la conexión a internet. No se importaron datos.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -546,12 +564,6 @@ namespace StockVentas
 
         private void RestaurarDatos(string archivo)
         {
-            /*
-             * crear archivo bat
-             * escribir archivo bat con sentencias
-             * ejecutar bat
-             * borrar bat
-             */
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\datos\\restore.bat"); // creo el archivo .bat
             sw.Close();
             StringBuilder sb = new StringBuilder();
@@ -578,14 +590,10 @@ namespace StockVentas
 
         private void RestaurarDatos_Exited(object sender, System.EventArgs e)
         {
-            if (File.Exists("c:\\Windows\\Temp\\restore.bat")) File.Delete("c:\\Windows\\Temp\\restore.bat");
+            if (File.Exists("c:\\Windows\\Temp\\datos\\restore.bat")) File.Delete("c:\\Windows\\Temp\\datos\\restore.bat");
             if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\datos.sql");
             if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
         }
 
-        private void AgregarMovimientos()
-        { 
-        
-        }
     }
 }
