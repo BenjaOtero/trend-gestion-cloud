@@ -142,13 +142,13 @@
         "Entry"
         {
         "MsmKey" = "8:_E382A05626A3ECC50D82B3FB9980519E"
-        "OwnerKey" = "8:_658B71F2EA30C0002297E94EFDDC9AF6"
+        "OwnerKey" = "8:_AA29AF4A3DC6C2F374AADA6947A7DF79"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_E382A05626A3ECC50D82B3FB9980519E"
-        "OwnerKey" = "8:_AA29AF4A3DC6C2F374AADA6947A7DF79"
+        "OwnerKey" = "8:_658B71F2EA30C0002297E94EFDDC9AF6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -166,13 +166,13 @@
         "Entry"
         {
         "MsmKey" = "8:_EC871401A7405B94E929A87F3E0EFD7A"
-        "OwnerKey" = "8:_AA29AF4A3DC6C2F374AADA6947A7DF79"
+        "OwnerKey" = "8:_5898D5F48CDD425EBD4616697237B5F2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_EC871401A7405B94E929A87F3E0EFD7A"
-        "OwnerKey" = "8:_5898D5F48CDD425EBD4616697237B5F2"
+        "OwnerKey" = "8:_AA29AF4A3DC6C2F374AADA6947A7DF79"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -220,49 +220,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FFD63A219A13C3C2589A386A863A6C55"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BDEBE509F5A0422B6E91CEF3083841C7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EC871401A7405B94E929A87F3E0EFD7A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_658B71F2EA30C0002297E94EFDDC9AF6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AA29AF4A3DC6C2F374AADA6947A7DF79"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5898D5F48CDD425EBD4616697237B5F2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_07C77CC1FF3B083213AF545EDA5A0324"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_47A7C5D168864CD49AA79BF6D788F904"
+        "OwnerKey" = "8:_F2AC01FBB1D6435A80B0DD0CE4B21177"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -274,7 +232,49 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F2AC01FBB1D6435A80B0DD0CE4B21177"
+        "OwnerKey" = "8:_47A7C5D168864CD49AA79BF6D788F904"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_07C77CC1FF3B083213AF545EDA5A0324"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5898D5F48CDD425EBD4616697237B5F2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AA29AF4A3DC6C2F374AADA6947A7DF79"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_658B71F2EA30C0002297E94EFDDC9AF6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EC871401A7405B94E929A87F3E0EFD7A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BDEBE509F5A0422B6E91CEF3083841C7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FFD63A219A13C3C2589A386A863A6C55"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -308,6 +308,11 @@
                     {
                     "Name" = "8:Microsoft .NET Framework 4 (x86 y x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.0"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 y x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
@@ -546,6 +551,11 @@
             "AssemblyAsmDisplayName" = "8:DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_658B71F2EA30C0002297E94EFDDC9AF6"
+                    {
+                    "Name" = "8:DAL.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:DAL.dll"
             "TargetName" = "8:"
@@ -672,6 +682,11 @@
             "AssemblyAsmDisplayName" = "8:BL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_AA29AF4A3DC6C2F374AADA6947A7DF79"
+                    {
+                    "Name" = "8:BL.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:BL.dll"
             "TargetName" = "8:"
@@ -698,6 +713,11 @@
             "AssemblyAsmDisplayName" = "8:Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_BDEBE509F5A0422B6E91CEF3083841C7"
+                    {
+                    "Name" = "8:Microsoft.ReportViewer.WinForms.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Microsoft.ReportViewer.WinForms.dll"
             "TargetName" = "8:"
@@ -835,6 +855,11 @@
             "AssemblyAsmDisplayName" = "8:Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_EC871401A7405B94E929A87F3E0EFD7A"
+                    {
+                    "Name" = "8:Entities.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Entities.dll"
             "TargetName" = "8:"
@@ -943,6 +968,11 @@
             "AssemblyAsmDisplayName" = "8:Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_FFD63A219A13C3C2589A386A863A6C55"
+                    {
+                    "Name" = "8:Microsoft.ReportViewer.Common.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Microsoft.ReportViewer.Common.dll"
             "TargetName" = "8:"
@@ -1063,7 +1093,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Gestion"
         "ProductCode" = "8:{25DF26A0-1C57-43D1-9C6D-3A8050E3D6D7}"
-        "PackageCode" = "8:{0EC5335F-DDEE-4611-AF7B-72C21862B424}"
+        "PackageCode" = "8:{233B1B46-C0C8-4D11-9A46-05EAF2D1ED34}"
         "UpgradeCode" = "8:{776F22DB-151F-489E-A718-50E320D3EB77}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

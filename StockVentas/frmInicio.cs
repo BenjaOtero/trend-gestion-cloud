@@ -82,6 +82,11 @@ namespace StockVentas
                 label1.Text = "Obteniendo datos del servidor . . .";
                 try
                 {
+                    if (!ExisteServicioMySQL())
+                    {
+                        label1.Text = "Configurando servidor de base de datos . . .";
+                        ConfigurarMySQL();
+                    }
                     ds = BL.GetDataBLL.GetData();
                     try
                     {
@@ -257,26 +262,35 @@ namespace StockVentas
         {
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\config_mysql.bat"); // creo el archivo .bat
             sw.Close();
-            string programFiles = "C:\\Program files";
-            if (Directory.Exists(programFiles))
+            string programFiles;
+            if (Directory.Exists(@"C:\Program files"))
             {
-                programFiles = programFiles.Substring(3, programFiles.Length - 3);
+                programFiles = "Program files";
+            }
+            else if (Directory.Exists(@"C:\Archivos de programa"))
+            {
+                programFiles = "Archivos de programa";
+            }
+            else if (Directory.Exists(@"C:\Program files(x86)"))
+            {
+                programFiles = "Program files(x86)";
             }
             else
             {
-                programFiles = "Archivos de programa";
+                programFiles = "Archivos de programa(x86)";
             }
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("C:");
             string configMysql = "cd " + "\"C:\\" + programFiles + "\\MySQL\\MySQL Server 5.5\\bin\"";
             sb.AppendLine(configMysql);
-            configMysql = "mysqlinstanceconfig.exe -i -q ServiceName=MySQL root Password=8953#AFjn ServerType=DEVELOPER DatabaseType=INODB Port=myport Charset=utf8";
+            configMysql = "mysqlinstanceconfig.exe -i -q ServiceName=MySQL ServerType=DEVELOPER DatabaseType=INODB Port=3306 Charset=utf8 RootPassword=8953#AFjn";
+//            configMysql = "mysqlinstanceconfig.exe -i -q ServiceName=MySQL root Password=8953#AFjn ServerType=DEVELOPER DatabaseType=INODB Port=myport Charset=utf8";
             sb.AppendLine(configMysql);
-            string rutaDB = Application.StartupPath.ToString() + @"\MySql\ncsoftwa_re.sql";
-            string restaurarDB = "mysql.exe -u root < \"" + rutaDB + "\"";
-            sb.AppendLine(restaurarDB);
-            string usuario = "mysql.exe -u root -e \"GRANT ALL ON *.* TO 'ncsoftwa_re'@'%' IDENTIFIED BY '8953#AFjn' WITH GRANT OPTION; FLUSH PRIVILEGES;\"";
+            string usuario = "mysql.exe -u root -e -p8953#AFjn \"GRANT ALL ON *.* TO 'ncsoftwa_re'@'%' IDENTIFIED BY '8953#AFjn' WITH GRANT OPTION; FLUSH PRIVILEGES;\"";
             sb.AppendLine(usuario);
+            string rutaDB = Application.StartupPath.ToString() + @"\MySql\ncsoftwa_re.sql";
+            string restaurarDB = "mysql.exe -u ncsoftwa_re -p8953#AFjn < \"" + rutaDB + "\"";
+            sb.AppendLine(restaurarDB);
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\config_mysql.bat", true)) // escribo en el archivo .bat
             {
                 outfile.Write(sb.ToString());
