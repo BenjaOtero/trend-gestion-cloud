@@ -286,7 +286,7 @@ namespace StockVentas
             configMysql = "mysqlinstanceconfig.exe -i -q ServiceName=MySQL ServerType=DEVELOPER DatabaseType=INODB Port=3306 Charset=utf8 RootPassword=8953#AFjn";
 //            configMysql = "mysqlinstanceconfig.exe -i -q ServiceName=MySQL root Password=8953#AFjn ServerType=DEVELOPER DatabaseType=INODB Port=myport Charset=utf8";
             sb.AppendLine(configMysql);
-            string usuario = "mysql.exe -u root -e -p8953#AFjn \"GRANT ALL ON *.* TO 'ncsoftwa_re'@'%' IDENTIFIED BY '8953#AFjn' WITH GRANT OPTION; FLUSH PRIVILEGES;\"";
+            string usuario = "mysql.exe -u root -p8953#AFjn -e \"GRANT ALL ON *.* TO 'ncsoftwa_re'@'%' IDENTIFIED BY '8953#AFjn' WITH GRANT OPTION; FLUSH PRIVILEGES;\"";
             sb.AppendLine(usuario);
             string rutaDB = Application.StartupPath.ToString() + @"\MySql\ncsoftwa_re.sql";
             string restaurarDB = "mysql.exe -u ncsoftwa_re -p8953#AFjn < \"" + rutaDB + "\"";

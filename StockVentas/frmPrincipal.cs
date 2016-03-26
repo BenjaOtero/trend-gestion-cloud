@@ -521,7 +521,7 @@ namespace StockVentas
                             {
                                 if (archivo.Contains(idRazonSocial))
                                 {
-                                    if (!archivo.Contains("datos"))
+                                    if (!archivo.Contains("datos") || !archivo.Contains("locales") || !archivo.Contains("pcs"))
                                     {
                                         string ftpPath = "ftp://" + ftpServerIP + "/" + archivo;
                                         string localPath = @"c:\windows\temp\datos\" + archivo;
@@ -540,7 +540,7 @@ namespace StockVentas
                         {
                             if (archivo.Contains(idRazonSocial))
                             {
-                                if (!archivo.Contains("datos"))
+                                if (!archivo.Contains("datos") || !archivo.Contains("locales") || !archivo.Contains("pcs"))
                                 {
                                     string ftpPath = "ftp://" + ftpServerIP + "/" + archivo;
                                     FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
@@ -548,7 +548,7 @@ namespace StockVentas
                                     request.Method = WebRequestMethods.Ftp.DeleteFile;
                                     FtpWebResponse respuesta = (FtpWebResponse)request.GetResponse();
                                 }
-                            }
+                            } 
                         }
                     }                
                 }
