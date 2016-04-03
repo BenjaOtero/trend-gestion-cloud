@@ -149,6 +149,7 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.Size = new System.Drawing.Size(798, 496);
             this.dgvDatos.TabIndex = 8;
+            this.dgvDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvDatos_DataError);
             // 
             // frmArticulosBorrar
             // 

@@ -601,5 +601,10 @@ namespace StockVentas
             return validado;
         }
 
+        private void dgvDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
+
     }
 }

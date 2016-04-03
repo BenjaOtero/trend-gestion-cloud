@@ -83,5 +83,10 @@ namespace StockVentas
                 }
             }
         }
+
+        private void dgvDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
     }
 }

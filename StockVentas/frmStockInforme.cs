@@ -21,5 +21,10 @@ namespace StockVentas
             dgvDatos.DataSource = datos;
             dgvDatos.AutoSize = true;            
         }
+
+        private void dgvDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
     }
 }

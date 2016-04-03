@@ -206,5 +206,10 @@ namespace StockVentas
             if ((bool)e.Value) e.Value = 1;
             else e.Value = 0;
         }
+
+        private void gvwDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
     }
 }

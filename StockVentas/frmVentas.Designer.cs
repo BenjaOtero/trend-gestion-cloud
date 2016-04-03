@@ -513,6 +513,7 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.Size = new System.Drawing.Size(890, 454);
             this.dgvDatos.TabIndex = 4;
+            this.dgvDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvDatos_DataError);
             // 
             // frmVentas
             // 

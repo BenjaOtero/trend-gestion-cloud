@@ -69,6 +69,7 @@
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVentas.Size = new System.Drawing.Size(982, 283);
             this.dgvVentas.TabIndex = 0;
+            this.dgvVentas.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvVentas_DataError);
             // 
             // lblFecha
             // 
@@ -104,6 +105,7 @@
             this.dgvTesoreria.Name = "dgvTesoreria";
             this.dgvTesoreria.Size = new System.Drawing.Size(650, 248);
             this.dgvTesoreria.TabIndex = 2;
+            this.dgvTesoreria.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvTesoreria_DataError);
             this.dgvTesoreria.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvTesoreria_KeyDown);
             // 
             // label3

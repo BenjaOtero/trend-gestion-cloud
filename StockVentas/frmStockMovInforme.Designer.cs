@@ -111,6 +111,7 @@
             this.dgvStockMov.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStockMov.Size = new System.Drawing.Size(888, 199);
             this.dgvStockMov.TabIndex = 3;
+            this.dgvStockMov.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvStockMov_DataError);
             // 
             // dgvStockDet
             // 
@@ -159,7 +160,7 @@
             this.btnModifcar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(233, 36);
+            this.toolStrip1.Size = new System.Drawing.Size(202, 36);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 

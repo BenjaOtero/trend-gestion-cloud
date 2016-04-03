@@ -57,6 +57,7 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.Size = new System.Drawing.Size(764, 440);
             this.dgvDatos.TabIndex = 0;
+            this.dgvDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvDatos_DataError);
             // 
             // groupBox1
             // 

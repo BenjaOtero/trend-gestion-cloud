@@ -246,5 +246,15 @@ namespace StockVentas
             }
         }
 
+        private void dgvDatosOrigen_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
+
+        private void dgvDatosDestino_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
+
     }
 }

@@ -245,5 +245,10 @@ namespace StockVentas
             Cursor.Current = Cursors.Arrow;
         }
 
+        private void dgvStockMov_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
+
     }
 }

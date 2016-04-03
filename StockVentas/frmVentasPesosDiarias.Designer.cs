@@ -45,6 +45,7 @@
             this.dgvVentas.ReadOnly = true;
             this.dgvVentas.Size = new System.Drawing.Size(426, 484);
             this.dgvVentas.TabIndex = 0;
+            this.dgvVentas.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvVentas_DataError);
             // 
             // lblLocal
             // 

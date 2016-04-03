@@ -141,5 +141,10 @@ namespace StockVentas
             Close();
         }
 
+        private void dgvDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
+
     }
 }

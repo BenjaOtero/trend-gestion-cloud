@@ -37,5 +37,10 @@ namespace StockVentas
             dgvVentas.Columns["Total"].DefaultCellStyle.Format = "C2";
             dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
+
+        private void dgvVentas_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
     }
 }

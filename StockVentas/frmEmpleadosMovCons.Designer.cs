@@ -60,6 +60,7 @@
             this.dgvEmpleados.Size = new System.Drawing.Size(836, 476);
             this.dgvEmpleados.TabIndex = 0;
             this.dgvEmpleados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmpleados_CellClick);
+            this.dgvEmpleados.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvEmpleados_DataError);
             // 
             // groupBox1
             // 

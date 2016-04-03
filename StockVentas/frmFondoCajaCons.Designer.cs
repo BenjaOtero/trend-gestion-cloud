@@ -60,6 +60,7 @@
             this.dgvDatos.Size = new System.Drawing.Size(551, 504);
             this.dgvDatos.TabIndex = 15;
             this.dgvDatos.Text = "DataGridView1";
+            this.dgvDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvDatos_DataError);
             // 
             // bindingNavigator1
             // 

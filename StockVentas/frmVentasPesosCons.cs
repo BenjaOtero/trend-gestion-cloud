@@ -40,5 +40,10 @@ namespace StockVentas
 
             
         }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
     }
 }

@@ -84,5 +84,10 @@ namespace StockVentas
             btnGrabar.Enabled = true;
         }
 
+        private void dgvEmpleados_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
+
     }
 }
