@@ -603,6 +603,7 @@ namespace StockVentas
 
         private void dgvDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
+            // reactivar en frmStockComp.Designer.cs
             return;
         }
 
