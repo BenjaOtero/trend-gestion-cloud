@@ -206,6 +206,13 @@ namespace StockVentas
             newMDIChild.Show();
         }
 
+        private void emailMarketingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMarketingEmail newMDIChild = new frmMarketingEmail();
+            newMDIChild.MdiParent = this;
+            newMDIChild.Show();
+        }
+
         private void fondoDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmFondoCaja newMDIChild = new frmFondoCaja();

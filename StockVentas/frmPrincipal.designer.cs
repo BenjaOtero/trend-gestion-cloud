@@ -101,6 +101,8 @@
             this.exportarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.borradoMasivoArtículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.marketingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emailMarketingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -296,6 +298,7 @@
             this.toolStripMenuItem9,
             this.toolStripMenuItem13,
             this.toolStripMenuItem14,
+            this.marketingToolStripMenuItem,
             this.toolStripMenuItem19,
             this.mantenimientoToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -675,6 +678,21 @@
             this.importarDatosToolStripMenuItem.Text = "Importar datos";
             this.importarDatosToolStripMenuItem.Click += new System.EventHandler(this.importarDatosToolStripMenuItem_Click);
             // 
+            // marketingToolStripMenuItem
+            // 
+            this.marketingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.emailMarketingToolStripMenuItem});
+            this.marketingToolStripMenuItem.Name = "marketingToolStripMenuItem";
+            this.marketingToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.marketingToolStripMenuItem.Text = "Marketing";
+            // 
+            // emailMarketingToolStripMenuItem
+            // 
+            this.emailMarketingToolStripMenuItem.Name = "emailMarketingToolStripMenuItem";
+            this.emailMarketingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.emailMarketingToolStripMenuItem.Text = "E-mail marketing";
+            this.emailMarketingToolStripMenuItem.Click += new System.EventHandler(this.emailMarketingToolStripMenuItem_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,6 +790,8 @@
         private System.Windows.Forms.ToolStripMenuItem exportarDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem borradoMasivoArtículosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importarDatosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem marketingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem emailMarketingToolStripMenuItem;
     }
 }
 
