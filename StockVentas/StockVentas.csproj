@@ -109,6 +109,12 @@
     <Compile Include="frmEmpleadosMovTipo.Designer.cs">
       <DependentUpon>frmEmpleadosMovTipo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMarketingEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMarketingEmail.Designer.cs">
+      <DependentUpon>frmMarketingEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRazonSocial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -479,6 +485,9 @@
     <EmbeddedResource Include="frmEmpleadosMovTipo.resx">
       <DependentUpon>frmEmpleadosMovTipo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMarketingEmail.resx">
+      <DependentUpon>frmMarketingEmail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmRazonSocial.resx">
       <DependentUpon>frmRazonSocial.cs</DependentUpon>
     </EmbeddedResource>
@@ -738,6 +747,7 @@
     <None Include="Resources\LogoTrend.ico" />
     <None Include="Resources\icono_app.ico" />
     <Content Include="icono_app.ico" />
+    <None Include="Resources\camara.jpg" />
     <Content Include="Resources\LogoTrend1.jpg" />
     <Content Include="xml\Articulos.xml" />
     <Content Include="xml\ArticulosItems.xml" />

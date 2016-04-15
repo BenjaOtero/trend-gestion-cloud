@@ -98,7 +98,7 @@ namespace StockVentas
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             string parametros = txtParametros.Text;
-            bindingSource1.Filter = "NombreCLI LIKE '" + parametros + "*' OR ApellidoCLI LIKE '" + parametros + "*'";
+            bindingSource1.Filter = "NombreCLI LIKE '" + parametros + "*' OR ApellidoCLI LIKE '" + parametros + "*' OR CorreoCLI LIKE '" + parametros + "*'";
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)

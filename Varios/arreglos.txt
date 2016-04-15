@@ -16,6 +16,7 @@
 -en tabla razon social se cambia solo el id
 -no generar stock para locales "Entradas" y "Salidas"
 -Quitar la sentencia de todos los ABM "txtProvinciaCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;"
+-Controlar error al exceder el timeout en frmStockMovInter o frmStockMov
 
 
 -vaciar base de datos

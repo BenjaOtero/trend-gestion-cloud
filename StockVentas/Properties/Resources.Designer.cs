@@ -60,6 +60,13 @@ namespace StockVentas.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap camara {
+            get {
+                object obj = ResourceManager.GetObject("camara", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap delete16 {
             get {
                 object obj = ResourceManager.GetObject("delete16", resourceCulture);
