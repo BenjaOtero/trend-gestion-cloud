@@ -158,9 +158,6 @@ namespace StockVentas
                 txtDescripcionITE.ReadOnly = true;
                 txtDescripcionWebITE.ReadOnly = true;
                 chkActivoWebITE.Enabled = false;
-                txtIdItemITE.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtDescripcionITE.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtDescripcionWebITE.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 btnBuscar.Enabled = true;
                 btnNuevo.Enabled = true;
                 btnEditar.Enabled = true;

@@ -90,7 +90,6 @@
             // 
             // txtIdFormaPagoFOR
             // 
-            this.txtIdFormaPagoFOR.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtIdFormaPagoFOR.Location = new System.Drawing.Point(104, 16);
             this.txtIdFormaPagoFOR.Name = "txtIdFormaPagoFOR";
             this.txtIdFormaPagoFOR.ReadOnly = true;

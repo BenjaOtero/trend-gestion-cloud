@@ -211,7 +211,6 @@
             // 
             // txtIdItemITE
             // 
-            this.txtIdItemITE.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtIdItemITE.Location = new System.Drawing.Point(122, 16);
             this.txtIdItemITE.Name = "txtIdItemITE";
             this.txtIdItemITE.ReadOnly = true;

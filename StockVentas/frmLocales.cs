@@ -37,6 +37,7 @@ namespace StockVentas
             this.MaximizeBox = false;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             bindingSource1.DataSource = tblLocales;
+            bindingSource1.Filter = "IdLocalLOC <> 1 AND IdLocalLOC <> 2";
             bindingNavigator1.BindingSource = bindingSource1;
             BL.Utilitarios.DataBindingsAdd(bindingSource1, grpCampos);
             Binding bind = new Binding("Checked", bindingSource1, "ActivoWebLOC", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -57,7 +58,7 @@ namespace StockVentas
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             string parametros = txtParametros.Text;
-            bindingSource1.Filter = "NombreLOC LIKE '" + parametros + "*'";
+            bindingSource1.Filter = "NombreLOC LIKE '" + parametros + "*' AND IdLocalLOC <> 1 AND IdLocalLOC <> 2";
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -100,8 +101,7 @@ namespace StockVentas
                 bindingSource1.EndEdit();
                 bindingSource1.Position = 0;
                 bindingSource1.Sort = "NombreLOC";
-                SetStateForm(FormState.inicial);
-                bindingSource1.RemoveFilter();
+                SetStateForm(FormState.inicial);                
             }
             catch (ConstraintException)
             {
@@ -130,7 +130,6 @@ namespace StockVentas
                 frmProgress progreso = new frmProgress(tblLocales, "frmLocales", "grabar");
                 progreso.ShowDialog();
             }
-            bindingSource1.RemoveFilter();
         }
 
         public void SetStateForm(FormState state)
@@ -140,13 +139,9 @@ namespace StockVentas
             {
                 gvwDatos.Enabled = true;
                 txtIdLocalLOC.ReadOnly = true;
-                txtIdLocalLOC.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtNombreLOC.ReadOnly = true;
-                txtNombreLOC.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtDireccionLOC.ReadOnly = true;
-                txtDireccionLOC.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtTelefonoLOC.ReadOnly = true;
-                txtTelefonoLOC.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 chkActivoWebLOC.Enabled = false;
                 btnBuscar.Enabled = true;
                 btnNuevo.Enabled = true;
@@ -159,7 +154,7 @@ namespace StockVentas
 
             if (state == FormState.insercion)
             {
-                gvwDatos.Enabled = false;                
+                gvwDatos.Enabled = false;
                 txtNombreLOC.ReadOnly = false;
                 txtDireccionLOC.ReadOnly = false;
                 txtTelefonoLOC.ReadOnly = false;

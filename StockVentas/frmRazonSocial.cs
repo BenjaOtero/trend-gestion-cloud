@@ -105,7 +105,6 @@ namespace StockVentas
 
             if (state == FormState.inicial)
             {
-
                 txtIdRazonSocialRAZ.Enabled = false;
                 txtRazonSocialRAZ.Enabled = false;
                 txtNombreFantasiaRAZ.Enabled = false;
@@ -116,18 +115,6 @@ namespace StockVentas
                 txtCuitRAZ.Enabled = false;
                 txtIngresosBrutosRAZ.Enabled = false;
                 txtInicioActividadRAZ.Enabled = false;
-
-                txtIdRazonSocialRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtRazonSocialRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtNombreFantasiaRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtDomicilioRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtLocalidadRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtProvinciaRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                cmbIdCondicionIvaRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtCuitRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtIngresosBrutosRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                txtInicioActividadRAZ.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-
                 btnEditar.Enabled = true;
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = false;

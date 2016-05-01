@@ -19,8 +19,6 @@
 -Controlar error al exceder el timeout en frmStockMovInter o frmStockMov
 
 
--vaciar base de datos
--llevarle planilla entradas a Cecilia
 -ofuscar codigo
 
 

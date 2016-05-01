@@ -36,7 +36,7 @@ namespace DAL
                 nuevaFila[12] = entidad.Imagen.ToString();
                 nuevaFila[13] = entidad.ImagenBack.ToString();
                 nuevaFila[14] = entidad.ImagenColor.ToString();
-            //    nuevaFila[15] = entidad.ActivoWeb;
+                nuevaFila[15] = entidad.ActivoWeb;
                 nuevaFila[16] = entidad.NuevoWeb;
                 nuevaFila[17] = entidad.Proveedor;
                 nuevaFila[18] = entidad.IdAlicuota;

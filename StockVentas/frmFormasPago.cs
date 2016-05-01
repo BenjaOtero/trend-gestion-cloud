@@ -145,7 +145,6 @@ namespace StockVentas
             {
                 gvwDatos.Enabled = true;
                 txtDescripcionFOR.ReadOnly = true;
-                txtDescripcionFOR.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 btnBuscar.Enabled = true;
                 btnNuevo.Enabled = true;
                 btnEditar.Enabled = true;

@@ -178,7 +178,6 @@
             // 
             // txtIdLocalLOC
             // 
-            this.txtIdLocalLOC.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtIdLocalLOC.Location = new System.Drawing.Point(107, 16);
             this.txtIdLocalLOC.Name = "txtIdLocalLOC";
             this.txtIdLocalLOC.ReadOnly = true;

@@ -144,11 +144,8 @@ namespace StockVentas
             {
                 gvwDatos.Enabled = true;
                 txtIdColorCOL.ReadOnly = true;
-                txtIdColorCOL.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtDescripcionCOL.ReadOnly = true;
-                txtDescripcionCOL.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtHexCOL.ReadOnly = true;
-                txtHexCOL.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 btnBuscar.Enabled = true;
                 btnNuevo.Enabled = true;
                 btnEditar.Enabled = true;
@@ -160,7 +157,7 @@ namespace StockVentas
                 txtParametros.Focus();
             }
             if (state == FormState.insercion)
-            {              
+            {
                 txtDescripcionCOL.ReadOnly = false;
                 txtHexCOL.ReadOnly = false;
                 txtDescripcionCOL.Clear();

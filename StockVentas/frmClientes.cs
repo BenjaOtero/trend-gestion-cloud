@@ -315,33 +315,19 @@ namespace StockVentas
             {
                 gvwDatos.Enabled = true;
                 txtIdClienteCLI.ReadOnly = true;
-                txtIdClienteCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtRazonSocialCLI.ReadOnly = true;
-                txtRazonSocialCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtNombreCLI.ReadOnly = true;
-                txtNombreCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtApellidoCLI.ReadOnly = true;
-                txtApellidoCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtCUIT.ReadOnly = true;
-                txtCUIT.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtDireccionCLI.ReadOnly = true;
-                txtDireccionCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtLocalidadCLI.ReadOnly = true;
-                txtLocalidadCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtProvinciaCLI.ReadOnly = true;
-                txtProvinciaCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtTransporteCLI.ReadOnly = true;
-                txtTransporteCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtContactoCLI.ReadOnly = true;
-                txtContactoCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtTelefonoCLI.ReadOnly = true;
-                txtTelefonoCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtMovilCLI.ReadOnly = true;
-                txtMovilCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtCorreoCLI.ReadOnly = true;
-                txtCorreoCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 txtFechaNacCLI.ReadOnly = true;
-                txtFechaNacCLI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 btnBuscar.Enabled = true;
                 btnNuevo.Enabled = true;
                 btnEditar.Enabled = true;
@@ -389,7 +375,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 txtNombreCLI.Focus();
-                AddEventosValidacion();                
+                AddEventosValidacion();
                 insertando = true;
             }
             if (state == FormState.edicion)

@@ -209,7 +209,6 @@
             // 
             // txtIdGeneroGEN
             // 
-            this.txtIdGeneroGEN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtIdGeneroGEN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtIdGeneroGEN.Location = new System.Drawing.Point(122, 16);
             this.txtIdGeneroGEN.Name = "txtIdGeneroGEN";

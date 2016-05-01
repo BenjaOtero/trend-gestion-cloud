@@ -146,7 +146,6 @@
             // 
             // txtIdColorCOL
             // 
-            this.txtIdColorCOL.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtIdColorCOL.Location = new System.Drawing.Point(102, 16);
             this.txtIdColorCOL.Name = "txtIdColorCOL";
             this.txtIdColorCOL.ReadOnly = true;
