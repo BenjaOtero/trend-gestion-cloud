@@ -31,12 +31,12 @@ namespace DAL
             return dt;
         }
 
-        public static void GrabarDB(DataSet dt)
+        public static void GrabarDB(DataTable tbl)
         {
             MySqlConnection SqlConnection1;
             SqlConnection1 = DALBase.GetConnection();
             MySqlDataAdapter da = AdaptadorABM(SqlConnection1);
-            da.Update(dt, "Clientes");
+            da.Update(tbl);
             SqlConnection1.Close();
         }
 

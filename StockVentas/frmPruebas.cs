@@ -167,8 +167,37 @@ namespace StockVentas
         private void txtWebRequest_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-      //      SimpleService svc = new SimpleService();
-        //    svc.ProcessSimpleType("steve");
+            string Connection = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Benja\\Desktop\\clientes_face.xlsx;Extended Properties=\"Excel 12.0;HDR=YES;IMEX=1\";";
+            OleDbConnection con = new OleDbConnection(Connection);
+            System.Data.DataTable tblClientesFace = new System.Data.DataTable();
+            OleDbDataAdapter myCommand = new OleDbDataAdapter("select * from [clientes$]", con);
+            myCommand.Fill(tblClientesFace);
+
+            DataTable tblClientes = BL.GetDataBLL.Clientes();
+            int clientesAntes = tblClientes.Rows.Count;
+            int clave;
+            foreach (DataRow rowClientesFace in tblClientesFace.Rows)
+            {
+                string clienteFace = rowClientesFace["E-mail"].ToString();
+                DataRow[] foundRow = tblClientes.Select("CorreoCLI LIKE '" + clienteFace + "'");
+                if (foundRow.Count() > 0)
+                {
+                    DataRow rowCliente = tblClientes.NewRow();
+                    Random rand = new Random();
+                    clave = rand.Next(1000000000, 2000000000);
+                    rowCliente["IdClienteCLI"] = clave;
+                    rowCliente["NombreCLI"] = rowClientesFace["Nombre"].ToString().ToUpper();
+                    rowCliente["ApellidoCLI"] = rowClientesFace["Apellido"].ToString().ToUpper();
+                    rowCliente["CorreoCLI"] = rowClientesFace["E-mail"].ToString();
+                    tblClientes.Rows.Add(rowCliente);
+                }
+            }
+            int clientesDespues = tblClientes.Rows.Count;
+            if (tblClientes.GetChanges() != null)
+            {
+                frmProgress progreso = new frmProgress(tblClientes, "frmClientes", "grabar");
+                progreso.ShowDialog();
+            }
             Cursor.Current = Cursors.Arrow;
             
         }

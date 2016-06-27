@@ -183,7 +183,7 @@ namespace StockVentas
                     bindingSource1.EndEdit();
                     if (tblClientes.GetChanges() != null)
                     {
-                        BL.ClientesBLL.GrabarDB(dsClientes, ref codigoError);
+                     //   BL.ClientesBLL.GrabarDB(dsClientes, ref codigoError);
                     }
                     bindingSource1.RemoveFilter();
                     if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
@@ -195,7 +195,7 @@ namespace StockVentas
                 bindingSource1.EndEdit();
                 if (tblClientes.GetChanges() != null)
                 {
-                    BL.ClientesBLL.GrabarDB(dsClientes, ref codigoError);
+                  //  BL.ClientesBLL.GrabarDB(dsClientes, ref codigoError);
                 }
                 bindingSource1.RemoveFilter();
                 if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);

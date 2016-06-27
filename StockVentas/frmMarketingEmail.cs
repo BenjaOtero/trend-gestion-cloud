@@ -44,6 +44,7 @@ namespace StockVentas
             MailAddress from = new MailAddress("info@karminna.com", "Karminna");
             MailMessage mail = new MailMessage(from, to);
             mail.Subject = titulo;
+          //  mail.Subject = "20% de descuento en todos nuestros productos.";
             AlternateView plainView = AlternateView.CreateAlternateViewFromString("", null, "text/plain");
 
             //then we create the Html part
@@ -51,11 +52,13 @@ namespace StockVentas
             //the cid value will map to the Content-Id of a Linked resource.
             //thus <img src='cid:companylogo'> will map to a LinkedResource with a ContentId of 'companylogo'
             string html = "<div align='center'>";
-            html += "<p>Hacé click en la imágen y participá del sorteo.</p>";
-            html += "<a href='http://promo.st/1XfFOGn'>";
+            html += "<a href='http://karminna.com'>";
             html += "<img src=cid:companylogo>";
             html += "</a><br><br>";
             html += "<a href='http://karminna.com'>Visitá nuestro sitio web</a>";
+            html += "<br><br>";
+            html += "<p>Para no recibir mas correos de KARMINNA hacé click ";
+            html += "<a href='http://karminna.com?action=unsuscribeNews&correo=" + mailTo + "'>aquí</a></p>";
             html += "</div>";
             AlternateView htmlView = AlternateView.CreateAlternateViewFromString(html, null, "text/html");
 
@@ -68,6 +71,7 @@ namespace StockVentas
             mail.AlternateViews.Add(plainView);
             mail.AlternateViews.Add(htmlView);
             SmtpClient client = new SmtpClient("mail.karminna.com", 587);
+          //  client.EnableSsl = true;
             client.Credentials = new System.Net.NetworkCredential("info@karminna.com", "8953#AFjn");
             client.Send(mail);
         }
@@ -110,6 +114,13 @@ namespace StockVentas
                 }
             }
             MessageBox.Show("Se enviaron " + nroCorreos + " correos correctamente", "Trend");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            EnviarCorreo("oterobenjamin@gmail.com");
+            Cursor.Current = Cursors.Arrow;
         }
 
     }

@@ -80,7 +80,7 @@
             this.txtWebRequest.Name = "txtWebRequest";
             this.txtWebRequest.Size = new System.Drawing.Size(129, 23);
             this.txtWebRequest.TabIndex = 3;
-            this.txtWebRequest.Text = "WebRequest";
+            this.txtWebRequest.Text = "Añadir clientes facebook";
             this.txtWebRequest.UseVisualStyleBackColor = true;
             this.txtWebRequest.Click += new System.EventHandler(this.txtWebRequest_Click);
             // 
