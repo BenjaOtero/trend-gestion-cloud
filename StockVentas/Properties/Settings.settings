@@ -43,5 +43,8 @@
     <Setting Name="StockVentas_com_karminna_TratarImagenesService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://karminna.com/tratar_imagenes_service.php</Value>
     </Setting>
+    <Setting Name="StockVentas_localhost_karminna_TratarImagenesService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/ecommerce/trunk/public_html/tratar_imagenes_service.php</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

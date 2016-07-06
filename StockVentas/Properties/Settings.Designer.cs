@@ -90,5 +90,15 @@ namespace StockVentas.Properties {
                 return ((string)(this["StockVentas_com_karminna_TratarImagenesService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/ecommerce/trunk/public_html/tratar_imagenes_service.php")]
+        public string StockVentas_localhost_karminna_TratarImagenesService {
+            get {
+                return ((string)(this["StockVentas_localhost_karminna_TratarImagenesService"]));
+            }
+        }
     }
 }

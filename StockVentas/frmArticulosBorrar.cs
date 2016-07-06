@@ -107,11 +107,26 @@ namespace StockVentas
                  "Si elimina este artículo/s, se eliminarán las ventas, movimientos de stock y stock relacionados. ¿Desea continuar?",
                  "Trend", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    string oldBorrado = string.Empty;
+                    string imagenesBorrar = string.Empty;
                     viewArticulos = new DataView(tblArticulos);
                     foreach (string borrado in articulosBorrar)
                     {
                         viewArticulos.RowFilter = "IdArticuloART = '" + borrado + "'";
                         viewArticulos[0].Delete();
+                        if (string.IsNullOrEmpty(oldBorrado))
+                        {
+                            imagenesBorrar += borrado.Substring(0, borrado.Length - 2) + ";";
+                            oldBorrado = borrado;
+                        }
+                        else
+                        {
+                            if (oldBorrado.Substring(0, oldBorrado.Length - 2) != borrado.Substring(0, borrado.Length - 2))
+                            {
+                                imagenesBorrar += borrado.Substring(0, borrado.Length - 2) + ";";
+                                oldBorrado = borrado;
+                            }
+                        }
                     }
                     foreach (string borrado in articulosBorrar)
                     {
@@ -128,7 +143,7 @@ namespace StockVentas
                     }
                     if (tblArticulos.GetChanges() != null)
                     {
-                        frmProgress frm = new frmProgress(tblArticulos, "frmArticulosBorrar", "grabar");
+                        frmProgress frm = new frmProgress(tblArticulos, "frmArticulosBorrar", "grabar", imagenesBorrar);
                         frm.ShowDialog();
                     }
                 }

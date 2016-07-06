@@ -11,6 +11,7 @@ using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.IO;
 using BL;
+using StockVentas.com.karminna;
 
 
 namespace StockVentas
@@ -68,6 +69,7 @@ namespace StockVentas
         string where;
         int activoWeb;
         BindingSource bindingSource1;
+        string imagenesBorrar;
 
         private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar de frmProgress
         protected override CreateParams CreateParams
@@ -134,6 +136,14 @@ namespace StockVentas
             this.accion = accion;
         }
 
+        public frmProgress(DataTable tabla, string origen, string accion, string imagenesBorrar)
+            : this()
+        {
+            this.tabla = tabla;
+            this.origen = origen;
+            this.accion = accion;
+            this.imagenesBorrar = imagenesBorrar;
+        }
         //Constructor frmArticulosAgrupar
         public frmProgress(DataTable tblArticulos, DataTable tblStock, string origen, string accion, frmArticulosAgrupar instanciaArticulosAgrupar)
             : this()
@@ -476,6 +486,8 @@ namespace StockVentas
                             break;
                         case "frmArticulosBorrar":
                             BL.ArticulosBLL.GrabarDB(tabla);
+                            TratarImagenesService tis = new TratarImagenesService();
+                            tis.BorrarImagenes(imagenesBorrar);
                             break;
                         case "frmArticulosGenerar":
                             BL.ArticulosBLL.GrabarDB(tabla);

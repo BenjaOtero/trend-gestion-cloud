@@ -461,6 +461,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\localhost.karminna\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="bin\Debug\Informes\Copia de StockMov.rdlc" />
     <EmbeddedResource Include="bin\Debug\Informes\Etiquetas.rdlc" />
     <EmbeddedResource Include="bin\Debug\Informes\Etiquetasx2.rdlc" />
@@ -717,6 +722,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\com.karminna\tratar_imagenes_service.wsdl" />
+    <None Include="Web References\localhost.karminna\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\localhost.karminna\tratar_imagenes_service.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BL\BLL.csproj">
@@ -808,6 +818,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>StockVentas_com_karminna_TratarImagenesService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/ecommerce/trunk/public_html/tratar_imagenes_service.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\localhost.karminna\</RelPath>
+      <UpdateFromURL>http://localhost/ecommerce/trunk/public_html/tratar_imagenes_service.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>StockVentas_localhost_karminna_TratarImagenesService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

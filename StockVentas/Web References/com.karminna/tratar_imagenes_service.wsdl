@@ -12,17 +12,37 @@
   <wsdl:message name="TratarImagenesResponse">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
+  <wsdl:message name="BorrarImagenesRequest">
+    <wsdl:part name="name" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="BorrarImagenesResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
   <wsdl:portType name="TratarImagenesServicePortType">
     <wsdl:operation name="TratarImagenes">
-      <documentation>A simple Hello World web method</documentation>
+      <documentation>Redimensiona las imagenes.</documentation>
       <wsdl:input message="tns:TratarImagenesRequest" />
       <wsdl:output message="tns:TratarImagenesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="BorrarImagenes">
+      <documentation>Borra imagenes en el servidor.</documentation>
+      <wsdl:input message="tns:BorrarImagenesRequest" />
+      <wsdl:output message="tns:BorrarImagenesResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TratarImagenesServiceBinding" type="tns:TratarImagenesServicePortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="TratarImagenes">
       <soap:operation soapAction="http://karminna.com/tratar_imagenes_service.php/TratarImagenes" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://localhost/Ecommerce/trunk/public_html/nusoap/lib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://localhost/Ecommerce/trunk/public_html/nusoap/lib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarImagenes">
+      <soap:operation soapAction="http://karminna.com/tratar_imagenes_service.php/BorrarImagenes" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="http://localhost/Ecommerce/trunk/public_html/nusoap/lib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

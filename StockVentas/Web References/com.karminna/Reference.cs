@@ -31,6 +31,8 @@ namespace StockVentas.com.karminna {
         
         private System.Threading.SendOrPostCallback TratarImagenesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback BorrarImagenesOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -73,6 +75,9 @@ namespace StockVentas.com.karminna {
         public event TratarImagenesCompletedEventHandler TratarImagenesCompleted;
         
         /// <remarks/>
+        public event BorrarImagenesCompletedEventHandler BorrarImagenesCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://karminna.com/tratar_imagenes_service.php/TratarImagenes", RequestNamespace="http://localhost/Ecommerce/trunk/public_html/nusoap/lib", ResponseNamespace="http://localhost/Ecommerce/trunk/public_html/nusoap/lib")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public string TratarImagenes(string name) {
@@ -99,6 +104,36 @@ namespace StockVentas.com.karminna {
             if ((this.TratarImagenesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.TratarImagenesCompleted(this, new TratarImagenesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://karminna.com/tratar_imagenes_service.php/BorrarImagenes", RequestNamespace="http://localhost/Ecommerce/trunk/public_html/nusoap/lib", ResponseNamespace="http://localhost/Ecommerce/trunk/public_html/nusoap/lib")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string BorrarImagenes(string name) {
+            object[] results = this.Invoke("BorrarImagenes", new object[] {
+                        name});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void BorrarImagenesAsync(string name) {
+            this.BorrarImagenesAsync(name, null);
+        }
+        
+        /// <remarks/>
+        public void BorrarImagenesAsync(string name, object userState) {
+            if ((this.BorrarImagenesOperationCompleted == null)) {
+                this.BorrarImagenesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnBorrarImagenesOperationCompleted);
+            }
+            this.InvokeAsync("BorrarImagenes", new object[] {
+                        name}, this.BorrarImagenesOperationCompleted, userState);
+        }
+        
+        private void OnBorrarImagenesOperationCompleted(object arg) {
+            if ((this.BorrarImagenesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.BorrarImagenesCompleted(this, new BorrarImagenesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -134,6 +169,32 @@ namespace StockVentas.com.karminna {
         private object[] results;
         
         internal TratarImagenesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void BorrarImagenesCompletedEventHandler(object sender, BorrarImagenesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class BorrarImagenesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal BorrarImagenesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
