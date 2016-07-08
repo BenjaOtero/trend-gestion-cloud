@@ -70,6 +70,8 @@ namespace StockVentas
         int activoWeb;
         BindingSource bindingSource1;
         string imagenesBorrar;
+        string idAlicuota;
+        string oldIdAlicuota;
 
         private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar de frmProgress
         protected override CreateParams CreateParams
@@ -143,6 +145,16 @@ namespace StockVentas
             this.origen = origen;
             this.accion = accion;
             this.imagenesBorrar = imagenesBorrar;
+        }
+
+        public frmProgress(DataTable tabla, string origen, string accion, string idAlicuota, string oldIdAlicuota)
+            : this()
+        {
+            this.tabla = tabla;
+            this.origen = origen;
+            this.accion = accion;
+            this.idAlicuota = idAlicuota;
+            this.oldIdAlicuota = oldIdAlicuota;
         }
         //Constructor frmArticulosAgrupar
         public frmProgress(DataTable tblArticulos, DataTable tblStock, string origen, string accion, frmArticulosAgrupar instanciaArticulosAgrupar)
@@ -470,7 +482,7 @@ namespace StockVentas
                     switch (origen)
                     {
                         case "frmAlicuotasIva":
-                            BL.AlicuotasIvaBLL.GrabarDB(tabla);
+                            BL.AlicuotasIvaBLL.GrabarDB(tabla, idAlicuota, oldIdAlicuota);
                             break;
                         case "frmArqueoCajaAdmin_borrarTesoreria":
                             BL.TesoreriaMovimientosBLL.BorrarByPK(PK);
@@ -534,7 +546,7 @@ namespace StockVentas
                             BL.ProveedoresBLL.GrabarDB(tabla);
                             break;
                         case "frmRazonSocial":
-                            BL.CondicionIvaBLL.GrabarDB(tabla);
+                            BL.RazonSocialBLL.GrabarDB(tabla);
                             break;
                         case "frmStockMov":
                             BL.TransaccionesBLL.GrabarStockMovimientos(dsStockMov, origen, ref codigoError);

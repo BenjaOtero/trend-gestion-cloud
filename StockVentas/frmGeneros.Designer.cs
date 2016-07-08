@@ -183,7 +183,6 @@
             this.gvwDatos.Size = new System.Drawing.Size(308, 241);
             this.gvwDatos.TabIndex = 11;
             this.gvwDatos.Text = "DataGridView1";
-            this.gvwDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gvwDatos_DataError);
             // 
             // label2
             // 

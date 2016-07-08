@@ -137,7 +137,6 @@
             this.gvwDatos.Size = new System.Drawing.Size(336, 159);
             this.gvwDatos.TabIndex = 0;
             this.gvwDatos.Text = "DataGridView1";
-            this.gvwDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gvwDatos_DataError);
             // 
             // grpBotones
             // 

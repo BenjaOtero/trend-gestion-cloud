@@ -12,6 +12,8 @@ namespace StockVentas
     public partial class frmAlicuotasIva : Form
     {
         private DataTable tblAlicuotasIva;
+        string oldId = string.Empty;
+        bool editar = false;
 
         public enum FormState
         {
@@ -46,6 +48,7 @@ namespace StockVentas
             gvwDatos.Columns["IdAlicuotaALI"].HeaderText = "ID";
             gvwDatos.Columns["PorcentajeALI"].HeaderText = "Porcentaje";
             bindingSource1.Sort = "IdAlicuotaALI";
+            tblAlicuotasIva.ColumnChanged += new DataColumnChangeEventHandler(Column_Changed);
             SetStateForm(FormState.inicial);   
         }        
 
@@ -65,6 +68,7 @@ namespace StockVentas
         private void btnEditar_Click(object sender, EventArgs e)
         {
             if (bindingSource1.Count == 0) return;
+            editar = true;
             SetStateForm(FormState.edicion);
         }
 
@@ -84,8 +88,25 @@ namespace StockVentas
             try
             {
             bindingSource1.EndEdit();
-            bindingSource1.Position = 0;
+            if (tblAlicuotasIva.GetChanges() != null)
+            {
+                string idAlicuota;
+                if (editar)
+                {
+                    if (string.IsNullOrEmpty(oldId)) oldId = txtIdAlicuotaALI.Text;
+                    idAlicuota = txtIdAlicuotaALI.Text;
+                }
+                else
+                {
+                    oldId = txtIdAlicuotaALI.Text;
+                    idAlicuota = txtIdAlicuotaALI.Text;
+                }
+                frmProgress progreso = new frmProgress(tblAlicuotasIva, "frmAlicuotasIva", "grabar", idAlicuota, oldId);
+                progreso.ShowDialog();
+            }
+            bindingSource1.RemoveFilter();
             bindingSource1.Sort = "IdAlicuotaALI";
+            editar = false;
             SetStateForm(FormState.inicial);
             }
             catch (ConstraintException ex)
@@ -140,6 +161,69 @@ namespace StockVentas
                 e.Binding.BindingManagerBase.EndCurrentEdit();
         }
 
+        private void Column_Changed(object sender, DataColumnChangeEventArgs e)
+        {
+            try
+            {
+                oldId = e.Row["IdAlicuotaALI", DataRowVersion.Original].ToString();
+            }
+            catch (VersionNotFoundException)
+            {
+                return;
+            }
+            
+        }
+
+        private void ValidarCampos(object sender, CancelEventArgs e)
+        {
+            if ((sender == (object)txtIdAlicuotaALI))
+            {
+                if (string.IsNullOrEmpty(txtIdAlicuotaALI.Text))
+                {
+                    this.errorProvider1.SetError(txtIdAlicuotaALI, "Debe escribir una alícuota.");
+                    e.Cancel = true;
+                }
+            }
+            if ((sender == (object)txtPorcentajeALI))
+            {
+                if (string.IsNullOrEmpty(txtPorcentajeALI.Text))
+                {
+                    this.errorProvider1.SetError(txtPorcentajeALI, "Debe escribir un porcentaje.");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void CamposValidado(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void AddEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating += new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated += new System.EventHandler(this.CamposValidado);
+                }
+            }
+        }
+
+        private void DelEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating -= new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated -= new System.EventHandler(this.CamposValidado);
+                }
+            }
+            this.errorProvider1.Clear();
+        }
+
         public void SetStateForm(FormState state)
         {
 
@@ -155,6 +239,7 @@ namespace StockVentas
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
+                DelEventosValidacion();
                 txtParametros.Focus();
             }
 
@@ -172,6 +257,7 @@ namespace StockVentas
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
+                AddEventosValidacion();
             }
 
             if (state == FormState.edicion)
@@ -187,12 +273,8 @@ namespace StockVentas
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
+                AddEventosValidacion();
             }
-        }
-
-        private void gvwDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            return;
         }
 
     }

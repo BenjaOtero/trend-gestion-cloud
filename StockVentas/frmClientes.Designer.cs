@@ -133,7 +133,6 @@
             this.grpCampos.Size = new System.Drawing.Size(404, 321);
             this.grpCampos.TabIndex = 0;
             this.grpCampos.TabStop = false;
-            this.grpCampos.Enter += new System.EventHandler(this.grpCampos_Enter);
             // 
             // label9
             // 
@@ -422,7 +421,6 @@
             this.gvwDatos.Size = new System.Drawing.Size(615, 172);
             this.gvwDatos.TabIndex = 0;
             this.gvwDatos.Text = "DataGridView1";
-            this.gvwDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gvwDatos_DataError);
             // 
             // grpBotones
             // 
@@ -526,6 +524,7 @@
             this.txtParametros.Name = "txtParametros";
             this.txtParametros.Size = new System.Drawing.Size(188, 20);
             this.txtParametros.TabIndex = 0;
+            this.txtParametros.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtParametros_KeyDown);
             // 
             // bindingNavigator1
             // 

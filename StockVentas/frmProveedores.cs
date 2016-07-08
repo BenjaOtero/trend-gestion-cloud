@@ -202,10 +202,5 @@ namespace StockVentas
             }
         }
 
-        private void gvwDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            return;
-        }
-
     }
 }

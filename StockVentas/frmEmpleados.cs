@@ -379,11 +379,6 @@ namespace StockVentas
                 e.Binding.BindingManagerBase.EndCurrentEdit();
         }
 
-        private void gvwDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            return;
-        }
-
         public void SetStateForm(FormState state)
         {
             if (state == FormState.inicial)

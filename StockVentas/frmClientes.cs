@@ -92,7 +92,12 @@ namespace StockVentas
             bindingSource1.Sort = "RazonSocialCLI";
             int itemFound = bindingSource1.Find("RazonSocialCLI", "PUBLICO");
             bindingSource1.Position = itemFound;
-            SetStateForm(FormState.inicial);
+            SetStateForm(FormState.inicial);            
+        }
+
+        private void txtParametros_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return) btnBuscar.PerformClick();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -183,7 +188,7 @@ namespace StockVentas
                     bindingSource1.EndEdit();
                     if (tblClientes.GetChanges() != null)
                     {
-                     //   BL.ClientesBLL.GrabarDB(dsClientes, ref codigoError);
+                        frmProgress progress = new frmProgress(tblClientes, "frmClientes", "grabar");
                     }
                     bindingSource1.RemoveFilter();
                     if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
@@ -195,17 +200,13 @@ namespace StockVentas
                 bindingSource1.EndEdit();
                 if (tblClientes.GetChanges() != null)
                 {
-                  //  BL.ClientesBLL.GrabarDB(dsClientes, ref codigoError);
+                    frmProgress progress = new frmProgress(tblClientes, "frmClientes", "grabar");
+                    progress.Show();
                 }
                 bindingSource1.RemoveFilter();
                 if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
             }
           
-        }
-
-        private void grpCampos_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private bool ValidarFormulario()
@@ -338,6 +339,7 @@ namespace StockVentas
                 DelEventosValidacion();
                 editando = false;
                 insertando = false;
+                txtParametros.Focus();
             }
             if (state == FormState.insercion)
             {
@@ -405,11 +407,6 @@ namespace StockVentas
                 AddEventosValidacion();
                 editando = true;
             }
-        }
-
-        private void gvwDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            return;
         }
 
     }

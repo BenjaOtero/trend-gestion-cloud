@@ -86,7 +86,6 @@
             this.gvwDatos.TabIndex = 14;
             this.gvwDatos.Text = "DataGridView1";
             this.gvwDatos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvwDatos_CellDoubleClick);
-            this.gvwDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gvwDatos_DataError);
             // 
             // groupBox2
             // 

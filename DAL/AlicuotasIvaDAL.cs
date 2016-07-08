@@ -11,15 +11,15 @@ namespace DAL
 {
     public class AlicuotasIvaDAL
     {
-        public static void GrabarDB(DataTable tblAlicuotasIva)
+        public static void GrabarDB(DataTable tblAlicuotasIva, string id, string oldId)
         {
             MySqlConnection SqlConnection1 = DALBase.GetConnection();
-            MySqlDataAdapter da = AdaptadorABM(SqlConnection1);
+            MySqlDataAdapter da = AdaptadorABM(SqlConnection1, id, oldId);
             da.Update(tblAlicuotasIva);
             SqlConnection1.Close();
         }
 
-        private static MySqlDataAdapter AdaptadorABM(MySqlConnection SqlConnection1)
+        private static MySqlDataAdapter AdaptadorABM(MySqlConnection SqlConnection1, string id, string oldId)
         {
             MySqlCommand SqlInsertCommand1;
             MySqlCommand SqlUpdateCommand1;
@@ -34,12 +34,14 @@ namespace DAL
 
 
             // IMPLEMENTACIÓN DE LA ORDEN UPDATE
-            SqlUpdateCommand1.Parameters.Add("p_id", MySqlDbType.Int32, 11, "IdAlicuotaALI");
+            SqlUpdateCommand1.Parameters.AddWithValue("p_id", id);
+            SqlUpdateCommand1.Parameters.AddWithValue("p_old_id", oldId);
             SqlUpdateCommand1.Parameters.Add("p_porcentaje", MySqlDbType.String, 10, "PorcentajeALI");
             SqlUpdateCommand1.CommandType = CommandType.StoredProcedure;
 
             // IMPLEMENTACIÓN DE LA ORDEN INSERT
-            SqlInsertCommand1.Parameters.Add("p_id", MySqlDbType.Int32, 11, "IdAlicuotaALI");
+            SqlInsertCommand1.Parameters.AddWithValue("p_id", id);
+            SqlInsertCommand1.Parameters.AddWithValue("p_old_id", oldId);
             SqlInsertCommand1.Parameters.Add("p_porcentaje", MySqlDbType.String, 10, "PorcentajeALI");
             SqlInsertCommand1.CommandType = CommandType.StoredProcedure;
 

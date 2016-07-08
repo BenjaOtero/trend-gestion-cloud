@@ -365,10 +365,5 @@ namespace StockVentas
             Cursor.Current = Cursors.Arrow;
         }
 
-        private void gvwDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            return;
-        }
-
     }
 }

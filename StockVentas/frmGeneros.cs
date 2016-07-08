@@ -204,11 +204,5 @@ namespace StockVentas
             if (btnGrabar.Enabled != true) btnGrabar.Enabled = true;
         }
 
-        private void gvwDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            return;
-        }
-
-
     }
 }

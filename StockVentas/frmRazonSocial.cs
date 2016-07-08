@@ -44,7 +44,7 @@ namespace StockVentas
             cmbIdCondicionIvaRAZ.DropDownStyle = ComboBoxStyle.DropDown;
             cmbIdCondicionIvaRAZ.DataSource = tblCondicionIva;
             BL.Utilitarios.DataBindingsAdd(bindingSource1, grpCampos);
-            cmbIdCondicionIvaRAZ.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);            
+            cmbIdCondicionIvaRAZ.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);
             SetStateForm(FormState.inicial);
         }
 
@@ -138,11 +138,6 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
             }
-        }
-
-        private void gvwDatos_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            return;
         }
 
     }

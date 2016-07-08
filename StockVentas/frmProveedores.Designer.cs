@@ -85,7 +85,6 @@
             this.gvwDatos.Size = new System.Drawing.Size(377, 321);
             this.gvwDatos.TabIndex = 14;
             this.gvwDatos.Text = "DataGridView1";
-            this.gvwDatos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gvwDatos_DataError);
             // 
             // groupBox2
             // 

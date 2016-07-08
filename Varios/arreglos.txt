@@ -13,7 +13,7 @@
 -ver contraseñas 8953#AFjn
 -en tabla razon social se cambia solo el id
 -no generar stock para locales "Entradas" y "Salidas"
--Controlar error al exceder el timeout en frmStockMovInter o frmStockMov
+
 
 
 -ofuscar codigo
