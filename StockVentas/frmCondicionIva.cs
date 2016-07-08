@@ -45,6 +45,8 @@ namespace StockVentas
             gvwDatos.Columns["IdCondicionIvaCIVA"].HeaderText = "ID";
             gvwDatos.Columns["DescripcionCIVA"].HeaderText = "Descripción";
             bindingSource1.Sort = "DescripcionCIVA";
+            grpBotones.CausesValidation = false;
+            btnCancelar.CausesValidation = false;
             SetStateForm(FormState.inicial);
         }
 
@@ -67,7 +69,10 @@ namespace StockVentas
         private void btnEditar_Click(object sender, EventArgs e)
         {
             if (bindingSource1.Count == 0) return;
-            SetStateForm(FormState.edicion);
+            if(MessageBox.Show("La edición errónea de los datos puede alterar el buen funcionamiento de la facturación. ¿Desea continuar?","Trend",
+                    MessageBoxButtons.OKCancel,MessageBoxIcon.Warning)
+                == DialogResult.OK) SetStateForm(FormState.edicion);
+            
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
@@ -131,20 +136,64 @@ namespace StockVentas
                 e.Binding.BindingManagerBase.EndCurrentEdit();
         }
 
+        private void ValidarCampos(object sender, CancelEventArgs e)
+        {
+            if ((sender == (object)txtDescripcionCIVA))
+            {
+                if (string.IsNullOrEmpty(txtDescripcionCIVA.Text))
+                {
+                    this.errorProvider1.SetError(txtDescripcionCIVA, "Debe escribir una descripción.");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void CamposValidado(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void AddEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating += new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated += new System.EventHandler(this.CamposValidado);
+                }
+            }
+        }
+
+        private void DelEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating -= new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated -= new System.EventHandler(this.CamposValidado);
+                }
+            }
+            this.errorProvider1.Clear();
+        }
+
         public void SetStateForm(FormState state)
         {
 
             if (state == FormState.inicial)
             {
                 gvwDatos.Enabled = true;
+                txtIdCondicionIvaCIVA.ReadOnly = true;
                 txtDescripcionCIVA.ReadOnly = true;
-                txtDescripcionCIVA.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
                 btnNuevo.Enabled = true;
                 btnEditar.Enabled = true;
                 btnBorrar.Enabled = true;
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
+                DelEventosValidacion();
+                gvwDatos.Focus();
             }
 
             if (state == FormState.insercion)
@@ -159,6 +208,7 @@ namespace StockVentas
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
+                AddEventosValidacion();
             }
 
             if (state == FormState.edicion)
@@ -172,6 +222,7 @@ namespace StockVentas
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
+                AddEventosValidacion();
             }
         }
 

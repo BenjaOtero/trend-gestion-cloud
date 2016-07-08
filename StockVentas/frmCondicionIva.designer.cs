@@ -31,10 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtIdCondicionIvaCIVA = new System.Windows.Forms.TextBox();
             this.txtDescripcionCIVA = new System.Windows.Forms.TextBox();
             this.gvwDatos = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpBotones = new System.Windows.Forms.GroupBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnGrabar = new System.Windows.Forms.Button();
@@ -42,6 +41,7 @@
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.grpCampos = new System.Windows.Forms.GroupBox();
+            this.txtIdCondicionIvaCIVA = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -53,12 +53,14 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.grpBotones.SuspendLayout();
             this.grpCampos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -83,15 +85,6 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "ID";
             // 
-            // txtIdCondicionIvaCIVA
-            // 
-            this.txtIdCondicionIvaCIVA.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtIdCondicionIvaCIVA.Location = new System.Drawing.Point(104, 16);
-            this.txtIdCondicionIvaCIVA.Name = "txtIdCondicionIvaCIVA";
-            this.txtIdCondicionIvaCIVA.ReadOnly = true;
-            this.txtIdCondicionIvaCIVA.Size = new System.Drawing.Size(178, 20);
-            this.txtIdCondicionIvaCIVA.TabIndex = 0;
-            // 
             // txtDescripcionCIVA
             // 
             this.txtDescripcionCIVA.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -108,24 +101,24 @@
             this.gvwDatos.Location = new System.Drawing.Point(12, 16);
             this.gvwDatos.Name = "gvwDatos";
             this.gvwDatos.ReadOnly = true;
-            this.gvwDatos.Size = new System.Drawing.Size(296, 241);
+            this.gvwDatos.Size = new System.Drawing.Size(304, 241);
             this.gvwDatos.TabIndex = 18;
             this.gvwDatos.TabStop = false;
             this.gvwDatos.Text = "DataGridView1";
             // 
-            // groupBox2
+            // grpBotones
             // 
-            this.groupBox2.Controls.Add(this.btnCancelar);
-            this.groupBox2.Controls.Add(this.btnSalir);
-            this.groupBox2.Controls.Add(this.btnGrabar);
-            this.groupBox2.Controls.Add(this.btnBorrar);
-            this.groupBox2.Controls.Add(this.btnEditar);
-            this.groupBox2.Controls.Add(this.btnNuevo);
-            this.groupBox2.Location = new System.Drawing.Point(321, 10);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 331);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
+            this.grpBotones.Controls.Add(this.btnCancelar);
+            this.grpBotones.Controls.Add(this.btnSalir);
+            this.grpBotones.Controls.Add(this.btnGrabar);
+            this.grpBotones.Controls.Add(this.btnBorrar);
+            this.grpBotones.Controls.Add(this.btnEditar);
+            this.grpBotones.Controls.Add(this.btnNuevo);
+            this.grpBotones.Location = new System.Drawing.Point(332, 10);
+            this.grpBotones.Name = "grpBotones";
+            this.grpBotones.Size = new System.Drawing.Size(200, 331);
+            this.grpBotones.TabIndex = 1;
+            this.grpBotones.TabStop = false;
             // 
             // btnCancelar
             // 
@@ -189,15 +182,23 @@
             // 
             // grpCampos
             // 
+            this.grpCampos.Controls.Add(this.txtIdCondicionIvaCIVA);
             this.grpCampos.Controls.Add(this.label1);
             this.grpCampos.Controls.Add(this.label2);
             this.grpCampos.Controls.Add(this.txtDescripcionCIVA);
-            this.grpCampos.Controls.Add(this.txtIdCondicionIvaCIVA);
             this.grpCampos.Location = new System.Drawing.Point(12, 263);
             this.grpCampos.Name = "grpCampos";
-            this.grpCampos.Size = new System.Drawing.Size(296, 78);
+            this.grpCampos.Size = new System.Drawing.Size(304, 78);
             this.grpCampos.TabIndex = 0;
             this.grpCampos.TabStop = false;
+            // 
+            // txtIdCondicionIvaCIVA
+            // 
+            this.txtIdCondicionIvaCIVA.Location = new System.Drawing.Point(104, 15);
+            this.txtIdCondicionIvaCIVA.Name = "txtIdCondicionIvaCIVA";
+            this.txtIdCondicionIvaCIVA.Size = new System.Drawing.Size(178, 20);
+            this.txtIdCondicionIvaCIVA.TabIndex = 0;
+            this.txtIdCondicionIvaCIVA.TabStop = false;
             // 
             // bindingNavigator1
             // 
@@ -222,7 +223,7 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(532, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(544, 25);
             this.bindingNavigator1.TabIndex = 29;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -289,28 +290,33 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // frmCondicionIva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 383);
+            this.ClientSize = new System.Drawing.Size(544, 383);
             this.ControlBox = false;
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.grpCampos);
             this.Controls.Add(this.gvwDatos);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpBotones);
             this.Name = "frmCondicionIva";
             this.Text = "Condición frente al IVA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCondicionIva_FormClosing);
             this.Load += new System.EventHandler(this.frmCondicionIva_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.grpBotones.ResumeLayout(false);
             this.grpCampos.ResumeLayout(false);
             this.grpCampos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -320,10 +326,9 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtIdCondicionIvaCIVA;
         private System.Windows.Forms.TextBox txtDescripcionCIVA;
         internal System.Windows.Forms.DataGridView gvwDatos;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpBotones;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnGrabar;
@@ -342,6 +347,8 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.TextBox txtIdCondicionIvaCIVA;
 
     }
 }

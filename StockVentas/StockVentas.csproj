@@ -759,20 +759,7 @@
     <Content Include="icono_app.ico" />
     <None Include="Resources\camara.jpg" />
     <Content Include="Resources\LogoTrend1.jpg" />
-    <Content Include="xml\Articulos.xml" />
-    <Content Include="xml\ArticulosItems.xml" />
     <Content Include="xml\Clientes.xml" />
-    <Content Include="xml\Colores.xml" />
-    <Content Include="xml\FondoCaja.xml" />
-    <Content Include="xml\FormasPago.xml" />
-    <Content Include="xml\Locales.xml" />
-    <Content Include="xml\Pc.xml" />
-    <Content Include="xml\Proveedores.xml" />
-    <Content Include="xml\Stock.xml" />
-    <Content Include="xml\StockMov.xml" />
-    <Content Include="xml\TesoreriaMovimientos.xml" />
-    <Content Include="xml\Ventas.xml" />
-    <Content Include="xml\VentasDetalle.xml" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

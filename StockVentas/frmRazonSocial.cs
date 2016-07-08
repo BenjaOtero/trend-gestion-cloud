@@ -28,6 +28,7 @@ namespace StockVentas
             tblRazonSocial = BL.GetDataBLL.RazonSocial();
             BL.Utilitarios.AddEventosABM(grpCampos, ref btnGrabar, ref tblRazonSocial);
             bindingSource1.BindingComplete += new BindingCompleteEventHandler(bindingSource1_BindingComplete);
+            cmbIdCondicionIvaRAZ.Validating += new System.ComponentModel.CancelEventHandler(BL.Utilitarios.ValidarComboBox);
         }
 
         private void frmRazonSocial_Load(object sender, EventArgs e)
@@ -43,6 +44,14 @@ namespace StockVentas
             cmbIdCondicionIvaRAZ.DisplayMember = "DescripcionCIVA";
             cmbIdCondicionIvaRAZ.DropDownStyle = ComboBoxStyle.DropDown;
             cmbIdCondicionIvaRAZ.DataSource = tblCondicionIva;
+            AutoCompleteStringCollection condicionColection = new AutoCompleteStringCollection();
+            foreach (DataRow row in tblCondicionIva.Rows)
+            {
+                condicionColection.Add(Convert.ToString(row["DescripcionCIVA"]));
+            }
+            cmbIdCondicionIvaRAZ.AutoCompleteCustomSource = condicionColection;
+            cmbIdCondicionIvaRAZ.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbIdCondicionIvaRAZ.AutoCompleteSource = AutoCompleteSource.CustomSource;
             BL.Utilitarios.DataBindingsAdd(bindingSource1, grpCampos);
             cmbIdCondicionIvaRAZ.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);
             SetStateForm(FormState.inicial);

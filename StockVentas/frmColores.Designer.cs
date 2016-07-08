@@ -39,7 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtIdColorCOL = new System.Windows.Forms.TextBox();
             this.gvwDatos = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpBotones = new System.Windows.Forms.GroupBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnGrabar = new System.Windows.Forms.Button();
@@ -60,13 +60,15 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.grpCampos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.grpBotones.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // grpCampos
@@ -80,7 +82,7 @@
             this.grpCampos.Controls.Add(this.txtIdColorCOL);
             this.grpCampos.Location = new System.Drawing.Point(12, 258);
             this.grpCampos.Name = "grpCampos";
-            this.grpCampos.Size = new System.Drawing.Size(296, 100);
+            this.grpCampos.Size = new System.Drawing.Size(307, 100);
             this.grpCampos.TabIndex = 0;
             this.grpCampos.TabStop = false;
             // 
@@ -102,6 +104,7 @@
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(35, 19);
             this.btnColor.TabIndex = 23;
+            this.btnColor.TabStop = false;
             this.btnColor.Text = "...";
             this.btnColor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnColor.UseVisualStyleBackColor = true;
@@ -160,24 +163,24 @@
             this.gvwDatos.Location = new System.Drawing.Point(12, 12);
             this.gvwDatos.Name = "gvwDatos";
             this.gvwDatos.ReadOnly = true;
-            this.gvwDatos.Size = new System.Drawing.Size(296, 241);
+            this.gvwDatos.Size = new System.Drawing.Size(307, 241);
             this.gvwDatos.TabIndex = 27;
             this.gvwDatos.Text = "DataGridView1";
             // 
-            // groupBox2
+            // grpBotones
             // 
-            this.groupBox2.Controls.Add(this.btnCancelar);
-            this.groupBox2.Controls.Add(this.btnSalir);
-            this.groupBox2.Controls.Add(this.btnGrabar);
-            this.groupBox2.Controls.Add(this.btnBorrar);
-            this.groupBox2.Controls.Add(this.btnEditar);
-            this.groupBox2.Controls.Add(this.btnNuevo);
-            this.groupBox2.Controls.Add(this.btnBuscar);
-            this.groupBox2.Location = new System.Drawing.Point(321, 66);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 292);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
+            this.grpBotones.Controls.Add(this.btnCancelar);
+            this.grpBotones.Controls.Add(this.btnSalir);
+            this.grpBotones.Controls.Add(this.btnGrabar);
+            this.grpBotones.Controls.Add(this.btnBorrar);
+            this.grpBotones.Controls.Add(this.btnEditar);
+            this.grpBotones.Controls.Add(this.btnNuevo);
+            this.grpBotones.Controls.Add(this.btnBuscar);
+            this.grpBotones.Location = new System.Drawing.Point(332, 66);
+            this.grpBotones.Name = "grpBotones";
+            this.grpBotones.Size = new System.Drawing.Size(200, 292);
+            this.grpBotones.TabIndex = 1;
+            this.grpBotones.TabStop = false;
             // 
             // btnCancelar
             // 
@@ -253,10 +256,10 @@
             // 
             this.groupBox1.Controls.Add(this.txtParametros);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBox1.Location = new System.Drawing.Point(321, 6);
+            this.groupBox1.Location = new System.Drawing.Point(332, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 54);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
@@ -266,6 +269,7 @@
             this.txtParametros.Name = "txtParametros";
             this.txtParametros.Size = new System.Drawing.Size(188, 20);
             this.txtParametros.TabIndex = 7;
+            this.txtParametros.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtParametros_KeyDown);
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -357,20 +361,24 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(532, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(545, 25);
             this.bindingNavigator1.TabIndex = 28;
             this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmColores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 403);
+            this.ClientSize = new System.Drawing.Size(545, 403);
             this.ControlBox = false;
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.grpCampos);
             this.Controls.Add(this.gvwDatos);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpBotones);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmColores";
             this.Text = "Colores";
@@ -379,13 +387,14 @@
             this.grpCampos.ResumeLayout(false);
             this.grpCampos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.grpBotones.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -402,7 +411,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtIdColorCOL;
         internal System.Windows.Forms.DataGridView gvwDatos;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpBotones;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnGrabar;
@@ -423,5 +432,6 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

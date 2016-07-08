@@ -49,6 +49,8 @@ namespace StockVentas
             gvwDatos.Columns["PorcentajeALI"].HeaderText = "Porcentaje";
             bindingSource1.Sort = "IdAlicuotaALI";
             tblAlicuotasIva.ColumnChanged += new DataColumnChangeEventHandler(Column_Changed);
+            grpBotones.CausesValidation = false;
+            btnCancelar.CausesValidation = false;
             SetStateForm(FormState.inicial);   
         }        
 
@@ -68,8 +70,13 @@ namespace StockVentas
         private void btnEditar_Click(object sender, EventArgs e)
         {
             if (bindingSource1.Count == 0) return;
-            editar = true;
-            SetStateForm(FormState.edicion);
+            if (MessageBox.Show("La edición errónea de los datos puede alterar el buen funcionamiento de la facturación. ¿Desea continuar?", "Trend",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                editar = true;
+                SetStateForm(FormState.edicion);
+            }
+
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)

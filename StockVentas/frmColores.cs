@@ -46,7 +46,14 @@ namespace StockVentas
             gvwDatos.Columns["IdColorCOL"].HeaderText = "Nº color";
             gvwDatos.Columns["DescripcionCOL"].HeaderText = "Descripción";
             bindingSource1.Sort = "DescripcionCOL";
+            grpBotones.CausesValidation = false;
+            btnCancelar.CausesValidation = false;
             SetStateForm(FormState.inicial);   
+        }
+
+        private void txtParametros_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return) btnBuscar.PerformClick();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -138,6 +145,48 @@ namespace StockVentas
             bindingSource1.RemoveFilter();
         }
 
+        private void ValidarCampos(object sender, CancelEventArgs e)
+        {
+            if ((sender == (object)txtDescripcionCOL))
+            {
+                if (string.IsNullOrEmpty(txtDescripcionCOL.Text))
+                {
+                    this.errorProvider1.SetError(txtDescripcionCOL, "Debe escribir una descripción.");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void CamposValidado(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void AddEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating += new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated += new System.EventHandler(this.CamposValidado);
+                }
+            }
+        }
+
+        private void DelEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating -= new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated -= new System.EventHandler(this.CamposValidado);
+                }
+            }
+            this.errorProvider1.Clear();
+        }
+
         public void SetStateForm(FormState state)
         {
             if (state == FormState.inicial)
@@ -154,6 +203,7 @@ namespace StockVentas
                 btnCancelar.Enabled = false;
                 btnColor.Enabled = false;
                 btnSalir.Enabled = true;
+                DelEventosValidacion();
                 txtParametros.Focus();
             }
             if (state == FormState.insercion)
@@ -171,6 +221,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnColor.Enabled = true;
                 btnSalir.Enabled = false;
+                AddEventosValidacion();
             }
             if (state == FormState.edicion)
             {
@@ -186,6 +237,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnColor.Enabled = true;
                 btnSalir.Enabled = false;
+                AddEventosValidacion();
             }
         }
 
