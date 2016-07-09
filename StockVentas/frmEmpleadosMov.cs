@@ -67,6 +67,7 @@ namespace StockVentas
 
         private void frmEmpleadosMov_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             this.Text = "Empleados movimientos";
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;

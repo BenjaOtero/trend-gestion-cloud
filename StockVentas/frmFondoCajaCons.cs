@@ -43,6 +43,7 @@ namespace StockVentas
 
         private void frmFondoCajaCons_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             dt.Tables[0].TableName = "FondoCaja";
             bindingSource1.DataSource = dt.Tables[0];
             bindingNavigator1.BindingSource = bindingSource1;

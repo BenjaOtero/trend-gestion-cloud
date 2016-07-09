@@ -34,6 +34,7 @@ namespace StockVentas
 
         private void frmArticulosItems_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
@@ -53,8 +54,15 @@ namespace StockVentas
             gvwDatos.Columns["DescripcionWebITE"].Visible = false;
             gvwDatos.Columns["ActivoWebITE"].Visible = false;
             bindingSource1.Sort = "DescripcionITE";
+            grpBotones.CausesValidation = false;
+            btnCancelar.CausesValidation = false;
             SetStateForm(FormState.inicial);            
-        }        
+        }
+
+        private void txtParametros_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return) btnBuscar.PerformClick();
+        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -147,6 +155,60 @@ namespace StockVentas
                 progreso.ShowDialog();
             }
             bindingSource1.RemoveFilter();
+        }        
+
+        private void binding_Format(object sender, ConvertEventArgs e)
+        {
+            if (e.Value.ToString() == "True")  e.Value = true;
+            else e.Value = false;
+        }
+
+        private void binding_Parse(object sender, ConvertEventArgs e)
+        {
+           if ((bool)e.Value) e.Value = 1;
+            else e.Value = 0;
+        }
+
+        private void ValidarCampos(object sender, CancelEventArgs e)
+        {
+            if ((sender == (object)txtDescripcionITE))
+            {
+                if (string.IsNullOrEmpty(txtDescripcionITE.Text))
+                {
+                    this.errorProvider1.SetError(txtDescripcionITE, "Debe escribir una descripcion.");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void CamposValidado(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void AddEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating += new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated += new System.EventHandler(this.CamposValidado);
+                }
+            }
+        }
+
+        private void DelEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating -= new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated -= new System.EventHandler(this.CamposValidado);
+                }
+            }
+            this.errorProvider1.Clear();
         }
 
         public void SetStateForm(FormState state)
@@ -202,60 +264,6 @@ namespace StockVentas
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
             }
-        }
-
-        private void binding_Format(object sender, ConvertEventArgs e)
-        {
-            if (e.Value.ToString() == "True")  e.Value = true;
-            else e.Value = false;
-        }
-
-        private void binding_Parse(object sender, ConvertEventArgs e)
-        {
-           if ((bool)e.Value) e.Value = 1;
-            else e.Value = 0;
-        }
-
-        private void ValidarCampos(object sender, CancelEventArgs e)
-        {
-            if ((sender == (object)txtDescripcionITE))
-            {
-                if (string.IsNullOrEmpty(txtDescripcionITE.Text))
-                {
-                    this.errorProvider1.SetError(txtDescripcionITE, "Debe escribir una descripcion.");
-                    e.Cancel = true;
-                }
-            }
-        }
-
-        private void CamposValidado(object sender, EventArgs e)
-        {
-            errorProvider1.Clear();
-        }
-
-        private void AddEventosValidacion()
-        {
-            foreach (Control ctl in grpCampos.Controls)
-            {
-                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
-                {
-                    ctl.Validating += new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
-                    ctl.Validated += new System.EventHandler(this.CamposValidado);
-                }
-            }
-        }
-
-        private void DelEventosValidacion()
-        {
-            foreach (Control ctl in grpCampos.Controls)
-            {
-                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
-                {
-                    ctl.Validating -= new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
-                    ctl.Validated -= new System.EventHandler(this.CamposValidado);
-                }
-            }
-            this.errorProvider1.Clear();
         }
 
     }

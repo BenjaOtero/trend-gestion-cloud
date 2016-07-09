@@ -16,6 +16,7 @@ namespace StockVentas
         public frmArticulosEditNewsInter(DataTable tblArticulos)
         {
             InitializeComponent();
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;

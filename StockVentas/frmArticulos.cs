@@ -82,6 +82,7 @@ namespace StockVentas
 
         private void frmArticulos_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             cmbGenero.Validating += new System.ComponentModel.CancelEventHandler(BL.Utilitarios.ValidarComboBox);
             cmbGenero.KeyDown += new System.Windows.Forms.KeyEventHandler(BL.Utilitarios.EnterTab);
             cmbProveedor.Validating += new System.ComponentModel.CancelEventHandler(BL.Utilitarios.ValidarComboBox);

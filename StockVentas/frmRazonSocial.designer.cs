@@ -55,7 +55,7 @@
             this.txtRazonSocialRAZ = new System.Windows.Forms.TextBox();
             this.txtIdRazonSocialRAZ = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.txtInicioActividadRAZ = new System.Windows.Forms.TextBox();
+            this.txtInicioActividadRAZ = new System.Windows.Forms.MaskedTextBox();
             this.groupBox2.SuspendLayout();
             this.grpCampos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -115,6 +115,7 @@
             // 
             // grpCampos
             // 
+            this.grpCampos.Controls.Add(this.txtInicioActividadRAZ);
             this.grpCampos.Controls.Add(this.cmbIdCondicionIvaRAZ);
             this.grpCampos.Controls.Add(this.label10);
             this.grpCampos.Controls.Add(this.label9);
@@ -126,7 +127,6 @@
             this.grpCampos.Controls.Add(this.label5);
             this.grpCampos.Controls.Add(this.label4);
             this.grpCampos.Controls.Add(this.label3);
-            this.grpCampos.Controls.Add(this.txtInicioActividadRAZ);
             this.grpCampos.Controls.Add(this.txtIngresosBrutosRAZ);
             this.grpCampos.Controls.Add(this.txtCuitRAZ);
             this.grpCampos.Controls.Add(this.txtProvinciaRAZ);
@@ -325,11 +325,12 @@
             // 
             // txtInicioActividadRAZ
             // 
-            this.txtInicioActividadRAZ.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtInicioActividadRAZ.Location = new System.Drawing.Point(114, 253);
+            this.txtInicioActividadRAZ.Location = new System.Drawing.Point(114, 249);
+            this.txtInicioActividadRAZ.Mask = "00/00/0000";
             this.txtInicioActividadRAZ.Name = "txtInicioActividadRAZ";
-            this.txtInicioActividadRAZ.Size = new System.Drawing.Size(375, 20);
-            this.txtInicioActividadRAZ.TabIndex = 10;
+            this.txtInicioActividadRAZ.Size = new System.Drawing.Size(377, 20);
+            this.txtInicioActividadRAZ.TabIndex = 23;
+            this.txtInicioActividadRAZ.ValidatingType = typeof(System.DateTime);
             // 
             // frmRazonSocial
             // 
@@ -379,7 +380,7 @@
         private System.Windows.Forms.TextBox txtNombreFantasiaRAZ;
         private System.Windows.Forms.TextBox txtRazonSocialRAZ;
         private System.Windows.Forms.TextBox txtIdRazonSocialRAZ;
-        private System.Windows.Forms.TextBox txtInicioActividadRAZ;
+        private System.Windows.Forms.MaskedTextBox txtInicioActividadRAZ;
 
     }
 }

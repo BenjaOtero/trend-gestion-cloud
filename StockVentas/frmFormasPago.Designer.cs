@@ -35,7 +35,7 @@
             this.txtIdFormaPagoFOR = new System.Windows.Forms.TextBox();
             this.txtDescripcionFOR = new System.Windows.Forms.TextBox();
             this.gvwDatos = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpBotones = new System.Windows.Forms.GroupBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnGrabar = new System.Windows.Forms.Button();
@@ -57,13 +57,15 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.grpBotones.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpCampos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -112,25 +114,25 @@
             this.gvwDatos.Location = new System.Drawing.Point(12, 16);
             this.gvwDatos.Name = "gvwDatos";
             this.gvwDatos.ReadOnly = true;
-            this.gvwDatos.Size = new System.Drawing.Size(296, 241);
+            this.gvwDatos.Size = new System.Drawing.Size(302, 241);
             this.gvwDatos.TabIndex = 18;
             this.gvwDatos.TabStop = false;
             this.gvwDatos.Text = "DataGridView1";
             // 
-            // groupBox2
+            // grpBotones
             // 
-            this.groupBox2.Controls.Add(this.btnCancelar);
-            this.groupBox2.Controls.Add(this.btnSalir);
-            this.groupBox2.Controls.Add(this.btnGrabar);
-            this.groupBox2.Controls.Add(this.btnBorrar);
-            this.groupBox2.Controls.Add(this.btnEditar);
-            this.groupBox2.Controls.Add(this.btnNuevo);
-            this.groupBox2.Controls.Add(this.btnBuscar);
-            this.groupBox2.Location = new System.Drawing.Point(321, 69);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 272);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
+            this.grpBotones.Controls.Add(this.btnCancelar);
+            this.grpBotones.Controls.Add(this.btnSalir);
+            this.grpBotones.Controls.Add(this.btnGrabar);
+            this.grpBotones.Controls.Add(this.btnBorrar);
+            this.grpBotones.Controls.Add(this.btnEditar);
+            this.grpBotones.Controls.Add(this.btnNuevo);
+            this.grpBotones.Controls.Add(this.btnBuscar);
+            this.grpBotones.Location = new System.Drawing.Point(325, 72);
+            this.grpBotones.Name = "grpBotones";
+            this.grpBotones.Size = new System.Drawing.Size(200, 272);
+            this.grpBotones.TabIndex = 1;
+            this.grpBotones.TabStop = false;
             // 
             // btnCancelar
             // 
@@ -207,10 +209,10 @@
             this.groupBox1.Controls.Add(this.txtParametros);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBox1.Location = new System.Drawing.Point(321, 9);
+            this.groupBox1.Location = new System.Drawing.Point(325, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 54);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
@@ -220,6 +222,7 @@
             this.txtParametros.Name = "txtParametros";
             this.txtParametros.Size = new System.Drawing.Size(188, 20);
             this.txtParametros.TabIndex = 0;
+            this.txtParametros.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtParametros_KeyDown);
             // 
             // grpCampos
             // 
@@ -229,7 +232,7 @@
             this.grpCampos.Controls.Add(this.txtIdFormaPagoFOR);
             this.grpCampos.Location = new System.Drawing.Point(12, 263);
             this.grpCampos.Name = "grpCampos";
-            this.grpCampos.Size = new System.Drawing.Size(296, 78);
+            this.grpCampos.Size = new System.Drawing.Size(302, 78);
             this.grpCampos.TabIndex = 0;
             this.grpCampos.TabStop = false;
             // 
@@ -256,7 +259,7 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(532, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(537, 25);
             this.bindingNavigator1.TabIndex = 29;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -327,23 +330,27 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // frmFormasPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 383);
+            this.ClientSize = new System.Drawing.Size(537, 383);
             this.ControlBox = false;
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.grpCampos);
             this.Controls.Add(this.gvwDatos);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpBotones);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmFormasPago";
             this.Text = "Formas de pago";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmFormasPago_FormClosing);
             this.Load += new System.EventHandler(this.frmFormasPago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.grpBotones.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.grpCampos.ResumeLayout(false);
@@ -352,6 +359,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,7 +372,7 @@
         private System.Windows.Forms.TextBox txtIdFormaPagoFOR;
         private System.Windows.Forms.TextBox txtDescripcionFOR;
         internal System.Windows.Forms.DataGridView gvwDatos;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpBotones;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnGrabar;
@@ -386,6 +394,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
 
     }
 }

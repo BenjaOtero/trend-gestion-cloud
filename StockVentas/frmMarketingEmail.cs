@@ -23,6 +23,7 @@ namespace StockVentas
         public frmMarketingEmail()
         {
             InitializeComponent();
+            this.Location = new Point(50, 50);
         }
 
         private void btnImagen_Click(object sender, EventArgs e)

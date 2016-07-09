@@ -1,18 +1,15 @@
 -Ver mail oterobenjamin@gmail.com (¡Notificación Importante! Vulnerabilidad POODLE)
--Validar que coincidan ImagenART con ImagenColorART en frmArticulosDetalle
 - tener en cuenta en la configuracion inicial de mysql server que el directorio de instalacion del mismo puede varias entre 
 	'archivos de programas', 'program files' y 'program files(x86)'
--error en frmAlicuotasIva al actualizar
+
 -backup db (crear servicio windows)
 
 
--probar ventas desde planillas
--probar fondo caja
--Update no puede encontrar TableMapping['Ventas'] o DataTable 'Ventas'.
+-Update no puede encontrar TableMapping['Ventas'] o DataTable 'Ventas'. Lo probé varias veces, dió error. Volver a probarlo.
 -agregar en requisitos previos sp3 windows xp
 -ver contraseñas 8953#AFjn
--en tabla razon social se cambia solo el id
--no generar stock para locales "Entradas" y "Salidas"
+-error en frmAlicuotasIva al actualizar
+
 
 
 

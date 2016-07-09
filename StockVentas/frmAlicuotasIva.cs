@@ -35,6 +35,7 @@ namespace StockVentas
 
         private void frmAlicuotasIva_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
@@ -53,12 +54,6 @@ namespace StockVentas
             btnCancelar.CausesValidation = false;
             SetStateForm(FormState.inicial);   
         }        
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            string parametros = txtParametros.Text;
-            bindingSource1.Filter = "PorcentajeALI LIKE '" + parametros + "*'";
-        }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -239,7 +234,6 @@ namespace StockVentas
                 gvwDatos.Enabled = true;
                 txtPorcentajeALI.ReadOnly = true;
                 txtPorcentajeALI.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-                btnBuscar.Enabled = true;
                 btnNuevo.Enabled = true;
                 btnEditar.Enabled = true;
                 btnBorrar.Enabled = true;
@@ -247,7 +241,7 @@ namespace StockVentas
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
                 DelEventosValidacion();
-                txtParametros.Focus();
+                gvwDatos.Focus();
             }
 
             if (state == FormState.insercion)
@@ -257,7 +251,6 @@ namespace StockVentas
                 txtPorcentajeALI.ReadOnly = false;
                 txtPorcentajeALI.Clear();
                 txtIdAlicuotaALI.Focus();
-                btnBuscar.Enabled = false;
                 btnNuevo.Enabled = false;
                 btnEditar.Enabled = false;
                 btnBorrar.Enabled = false;
@@ -273,7 +266,6 @@ namespace StockVentas
                 txtIdAlicuotaALI.ReadOnly = false;
                 txtPorcentajeALI.ReadOnly = false;
                 txtIdAlicuotaALI.Focus();
-                btnBuscar.Enabled = false;
                 btnNuevo.Enabled = false;
                 btnEditar.Enabled = false;
                 btnBorrar.Enabled = false;

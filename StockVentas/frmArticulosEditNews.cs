@@ -29,6 +29,7 @@ namespace StockVentas
 
         private void frmArticulosEditNews_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
@@ -64,7 +65,6 @@ namespace StockVentas
             dgvDatos.Columns["DescripcionART"].HeaderText = "Descripcion";
             dgvDatos.Columns["DescripcionART"].ReadOnly = true;
             dgvDatos.Columns["NuevoART"].HeaderText = "Nuevo";
-
             dgvDatos.Columns.Remove("NuevoART");
             DataGridViewCheckBoxColumn chkNuevo = new DataGridViewCheckBoxColumn();
             chkNuevo.Name = "NuevoART";

@@ -27,6 +27,7 @@ namespace StockVentas
 
         private void frmVentasPesosDiarias_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             this.Text = "Ventas diarias en pesos";
             this.CenterToScreen();
             this.MaximizeBox = false;

@@ -40,6 +40,7 @@ namespace StockVentas
 
         private void frmEmpleadosMovTipos_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             this.Text = "Empleados tipos de movimientos";
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;

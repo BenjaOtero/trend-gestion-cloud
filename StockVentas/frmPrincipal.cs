@@ -11,6 +11,7 @@ using System.Diagnostics;
 using BL;
 using System.Net;
 using System.Xml;
+using System.Timers;
 
 
 namespace StockVentas
@@ -20,6 +21,8 @@ namespace StockVentas
         public frmProgress progreso;
         string origen, accion;
         string idRazonSocial;
+        private static System.Timers.Timer timerInicializar;
+        string fileSilenceBck;
 
         public frmPrincipal()
         {
@@ -39,6 +42,11 @@ namespace StockVentas
         {
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
+
+            timerInicializar = new System.Timers.Timer(500);
+            timerInicializar.Elapsed += new ElapsedEventHandler(SilenceBackup);
+            timerInicializar.AutoReset = false;
+            timerInicializar.Enabled = true;
          //   alícuotasIVAToolStripMenuItem.Visible = false;
             //   condiciónIVAToolStripMenuItem.Visible = false;
             //   empleadosToolStripMenuItem.Visible = false;
@@ -335,7 +343,7 @@ namespace StockVentas
                 sb.AppendLine(unidad);
                 sb.AppendLine(@"cd " + path + @"\Backup");
                 //  sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h ns21a.cyberneticos.com --opt ncsoftwa_re > " + fichero.FileName);
-                sb.AppendLine(@"mysqldump --skip-comments -u benja -p8953#AFjn -h localhost --routines --opt ncsoftwa_re > " + fichero.FileName);              
+                sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --routines --opt ncsoftwa_re > " + fichero.FileName);              
                 //mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
                 using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
                 {
@@ -357,6 +365,46 @@ namespace StockVentas
         {
             if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
             Cursor = Cursors.Arrow;
+        }
+
+        private void SilenceBackup(object source, ElapsedEventArgs e)
+        {
+            DataTable tbl = BL.GetDataBLL.RazonSocial();
+            fileSilenceBck = tbl.Rows[0][0].ToString() + "_bck.sql.gz";
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); // creo el archivo .bat
+            sw.Close();
+            StringBuilder sb = new StringBuilder();
+            string path = Application.StartupPath;
+            string unidad = path.Substring(0, 2);
+            sb.AppendLine(unidad);
+            sb.AppendLine(@"cd " + path + @"\Backup");
+            //  sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h ns21a.cyberneticos.com --opt ncsoftwa_re > " + fichero.FileName);
+            sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --routines --opt ncsoftwa_re | gzip > c:\windows\temp\" + fileSilenceBck);
+            //mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
+            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
+            {
+                outfile.Write(sb.ToString());
+            }
+            Process process = new Process();
+            process.StartInfo.FileName = "c:\\Windows\\Temp\\backup.bat";
+            process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            process.Exited += new EventHandler(process_Exited_silence);
+            process.Start();
+            process.WaitForExit();
+
+        }
+
+        private void process_Exited_silence(object sender, System.EventArgs e)
+        {
+            MemoryStream ms = new MemoryStream();
+            using (FileStream fs = File.OpenRead(@"c:\windows\temp\" + fileSilenceBck))
+            {
+                fs.CopyTo(ms);
+            }
+            BL.Utilitarios.UploadFromMemoryStream(ms, fileSilenceBck);
+            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
         }
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)

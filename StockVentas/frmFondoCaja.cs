@@ -42,6 +42,7 @@ namespace StockVentas
 
         private void frmFondoCaja_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
@@ -83,6 +84,8 @@ namespace StockVentas
             txtImporte.DataBindings.Add("Text", rowView, "ImporteFONP", false, DataSourceUpdateMode.OnPropertyChanged);
             if (lstPc.Items.Count > 0) lstPc.SetSelected(0, true);   
             this.lstLocales.SelectedValueChanged += new System.EventHandler(this.lstLocales_SelectedValueChanged);
+            this.AcceptButton = btnAceptar;
+            txtImporte.Focus();
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

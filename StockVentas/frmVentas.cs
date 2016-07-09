@@ -61,6 +61,7 @@ namespace StockVentas
 
         private void frmVentas_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             instanciaVentas = this;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             System.Drawing.Icon ico = Properties.Resources.icono_app;

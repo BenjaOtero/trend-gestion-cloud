@@ -42,9 +42,6 @@
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtParametros = new System.Windows.Forms.TextBox();
             this.grpCampos = new System.Windows.Forms.GroupBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -60,7 +57,6 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).BeginInit();
             this.grpBotones.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.grpCampos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -128,16 +124,15 @@
             this.grpBotones.Controls.Add(this.btnBorrar);
             this.grpBotones.Controls.Add(this.btnEditar);
             this.grpBotones.Controls.Add(this.btnNuevo);
-            this.grpBotones.Controls.Add(this.btnBuscar);
-            this.grpBotones.Location = new System.Drawing.Point(332, 72);
+            this.grpBotones.Location = new System.Drawing.Point(332, 16);
             this.grpBotones.Name = "grpBotones";
-            this.grpBotones.Size = new System.Drawing.Size(200, 272);
+            this.grpBotones.Size = new System.Drawing.Size(200, 325);
             this.grpBotones.TabIndex = 1;
             this.grpBotones.TabStop = false;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(20, 185);
+            this.btnCancelar.Location = new System.Drawing.Point(20, 149);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(160, 26);
             this.btnCancelar.TabIndex = 6;
@@ -147,7 +142,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(20, 217);
+            this.btnSalir.Location = new System.Drawing.Point(20, 181);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(160, 26);
             this.btnSalir.TabIndex = 5;
@@ -157,7 +152,7 @@
             // 
             // btnGrabar
             // 
-            this.btnGrabar.Location = new System.Drawing.Point(20, 153);
+            this.btnGrabar.Location = new System.Drawing.Point(20, 117);
             this.btnGrabar.Name = "btnGrabar";
             this.btnGrabar.Size = new System.Drawing.Size(160, 26);
             this.btnGrabar.TabIndex = 4;
@@ -167,7 +162,7 @@
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(20, 121);
+            this.btnBorrar.Location = new System.Drawing.Point(20, 85);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(160, 26);
             this.btnBorrar.TabIndex = 3;
@@ -177,7 +172,7 @@
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(20, 89);
+            this.btnEditar.Location = new System.Drawing.Point(20, 53);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(160, 26);
             this.btnEditar.TabIndex = 2;
@@ -187,42 +182,13 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new System.Drawing.Point(20, 57);
+            this.btnNuevo.Location = new System.Drawing.Point(20, 21);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(160, 26);
             this.btnNuevo.TabIndex = 1;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(20, 25);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(160, 26);
-            this.btnBuscar.TabIndex = 0;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtParametros);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBox1.Location = new System.Drawing.Point(332, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 54);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Buscar";
-            // 
-            // txtParametros
-            // 
-            this.txtParametros.Location = new System.Drawing.Point(6, 20);
-            this.txtParametros.Name = "txtParametros";
-            this.txtParametros.Size = new System.Drawing.Size(188, 20);
-            this.txtParametros.TabIndex = 0;
             // 
             // grpCampos
             // 
@@ -344,15 +310,12 @@
             this.Controls.Add(this.grpCampos);
             this.Controls.Add(this.gvwDatos);
             this.Controls.Add(this.grpBotones);
-            this.Controls.Add(this.groupBox1);
             this.Name = "frmAlicuotasIva";
             this.Text = "Alicuotas iva";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAlicuotasIva_FormClosing);
             this.Load += new System.EventHandler(this.frmAlicuotasIva_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).EndInit();
             this.grpBotones.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.grpCampos.ResumeLayout(false);
             this.grpCampos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -379,9 +342,6 @@
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnNuevo;
-        private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtParametros;
         private System.Windows.Forms.GroupBox grpCampos;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.ErrorProvider errorProvider1;

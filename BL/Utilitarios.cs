@@ -398,8 +398,8 @@ namespace BL
             string ftpPassword;
 
             ftpServerIP = "karminna.com/public_html/images";
-              ftpUserID = "benja@karminna.com";
-              ftpPassword = "8953#AFjn";
+            ftpUserID = "benja@karminna.com";
+            ftpPassword = "8953#AFjn";
 
               /*// FTP local
                ftpServerIP = "127.0.0.1:22";

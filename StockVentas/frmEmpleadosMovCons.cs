@@ -26,6 +26,7 @@ namespace StockVentas
 
         private void frmEmpleadosMovCons_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             bindingSource1.DataSource = tblEmpleadosMov;
             bindingNavigator1.BindingSource = bindingSource1;
             dgvEmpleados.DataSource = bindingSource1;

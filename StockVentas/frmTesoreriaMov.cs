@@ -41,6 +41,7 @@ namespace StockVentas
 
         private void frmTesoreriaMov_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;

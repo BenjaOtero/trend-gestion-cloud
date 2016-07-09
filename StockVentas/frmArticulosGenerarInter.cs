@@ -16,6 +16,7 @@ namespace StockVentas
         public frmArticulosGenerarInter(BindingSource bindingSource)
         {
             InitializeComponent();
+            this.CenterToScreen();
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.Text = "  Generar artículos";

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGeneros));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpBotones = new System.Windows.Forms.GroupBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnGrabar = new System.Windows.Forms.Button();
@@ -59,29 +59,31 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.groupBox2.SuspendLayout();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.grpBotones.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).BeginInit();
             this.grpCampos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox2
+            // grpBotones
             // 
-            this.groupBox2.Controls.Add(this.btnCancelar);
-            this.groupBox2.Controls.Add(this.btnSalir);
-            this.groupBox2.Controls.Add(this.btnGrabar);
-            this.groupBox2.Controls.Add(this.btnBorrar);
-            this.groupBox2.Controls.Add(this.btnEditar);
-            this.groupBox2.Controls.Add(this.btnNuevo);
-            this.groupBox2.Controls.Add(this.btnBuscar);
-            this.groupBox2.Location = new System.Drawing.Point(333, 69);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 293);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
+            this.grpBotones.Controls.Add(this.btnCancelar);
+            this.grpBotones.Controls.Add(this.btnSalir);
+            this.grpBotones.Controls.Add(this.btnGrabar);
+            this.grpBotones.Controls.Add(this.btnBorrar);
+            this.grpBotones.Controls.Add(this.btnEditar);
+            this.grpBotones.Controls.Add(this.btnNuevo);
+            this.grpBotones.Controls.Add(this.btnBuscar);
+            this.grpBotones.Location = new System.Drawing.Point(333, 69);
+            this.grpBotones.Name = "grpBotones";
+            this.grpBotones.Size = new System.Drawing.Size(200, 293);
+            this.grpBotones.TabIndex = 2;
+            this.grpBotones.TabStop = false;
             // 
             // btnCancelar
             // 
@@ -171,6 +173,7 @@
             this.txtParametros.Name = "txtParametros";
             this.txtParametros.Size = new System.Drawing.Size(188, 20);
             this.txtParametros.TabIndex = 7;
+            this.txtParametros.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtParametros_KeyDown);
             // 
             // gvwDatos
             // 
@@ -351,6 +354,10 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // frmGeneros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,7 +366,7 @@
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.grpCampos);
             this.Controls.Add(this.gvwDatos);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpBotones);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -368,7 +375,7 @@
             this.Text = "Géneros";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmGeneros_FormClosing);
             this.Load += new System.EventHandler(this.frmGeneros_Load);
-            this.groupBox2.ResumeLayout(false);
+            this.grpBotones.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).EndInit();
@@ -378,6 +385,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -385,7 +393,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpBotones;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnGrabar;
@@ -414,6 +422,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 

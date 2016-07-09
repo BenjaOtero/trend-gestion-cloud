@@ -69,6 +69,7 @@ namespace StockVentas
 
         private void frmStockMov_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             instanciaStockMov = this;
             grabacionCorrecta = true;

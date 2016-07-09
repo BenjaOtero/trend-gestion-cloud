@@ -44,6 +44,7 @@ namespace StockVentas
 
         private void frmEmpleados_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             this.Text = "Empleados";
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;

@@ -32,6 +32,7 @@ namespace StockVentas
 
         private void frmGeneros_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
@@ -42,21 +43,24 @@ namespace StockVentas
             tblGeneros.ColumnChanged += new DataColumnChangeEventHandler(tblGeneros_ColumnChanged);
             bindingNavigator1.BindingSource = bindingSource1;
             BL.Utilitarios.DataBindingsAdd(bindingSource1, grpCampos);
-
-
             Binding bind = new Binding("Checked", bindingSource1, "ActivoWebGEN", false, DataSourceUpdateMode.OnPropertyChanged);
             bind.Format += new ConvertEventHandler(binding_Format);
             bind.Parse += new ConvertEventHandler(binding_Parse);
             chkActivoWebGEN.DataBindings.Add(bind);
-
-
             gvwDatos.DataSource = bindingSource1;
             gvwDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gvwDatos.Columns["IdGeneroGEN"].HeaderText = "Nº Género";
             gvwDatos.Columns["DescripcionGEN"].HeaderText = "Descripción";
             gvwDatos.Columns["ActivoWebGEN"].Visible = false;
+            grpBotones.CausesValidation = false;
+            btnCancelar.CausesValidation = false;
             SetStateForm(FormState.inicial);            
-        }        
+        }
+
+        private void txtParametros_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return) btnBuscar.PerformClick();
+        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -139,6 +143,65 @@ namespace StockVentas
          //   bindingSource1.RemoveFilter();
         }
 
+        void binding_Format(object sender, ConvertEventArgs e)
+        {
+            if (e.Value.ToString() == "True")  e.Value = true;
+            else e.Value = false;
+        }
+
+        void binding_Parse(object sender, ConvertEventArgs e)
+        {
+           if ((bool)e.Value) e.Value = 1;
+            else e.Value = 0;
+        }
+
+        private void tblGeneros_ColumnChanged(object sender, EventArgs e)
+        {
+            if (btnGrabar.Enabled != true) btnGrabar.Enabled = true;
+        }
+
+        private void ValidarCampos(object sender, CancelEventArgs e)
+        {
+            if ((sender == (object)txtDescripcionGEN))
+            {
+                if (string.IsNullOrEmpty(txtDescripcionGEN.Text))
+                {
+                    this.errorProvider1.SetError(txtDescripcionGEN, "Debe escribir una descripción.");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void CamposValidado(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+
+        private void AddEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating += new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated += new System.EventHandler(this.CamposValidado);
+                }
+            }
+        }
+
+        private void DelEventosValidacion()
+        {
+            foreach (Control ctl in grpCampos.Controls)
+            {
+                if (ctl is TextBox || ctl is MaskedTextBox || ctl is ComboBox)
+                {
+                    ctl.Validating -= new System.ComponentModel.CancelEventHandler(this.ValidarCampos);
+                    ctl.Validated -= new System.EventHandler(this.CamposValidado);
+                }
+            }
+            this.errorProvider1.Clear();
+        }
+
         public void SetStateForm(FormState state)
         {
 
@@ -154,6 +217,7 @@ namespace StockVentas
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
+                DelEventosValidacion();
                 txtParametros.Focus();
             }
 
@@ -170,6 +234,7 @@ namespace StockVentas
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
+                AddEventosValidacion();
             }
 
             if (state == FormState.edicion)
@@ -184,24 +249,8 @@ namespace StockVentas
                 btnGrabar.Enabled = false;
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
+                AddEventosValidacion();
             }
-        }
-
-        void binding_Format(object sender, ConvertEventArgs e)
-        {
-            if (e.Value.ToString() == "True")  e.Value = true;
-            else e.Value = false;
-        }
-
-        void binding_Parse(object sender, ConvertEventArgs e)
-        {
-           if ((bool)e.Value) e.Value = 1;
-            else e.Value = 0;
-        }
-
-        private void tblGeneros_ColumnChanged(object sender, EventArgs e)
-        {
-            if (btnGrabar.Enabled != true) btnGrabar.Enabled = true;
         }
 
     }

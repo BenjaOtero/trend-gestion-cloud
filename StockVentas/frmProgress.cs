@@ -354,6 +354,7 @@ namespace StockVentas
 
         private void frmProgress_Shown(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             if (accion == "cargar")
             {
                 if (origen == "VentasHistoricasUpdate")
@@ -682,7 +683,7 @@ namespace StockVentas
                 switch (origen)
                 {
                     case "frmFondoCaja":
-                        MessageBox.Show("El fondo de caja que intentó grabar ya existe. No se guardaron los cambios.",
+                        MessageBox.Show("Ya existe un fondo de caja para dicha fecha. No se guardaron los cambios.",
                         "Trend Gestion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }

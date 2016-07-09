@@ -50,6 +50,7 @@ namespace StockVentas
 
         private void frmArticulosDetalle_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(50, 50);
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
             this.ControlBox = true;
@@ -163,66 +164,67 @@ namespace StockVentas
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
+            MemoryStream ms;
+            bool tratarImagenesServer = false;
             Cursor.Current = Cursors.WaitCursor;
-            if (strFileName != null)
+            try
             {
-                var image_large = Image.FromFile(strFileName);
-                if (image_large.Height != 1600 && image_large.Width != 1200)
+                if (strFileName != null)
                 {
-                    MessageBox.Show("La imagen debe medir 1600px de alto por 1200px de ancho.", "Trend Gestión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var image_large = Image.FromFile(strFileName);
+                    if (image_large.Height < 1600 && image_large.Width < 1200)
+                    {
+                        MessageBox.Show("La imagen debe medir 1600px de alto por 1200px de ancho.", "Trend Gestión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    ms = new MemoryStream();
+                    using (FileStream fs = File.OpenRead(strFileName))
+                    {
+                        fs.CopyTo(ms);
+                    }
+                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidor + "_large.jpg");
+                    tratarImagenesServer = true;
                 }
-                string strFilePath = Application.StartupPath + "\\images\\";
-                System.IO.File.Copy(strFileName, strFilePath + nombreServidor + "_large.jpg", true);
-                BL.Utilitarios.UploadFromFile(strFilePath + nombreServidor + "_large.jpg", nombreServidor + "_large.jpg");
-
-                var image_xsmall = Image.FromFile(strFileName);                
-                var new_xsmall = ScaleImage(image_xsmall, 40, 53);
-                new_xsmall.Save(strFilePath + nombreServidor + "_xsmall.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                BL.Utilitarios.UploadFromFile(strFilePath + nombreServidor + "_xsmall.jpg", nombreServidor + "_xsmall.jpg");
-
-                var image_small = Image.FromFile(strFileName);
-                var new_small = ScaleImage(image_small, 185, 250);
-                new_small.Save(strFilePath + nombreServidor + "_small.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                BL.Utilitarios.UploadFromFile(strFilePath + nombreServidor + "_small.jpg", nombreServidor + "_small.jpg");
-
-                var image_medium = Image.FromFile(strFileName);
-                var new_medium = ScaleImage(image_medium, 270, 370);
-                new_medium.Save(strFilePath + nombreServidor + "_medium.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                BL.Utilitarios.UploadFromFile(strFilePath + nombreServidor + "_medium.jpg", nombreServidor + "_medium.jpg");
-            }
-            if (strFileNameBck != null)
-            {
-                var image_large = Image.FromFile(strFileNameBck);
-                if (image_large.Height != 1600 && image_large.Width != 1200)
+                if (strFileNameBck != null)
                 {
-                    MessageBox.Show("La imagen debe medir 1600 píxeles de alto por 1200 píxeles de ancho.", "Trend Gestión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var image_large = Image.FromFile(strFileNameBck);
+                    if (image_large.Height < 1600 && image_large.Width < 1200)
+                    {
+                        MessageBox.Show("La imagen debe medir 1600px de alto por 1200px de ancho.", "Trend Gestión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    ms = new MemoryStream();
+                    using (FileStream fs = File.OpenRead(strFileNameBck))
+                    {
+                        fs.CopyTo(ms);
+                    }
+                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidor + "_bck_large.jpg");
+                    tratarImagenesServer = true;
                 }
-                string strFilePath = Application.StartupPath + "\\images\\";
-                System.IO.File.Copy(strFileNameBck, strFilePath + nombreServidorBck + "_bck_large.jpg", true);
-                BL.Utilitarios.UploadFromFile(strFilePath + nombreServidorBck + "_bck_large.jpg", nombreServidorBck + "_bck_large.jpg");
-
-                var image_xsmall = Image.FromFile(strFileNameBck);
-                var new_xsmall = ScaleImage(image_xsmall, 40, 53);
-                new_xsmall.Save(strFilePath + nombreServidorBck + "_bck_xsmall.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                BL.Utilitarios.UploadFromFile(strFilePath + nombreServidorBck + "_bck_xsmall.jpg", nombreServidorBck + "_bck_xsmall.jpg");
-
-                var image_medium = Image.FromFile(strFileNameBck);
-                var new_medium = ScaleImage(image_medium, 270, 370);
-                new_medium.Save(strFilePath + nombreServidorBck + "_bck_medium.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                BL.Utilitarios.UploadFromFile(strFilePath + nombreServidorBck + "_bck_medium.jpg", nombreServidorBck + "_bck_medium.jpg");
+                if (strFileNameColor != null)
+                {
+                    ms = new MemoryStream();
+                    using (FileStream fs = File.OpenRead(strFileNameColor))
+                    {
+                        fs.CopyTo(ms);
+                    }
+                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidorColor);
+                }
+                if (tratarImagenesServer)
+                {
+                    TratarImagenesService tis = new TratarImagenesService();
+                    tis.TratarImagenes(nombreServidor);
+                }
+                fila.EndEdit();
+                if (tblArticulos.GetChanges() != null)
+                {
+                    Grabar();
+                }
             }
-            if (strFileNameColor != null)
+            catch (Exception)
             {
-                string strFilePath = Application.StartupPath + "\\images\\";
-                System.IO.File.Copy(strFileNameColor, strFilePath + nombreServidorColor, true);
-                BL.Utilitarios.UploadFromFile(strFileNameColor, nombreServidorColor);
-            } 
-            fila.EndEdit();
-            if (tblArticulos.GetChanges() != null)
-            {
-                Grabar();
+                MessageBox.Show("Se produjo un error al subir las imagenes al servidor", "Trend");
             }
-            Cursor.Current = Cursors.Arrow;
         }
 
         public static Image ScaleImage(Image image, int maxWidth, int maxHeight)
@@ -369,79 +371,6 @@ namespace StockVentas
             else e.Value = 0;
         }
 
-        private void btnPruebas_Click(object sender, EventArgs e)
-        {
-            MemoryStream ms;
-            bool tratarImagenesServer = false;
-            Cursor.Current = Cursors.WaitCursor;
-            try
-            {
-                if (strFileName != null)
-                {
-                    var image_large = Image.FromFile(strFileName);
-                    if (image_large.Height < 1600 && image_large.Width < 1200)
-                    {
-                        MessageBox.Show("La imagen debe medir 1600px de alto por 1200px de ancho.", "Trend Gestión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    ms = new MemoryStream();
-                    using (FileStream fs = File.OpenRead(strFileName))
-                    {
-                        fs.CopyTo(ms);
-                    }
-                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidor + "_large.jpg");
-                    tratarImagenesServer = true;
-                }
-                if (strFileNameBck != null)
-                {
-                    var image_large = Image.FromFile(strFileNameBck);
-                    if (image_large.Height < 1600 && image_large.Width < 1200)
-                    {
-                        MessageBox.Show("La imagen debe medir 1600px de alto por 1200px de ancho.", "Trend Gestión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    ms = new MemoryStream();
-                    using (FileStream fs = File.OpenRead(strFileNameBck))
-                    {
-                        fs.CopyTo(ms);
-                    }
-                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidor + "_bck_large.jpg");
-                    tratarImagenesServer = true;
-                }
-                if (strFileNameColor != null)
-                {
-                    ms = new MemoryStream();
-                    using (FileStream fs = File.OpenRead(strFileNameColor))
-                    {
-                        fs.CopyTo(ms);
-                    }
-                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidorColor);
-                }
-                if (tratarImagenesServer)
-                {
-                    TratarImagenesService tis = new TratarImagenesService();
-                    tis.TratarImagenes(nombreServidor);
-                }
-                fila.EndEdit();
-                if (tblArticulos.GetChanges() != null)
-                {
-                    Grabar();
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Se produjo un error al subir las imagenes al servidor", "Trend");
-            }
-
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-        //    SimpleService svc = new SimpleService();
-        //    MessageBox.Show(svc.ProcessSimpleType(nombreServidor));
-            Cursor.Current = Cursors.Arrow;
-        }
 
     }
 }

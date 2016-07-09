@@ -38,6 +38,7 @@ namespace StockVentas
 
         private void frmStockMovInforme_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             Cursor.Current = Cursors.WaitCursor;
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;

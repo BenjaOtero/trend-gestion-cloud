@@ -30,8 +30,6 @@
         {
             this.txtIdArticulo = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpload = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnGrabar = new System.Windows.Forms.Button();
             this.btnImagen = new System.Windows.Forms.Button();
@@ -78,8 +76,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnDelete);
-            this.groupBox2.Controls.Add(this.btnUpload);
             this.groupBox2.Controls.Add(this.btnSalir);
             this.groupBox2.Controls.Add(this.btnGrabar);
             this.groupBox2.Location = new System.Drawing.Point(520, 7);
@@ -87,26 +83,6 @@
             this.groupBox2.Size = new System.Drawing.Size(166, 385);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(18, 344);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(135, 26);
-            this.btnDelete.TabIndex = 1;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnUpload
-            // 
-            this.btnUpload.Location = new System.Drawing.Point(18, 312);
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(135, 26);
-            this.btnUpload.TabIndex = 1;
-            this.btnUpload.Text = "Grabar 2";
-            this.btnUpload.UseVisualStyleBackColor = true;
-            this.btnUpload.Click += new System.EventHandler(this.btnPruebas_Click);
             // 
             // btnSalir
             // 
@@ -120,7 +96,7 @@
             // 
             // btnGrabar
             // 
-            this.btnGrabar.Location = new System.Drawing.Point(18, 20);
+            this.btnGrabar.Location = new System.Drawing.Point(18, 17);
             this.btnGrabar.Name = "btnGrabar";
             this.btnGrabar.Size = new System.Drawing.Size(135, 26);
             this.btnGrabar.TabIndex = 0;
@@ -488,7 +464,5 @@
         private System.Windows.Forms.ComboBox cmbGenero;
         private System.Windows.Forms.ComboBox cmbAlicuota;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button btnUpload;
-        private System.Windows.Forms.Button btnDelete;
     }
 }
