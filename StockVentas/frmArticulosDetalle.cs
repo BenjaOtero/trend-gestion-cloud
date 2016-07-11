@@ -182,7 +182,7 @@ namespace StockVentas
                     {
                         fs.CopyTo(ms);
                     }
-                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidor + "_large.jpg");
+                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidor + "_large.jpg", "karminna");
                     tratarImagenesServer = true;
                 }
                 if (strFileNameBck != null)
@@ -198,7 +198,7 @@ namespace StockVentas
                     {
                         fs.CopyTo(ms);
                     }
-                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidor + "_bck_large.jpg");
+                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidor + "_bck_large.jpg", "karminna");
                     tratarImagenesServer = true;
                 }
                 if (strFileNameColor != null)
@@ -208,7 +208,7 @@ namespace StockVentas
                     {
                         fs.CopyTo(ms);
                     }
-                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidorColor);
+                    BL.Utilitarios.UploadFromMemoryStream(ms, nombreServidorColor, "karminna");
                 }
                 if (tratarImagenesServer)
                 {

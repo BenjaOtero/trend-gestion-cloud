@@ -33,6 +33,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.btnCompararStock = new System.Windows.Forms.Button();
             this.txtWebRequest = new System.Windows.Forms.Button();
+            this.btnUploadImagen = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -84,11 +87,32 @@
             this.txtWebRequest.UseVisualStyleBackColor = true;
             this.txtWebRequest.Click += new System.EventHandler(this.txtWebRequest_Click);
             // 
+            // btnUploadImagen
+            // 
+            this.btnUploadImagen.Location = new System.Drawing.Point(12, 158);
+            this.btnUploadImagen.Name = "btnUploadImagen";
+            this.btnUploadImagen.Size = new System.Drawing.Size(129, 23);
+            this.btnUploadImagen.TabIndex = 3;
+            this.btnUploadImagen.Text = "Subir imagen mysql";
+            this.btnUploadImagen.UseVisualStyleBackColor = true;
+            this.btnUploadImagen.Click += new System.EventHandler(this.btnUploadImagen_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::StockVentas.Properties.Resources.camara;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 188);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(303, 226);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmPruebas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(349, 453);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.btnUploadImagen);
             this.Controls.Add(this.txtWebRequest);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btnCompararStock);
@@ -97,6 +121,7 @@
             this.Name = "frmPruebas";
             this.Text = "frmPruebas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPruebas_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -108,5 +133,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnCompararStock;
         private System.Windows.Forms.Button txtWebRequest;
+        private System.Windows.Forms.Button btnUploadImagen;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

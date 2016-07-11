@@ -201,6 +201,14 @@ namespace StockVentas
             Cursor.Current = Cursors.Arrow;
             
         }
+
+        private void btnUploadImagen_Click(object sender, EventArgs e)
+        {
+            MemoryStream ms = new MemoryStream();
+            pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            DAL.AlicuotasIvaDAL.SaveImage(ms);
+            
+        }
     }
 }
 

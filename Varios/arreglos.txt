@@ -8,7 +8,7 @@
 -Update no puede encontrar TableMapping['Ventas'] o DataTable 'Ventas'. Lo probé varias veces, dió error. Volver a probarlo.
 -agregar en requisitos previos sp3 windows xp
 -ver contraseñas 8953#AFjn
--error en frmAlicuotasIva al actualizar
+
 
 
 

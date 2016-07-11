@@ -313,13 +313,6 @@ namespace StockVentas
             }            
         }
 
-        private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (MessageBox.Show("¿Realiza copia de seguridad de los datos?", "Trend", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                Backup();
-            Application.Exit();
-        }
-
         private void pruebasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmPruebas newMDIChild = new frmPruebas();
@@ -403,7 +396,7 @@ namespace StockVentas
             {
                 fs.CopyTo(ms);
             }
-            BL.Utilitarios.UploadFromMemoryStream(ms, fileSilenceBck);
+            BL.Utilitarios.UploadFromMemoryStream(ms, fileSilenceBck, "trendsistemas");
             if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
         }
 
@@ -650,5 +643,11 @@ namespace StockVentas
             if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
         }
 
+        private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+          //  if (MessageBox.Show("¿Realiza copia de seguridad de los datos?", "Trend", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    Backup();
+            Application.Exit();
+        }
     }
 }

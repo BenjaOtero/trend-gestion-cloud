@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace DAL
 {
@@ -49,6 +50,28 @@ namespace DAL
             SqlDeleteCommand1.Parameters.Add("p_id", MySqlDbType.Int32, 11, "IdAlicuotaALI");
             SqlDeleteCommand1.CommandType = CommandType.StoredProcedure;
             return SqlDataAdapter1;
+        }
+
+        public static void SaveImage(MemoryStream ms)
+        {
+      //      MySqlConnection SqlConnection1 = DALBase.GetConnection();
+            //SqlConnection1.Open();
+        //    MySqlCommand cmd = new MySqlCommand("UPDATE alicuotasiva SET Imagen = 100 WHERE IdAlicuotaALI = '5')", SqlConnection1);
+       //     cmd.Parameters.Add(new MySqlParameter("@Image", Convert.ToBase64String(ms.ToArray())));
+       //     cmd.ExecuteNonQuery();
+       //     SqlConnection1.Close();
+
+
+            string stringCommand;
+            stringCommand = "UPDATE alicuotasiva SET Imagen = @Image WHERE IdAlicuotaALI = '5'";
+            //  UPDATE articulos SET IdArticuloART = '0030031803' WHERE IdArticuloART = '030031803';
+            MySqlConnection SqlConnection1 = DALBase.GetConnection();
+            SqlConnection1.Open();
+            MySqlCommand command = new MySqlCommand(stringCommand, SqlConnection1);
+            command.Parameters.Add(new MySqlParameter("@Image", Convert.ToBase64String(ms.ToArray())));
+            command.ExecuteNonQuery();
+            SqlConnection1.Close();
+
         }
 
     }

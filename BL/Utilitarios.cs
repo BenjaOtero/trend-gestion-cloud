@@ -391,21 +391,27 @@ namespace BL
             }
         }
 
-        public static void UploadFromMemoryStream(MemoryStream memoryStream, string nombreRemoto)
+        public static void UploadFromMemoryStream(MemoryStream memoryStream, string nombreRemoto, string servidor)
         {
             string ftpServerIP;
             string ftpUserID;
             string ftpPassword;
-
-            ftpServerIP = "karminna.com/public_html/images";
-            ftpUserID = "benja@karminna.com";
-            ftpPassword = "8953#AFjn";
-
+            if (servidor == "karminna")
+            {
+                ftpServerIP = "karminna.com/public_html/images";
+                ftpUserID = "benja@karminna.com";
+                ftpPassword = "8953#AFjn";
+            }
+            else
+            {
+                ftpServerIP = "trendsistemas.com/datos";
+                ftpUserID = "benja@trendsistemas.com";
+                ftpPassword = "8953#AFjn";
+            }
               /*// FTP local
                ftpServerIP = "127.0.0.1:22";
                 ftpUserID = "Benja";
                 ftpPassword = "8953#AFjn";*/
-
             FtpWebRequest reqFTP;
 
             // Create FtpWebRequest object from the Uri provided
@@ -458,7 +464,8 @@ namespace BL
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Upload Error");
+               // MessageBox.Show(ex.Message, "Upload Error");
+                return;
             }
         }
 
