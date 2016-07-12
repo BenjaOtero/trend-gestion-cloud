@@ -117,44 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LogoTrend1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LogoTrend1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="delete16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btn_cerrar_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btn_cerrar_down.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="logo22" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo22.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="camara" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\camara.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LogoTrend" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LogoTrend.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icono_app" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icono_app.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="document_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document_edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="top_ bar_form" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\top_ bar_form.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btn_cerrar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btn_cerrar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btn_cerrar_down1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btn_cerrar_down.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="progress_bar32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\progress_bar32.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bckgrd_popup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bckgrd_popup.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

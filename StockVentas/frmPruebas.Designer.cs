@@ -34,10 +34,9 @@
             this.btnCompararStock = new System.Windows.Forms.Button();
             this.txtWebRequest = new System.Windows.Forms.Button();
             this.btnUploadImagen = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnDownLoadImage = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.btnLeftBottom = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,40 +99,41 @@
             this.btnUploadImagen.UseVisualStyleBackColor = true;
             this.btnUploadImagen.Click += new System.EventHandler(this.btnUploadImagen_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.ImageLocation = "";
-            this.pictureBox1.Location = new System.Drawing.Point(13, 188);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(303, 226);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
             // btnDownLoadImage
             // 
-            this.btnDownLoadImage.Location = new System.Drawing.Point(12, 420);
+            this.btnDownLoadImage.Location = new System.Drawing.Point(12, 187);
             this.btnDownLoadImage.Name = "btnDownLoadImage";
             this.btnDownLoadImage.Size = new System.Drawing.Size(129, 23);
             this.btnDownLoadImage.TabIndex = 3;
-            this.btnDownLoadImage.Text = "Subir imagen mysql";
+            this.btnDownLoadImage.Text = "Descargar imagen mysql";
             this.btnDownLoadImage.UseVisualStyleBackColor = true;
             this.btnDownLoadImage.Click += new System.EventHandler(this.btnDownLoadImage_Click);
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(12, 451);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 216);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(303, 226);
+            this.pictureBox2.Size = new System.Drawing.Size(129, 226);
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
+            // 
+            // btnLeftBottom
+            // 
+            this.btnLeftBottom.Location = new System.Drawing.Point(158, 12);
+            this.btnLeftBottom.Name = "btnLeftBottom";
+            this.btnLeftBottom.Size = new System.Drawing.Size(129, 23);
+            this.btnLeftBottom.TabIndex = 3;
+            this.btnLeftBottom.Text = "Left bottom form";
+            this.btnLeftBottom.UseVisualStyleBackColor = true;
+            this.btnLeftBottom.Click += new System.EventHandler(this.btnLeftBottom_Click);
             // 
             // frmPruebas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 689);
+            this.ClientSize = new System.Drawing.Size(349, 485);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.btnLeftBottom);
             this.Controls.Add(this.btnDownLoadImage);
             this.Controls.Add(this.btnUploadImagen);
             this.Controls.Add(this.txtWebRequest);
@@ -144,7 +144,6 @@
             this.Name = "frmPruebas";
             this.Text = "frmPruebas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPruebas_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
@@ -158,8 +157,8 @@
         private System.Windows.Forms.Button btnCompararStock;
         private System.Windows.Forms.Button txtWebRequest;
         private System.Windows.Forms.Button btnUploadImagen;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnDownLoadImage;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btnLeftBottom;
     }
 }

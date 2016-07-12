@@ -60,6 +60,34 @@ namespace StockVentas.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap bckgrd_popup {
+            get {
+                object obj = ResourceManager.GetObject("bckgrd_popup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btn_cerrar {
+            get {
+                object obj = ResourceManager.GetObject("btn_cerrar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btn_cerrar_down {
+            get {
+                object obj = ResourceManager.GetObject("btn_cerrar_down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap btn_cerrar_down1 {
+            get {
+                object obj = ResourceManager.GetObject("btn_cerrar_down1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap camara {
             get {
                 object obj = ResourceManager.GetObject("camara", resourceCulture);
@@ -112,6 +140,13 @@ namespace StockVentas.Properties {
         internal static System.Drawing.Bitmap progress_bar32 {
             get {
                 object obj = ResourceManager.GetObject("progress_bar32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap top__bar_form {
+            get {
+                object obj = ResourceManager.GetObject("top_ bar_form", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

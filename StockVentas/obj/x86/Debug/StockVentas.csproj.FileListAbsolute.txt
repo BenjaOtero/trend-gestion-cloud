@@ -608,3 +608,4 @@ C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\GenerateResource.read.1.t
 C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\StockVentas.HaberesRpt.resources
 C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\StockVentas.frmMarketingEmail.resources
+C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\StockVentas.frmPopupTrend.resources

@@ -115,6 +115,12 @@
     <Compile Include="frmMarketingEmail.Designer.cs">
       <DependentUpon>frmMarketingEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPopupTrend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPopupTrend.Designer.cs">
+      <DependentUpon>frmPopupTrend.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRazonSocial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -493,6 +499,9 @@
     <EmbeddedResource Include="frmMarketingEmail.resx">
       <DependentUpon>frmMarketingEmail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPopupTrend.resx">
+      <DependentUpon>frmPopupTrend.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmRazonSocial.resx">
       <DependentUpon>frmRazonSocial.cs</DependentUpon>
     </EmbeddedResource>
@@ -758,7 +767,12 @@
     <None Include="Resources\icono_app.ico" />
     <Content Include="icono_app.ico" />
     <None Include="Resources\camara.jpg" />
+    <None Include="Resources\btn_cerrar.jpg" />
+    <None Include="Resources\btn_cerrar_down.jpg" />
+    <None Include="Resources\btn_cerrar_down.gif" />
+    <None Include="Resources\bckgrd_popup.jpg" />
     <Content Include="Resources\LogoTrend1.jpg" />
+    <None Include="Resources\top_ bar_form.jpg" />
     <Content Include="xml\Clientes.xml" />
   </ItemGroup>
   <ItemGroup>

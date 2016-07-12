@@ -216,18 +216,26 @@ namespace StockVentas
                 br.Close();
                 fs.Close();
                 DAL.AlicuotasIvaDAL.SaveImage(ImageData);
-                MemoryStream ms = new MemoryStream();
-                int ss = 45;
-                pictureBox1.Image = 45;
-
-            }
-            
+            }            
         }
 
         private void btnDownLoadImage_Click(object sender, EventArgs e)
         {
+            DataTable tbl = DAL.AlicuotasIvaDAL.RecuperarImage();
+            byte[] imgBytes = (byte[])tbl.Rows[0]["Imagen"];
+            TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+            Bitmap MyBitmap = (Bitmap)tc.ConvertFrom(imgBytes);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.Image = MyBitmap;
 
+        }
 
+        private void btnLeftBottom_Click(object sender, EventArgs e)
+        {
+            frmPopupTrend frm = new frmPopupTrend();
+            frm.Show();
+            this.Opacity = 0.1;
+            this.Refresh(); 
         }
 
 
