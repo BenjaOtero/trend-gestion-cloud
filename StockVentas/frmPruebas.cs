@@ -204,11 +204,34 @@ namespace StockVentas
 
         private void btnUploadImagen_Click(object sender, EventArgs e)
         {
-            MemoryStream ms = new MemoryStream();
-            pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            DAL.AlicuotasIvaDAL.SaveImage(ms);
+            OpenFileDialog opFilDlg = new OpenFileDialog();
+            opFilDlg.Filter = "JPG (*.jpg)|*.jpg";
+            if (opFilDlg.ShowDialog() == DialogResult.OK)
+            {
+                string strFileName = opFilDlg.FileName;
+                byte[] ImageData;
+                FileStream fs = new FileStream(strFileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                ImageData = br.ReadBytes((int)fs.Length);
+                br.Close();
+                fs.Close();
+                DAL.AlicuotasIvaDAL.SaveImage(ImageData);
+                MemoryStream ms = new MemoryStream();
+                int ss = 45;
+                pictureBox1.Image = 45;
+
+            }
             
         }
+
+        private void btnDownLoadImage_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+
+
     }
 }
 

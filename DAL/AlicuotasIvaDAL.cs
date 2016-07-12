@@ -52,27 +52,35 @@ namespace DAL
             return SqlDataAdapter1;
         }
 
-        public static void SaveImage(MemoryStream ms)
+        public static void SaveImage(byte[] ImageData)
         {
-      //      MySqlConnection SqlConnection1 = DALBase.GetConnection();
-            //SqlConnection1.Open();
-        //    MySqlCommand cmd = new MySqlCommand("UPDATE alicuotasiva SET Imagen = 100 WHERE IdAlicuotaALI = '5')", SqlConnection1);
-       //     cmd.Parameters.Add(new MySqlParameter("@Image", Convert.ToBase64String(ms.ToArray())));
-       //     cmd.ExecuteNonQuery();
-       //     SqlConnection1.Close();
-
-
             string stringCommand;
-            stringCommand = "UPDATE alicuotasiva SET Imagen = @Image WHERE IdAlicuotaALI = '5'";
-            //  UPDATE articulos SET IdArticuloART = '0030031803' WHERE IdArticuloART = '030031803';
+            stringCommand = "UPDATE alicuotasiva SET Imagen = @Image";
             MySqlConnection SqlConnection1 = DALBase.GetConnection();
             SqlConnection1.Open();
             MySqlCommand command = new MySqlCommand(stringCommand, SqlConnection1);
-            command.Parameters.Add(new MySqlParameter("@Image", Convert.ToBase64String(ms.ToArray())));
+            command.Parameters.AddWithValue("@Image", ImageData); 
             command.ExecuteNonQuery();
             SqlConnection1.Close();
-
         }
+
+        public static DataTable RecuperarImage()
+        {
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            string stringCommand;
+            stringCommand = "SELECT * FROM alicuotasiva";
+            MySqlConnection SqlConnection1 = DALBase.GetConnection();
+            SqlConnection1.Open();
+            MySqlCommand command = new MySqlCommand(stringCommand, SqlConnection1);
+            SqlDataAdapter1.SelectCommand = command;
+            DataTable tbl = new DataTable();
+            SqlDataAdapter1.Fill(tbl);
+            SqlConnection1.Close();
+            return tbl;
+        }
+
+
+
 
     }
 }
