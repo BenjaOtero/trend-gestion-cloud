@@ -7,33 +7,31 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Timers;
 
 namespace StockVentas
 {
     public partial class frmPopupTrend : Form
     {
+        private System.Timers.Timer aTimer;
+        double porcentaje = 1;
+
         public frmPopupTrend()
         {
             InitializeComponent();
         }
 
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle,
-                                                                       System.Drawing.ColorTranslator.FromHtml("#111317"),
-                                                                       System.Drawing.ColorTranslator.FromHtml("#07090A"),
-                                                                       90F))
-            {
-                e.Graphics.FillRectangle(brush, this.ClientRectangle);
-            }
-        }
-
         private void frmPopupTrend_Load(object sender, EventArgs e)
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
             System.Drawing.Rectangle workingRectangle = Screen.PrimaryScreen.WorkingArea;
-            this.Location = new Point(workingRectangle.Width - 305, workingRectangle.Height - 295);
+            this.Location = new Point(workingRectangle.Width - 405, workingRectangle.Height - 205);
             pictureBox3.Image = Properties.Resources.btn_cerrar;
-            this.Opacity = 0.35;
+       //     this.Opacity = 0.35;
+            this.BackColor = System.Drawing.Color.White;
+            aTimer = new System.Timers.Timer(10000);
+            aTimer.Elapsed += new ElapsedEventHandler(OpacityDown);
+            aTimer.Enabled = true;
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -44,6 +42,18 @@ namespace StockVentas
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             pictureBox3.Image = Properties.Resources.btn_cerrar;
+        }
+
+        private void OpacityDown(object source, ElapsedEventArgs e)
+        {
+            if (porcentaje == 0.10)
+            {
+                aTimer.Enabled = false;
+                this.Close();
+            }
+            porcentaje = porcentaje - 0.01;
+            this.Opacity = porcentaje;
+            aTimer.Interval = 150;
         }
 
     }

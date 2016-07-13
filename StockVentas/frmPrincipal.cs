@@ -43,7 +43,7 @@ namespace StockVentas
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
 
-            timerInicializar = new System.Timers.Timer(500);
+            timerInicializar = new System.Timers.Timer(10000);
             timerInicializar.Elapsed += new ElapsedEventHandler(SilenceBackup);
             timerInicializar.AutoReset = false;
             timerInicializar.Enabled = true;
