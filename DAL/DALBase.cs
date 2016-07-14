@@ -32,7 +32,7 @@ namespace DAL
             connectionString += "Persist Security Info=False;";
             connectionString += "database=" + db + ";";
             connectionString += "Pwd=" + pass;
-       //     connectionString = ConfigurationManager.ConnectionStrings["DBMainLocal"].ConnectionString;        
+           // connectionString = ConfigurationManager.ConnectionStrings["DBMainLocal"].ConnectionString;        
             objCon = new MySqlConnection(connectionString);
             return objCon;
         }
@@ -41,8 +41,8 @@ namespace DAL
         {
             string connectionString;
             MySqlConnection objCon;
-            connectionString = ConfigurationManager.ConnectionStrings["DBTrend"].ConnectionString;
-          //  connectionString = ConfigurationManager.ConnectionStrings["DBTrendLocal"].ConnectionString;
+            //  connectionString = ConfigurationManager.ConnectionStrings["DBTrend"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["DBTrendLocal"].ConnectionString;
             objCon = new MySqlConnection(connectionString);
             return objCon;
         }

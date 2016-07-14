@@ -78,6 +78,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPopupTrend";
             this.ShowInTaskbar = false;
+            this.Deactivate += new System.EventHandler(this.frmPopupTrend_Deactivate);
             this.Load += new System.EventHandler(this.frmPopupTrend_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPromo)).EndInit();

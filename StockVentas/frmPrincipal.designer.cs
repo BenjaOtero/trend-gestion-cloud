@@ -79,6 +79,8 @@
             this.movimientosDeEmpleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
+            this.marketingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emailMarketingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
             this.fondosDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,14 +97,11 @@
             this.movimientosToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.liquidaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantenimientoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.actualizarServidorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backupBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pruebasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.borradoMasivoArtículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.marketingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emailMarketingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restaurarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -503,6 +502,21 @@
             this.toolStripMenuItem16.Text = "Fondo de caja";
             this.toolStripMenuItem16.Click += new System.EventHandler(this.fondoDeCajaToolStripMenuItem_Click);
             // 
+            // marketingToolStripMenuItem
+            // 
+            this.marketingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.emailMarketingToolStripMenuItem});
+            this.marketingToolStripMenuItem.Name = "marketingToolStripMenuItem";
+            this.marketingToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.marketingToolStripMenuItem.Text = "Marketing";
+            // 
+            // emailMarketingToolStripMenuItem
+            // 
+            this.emailMarketingToolStripMenuItem.Name = "emailMarketingToolStripMenuItem";
+            this.emailMarketingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.emailMarketingToolStripMenuItem.Text = "E-mail marketing";
+            this.emailMarketingToolStripMenuItem.Click += new System.EventHandler(this.emailMarketingToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem19
             // 
             this.toolStripMenuItem19.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -626,72 +640,49 @@
             // mantenimientoToolStripMenuItem1
             // 
             this.mantenimientoToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.actualizarServidorToolStripMenuItem,
             this.backupBaseDeDatosToolStripMenuItem,
+            this.restaurarBaseDeDatosToolStripMenuItem,
             this.pruebasToolStripMenuItem,
             this.exportarDatosToolStripMenuItem,
-            this.borradoMasivoArtículosToolStripMenuItem,
             this.importarDatosToolStripMenuItem});
             this.mantenimientoToolStripMenuItem1.Name = "mantenimientoToolStripMenuItem1";
             this.mantenimientoToolStripMenuItem1.Size = new System.Drawing.Size(89, 20);
             this.mantenimientoToolStripMenuItem1.Text = "Mantenimiento";
             // 
-            // actualizarServidorToolStripMenuItem
-            // 
-            this.actualizarServidorToolStripMenuItem.Name = "actualizarServidorToolStripMenuItem";
-            this.actualizarServidorToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.actualizarServidorToolStripMenuItem.Text = "Actualizar servidor";
-            this.actualizarServidorToolStripMenuItem.Click += new System.EventHandler(this.actualizarServidorToolStripMenuItem_Click_1);
-            // 
             // backupBaseDeDatosToolStripMenuItem
             // 
             this.backupBaseDeDatosToolStripMenuItem.Name = "backupBaseDeDatosToolStripMenuItem";
-            this.backupBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.backupBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.backupBaseDeDatosToolStripMenuItem.Text = "Backup base de datos";
             this.backupBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.backup_Click);
             // 
             // pruebasToolStripMenuItem
             // 
             this.pruebasToolStripMenuItem.Name = "pruebasToolStripMenuItem";
-            this.pruebasToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.pruebasToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.pruebasToolStripMenuItem.Text = "Pruebas";
             this.pruebasToolStripMenuItem.Click += new System.EventHandler(this.pruebasToolStripMenuItem_Click);
             // 
             // exportarDatosToolStripMenuItem
             // 
             this.exportarDatosToolStripMenuItem.Name = "exportarDatosToolStripMenuItem";
-            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.exportarDatosToolStripMenuItem.Text = "Exportar datos";
             this.exportarDatosToolStripMenuItem.Click += new System.EventHandler(this.exportarDatosToolStripMenuItem_Click);
-            // 
-            // borradoMasivoArtículosToolStripMenuItem
-            // 
-            this.borradoMasivoArtículosToolStripMenuItem.Name = "borradoMasivoArtículosToolStripMenuItem";
-            this.borradoMasivoArtículosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.borradoMasivoArtículosToolStripMenuItem.Text = "Borrado masivo artículos";
-            this.borradoMasivoArtículosToolStripMenuItem.Click += new System.EventHandler(this.borradoMasivoArtículosToolStripMenuItem_Click);
             // 
             // importarDatosToolStripMenuItem
             // 
             this.importarDatosToolStripMenuItem.Name = "importarDatosToolStripMenuItem";
-            this.importarDatosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.importarDatosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.importarDatosToolStripMenuItem.Text = "Importar datos";
             this.importarDatosToolStripMenuItem.Click += new System.EventHandler(this.importarDatosToolStripMenuItem_Click);
             // 
-            // marketingToolStripMenuItem
+            // restaurarBaseDeDatosToolStripMenuItem
             // 
-            this.marketingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.emailMarketingToolStripMenuItem});
-            this.marketingToolStripMenuItem.Name = "marketingToolStripMenuItem";
-            this.marketingToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.marketingToolStripMenuItem.Text = "Marketing";
-            // 
-            // emailMarketingToolStripMenuItem
-            // 
-            this.emailMarketingToolStripMenuItem.Name = "emailMarketingToolStripMenuItem";
-            this.emailMarketingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.emailMarketingToolStripMenuItem.Text = "E-mail marketing";
-            this.emailMarketingToolStripMenuItem.Click += new System.EventHandler(this.emailMarketingToolStripMenuItem_Click);
+            this.restaurarBaseDeDatosToolStripMenuItem.Name = "restaurarBaseDeDatosToolStripMenuItem";
+            this.restaurarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.restaurarBaseDeDatosToolStripMenuItem.Text = "Restaurar base de datos";
+            this.restaurarBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.restaurarBaseDeDatosToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -768,7 +759,6 @@
         private System.Windows.Forms.ToolStripMenuItem arqueoDeCajaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem fondosDeCajaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mantenimientoToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem actualizarServidorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enPesosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detallesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidosToolStripMenuItem;
@@ -788,10 +778,10 @@
         private System.Windows.Forms.ToolStripMenuItem movimientosToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem liquidaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportarDatosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem borradoMasivoArtículosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importarDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem marketingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem emailMarketingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restaurarBaseDeDatosToolStripMenuItem;
     }
 }
 

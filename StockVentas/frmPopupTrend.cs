@@ -14,10 +14,11 @@ namespace StockVentas
 {
     public partial class frmPopupTrend : Form
     {
+        System.Drawing.Rectangle workingRectangle = Screen.PrimaryScreen.WorkingArea;
         private System.Timers.Timer timerUp;
         private System.Timers.Timer timerDown;
         double porcentajeDown = 1;
-        double porcentajeUp = 0.5;
+        int porcentajeUp;
         byte[] imgBytes;
         string url;
 
@@ -30,8 +31,8 @@ namespace StockVentas
 
         private void frmPopupTrend_Load(object sender, EventArgs e)
         {
-            System.Drawing.Rectangle workingRectangle = Screen.PrimaryScreen.WorkingArea;
-            this.Location = new Point(workingRectangle.Width - 405, workingRectangle.Height - 205);
+            porcentajeUp = workingRectangle.Height;
+            this.Location = new Point(workingRectangle.Width -405, workingRectangle.Height);
             pictureBoxBoton.Image = Properties.Resources.btn_cerrar;
             TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
             Bitmap MyBitmap = (Bitmap)tc.ConvertFrom(imgBytes);
@@ -40,12 +41,12 @@ namespace StockVentas
             this.BackColor = System.Drawing.Color.White;
 
             timerUp = new System.Timers.Timer(1);
-            timerUp.Elapsed += new ElapsedEventHandler(OpacityUp);
-            timerUp.Enabled = false;
+            timerUp.Elapsed += new ElapsedEventHandler(SlideUp);
+            timerUp.Enabled = true;
 
             timerDown = new System.Timers.Timer(10000);
             timerDown.Elapsed += new ElapsedEventHandler(OpacityDown);
-            timerDown.Enabled = true;
+            timerDown.Enabled = false;
         }
 
         private void pictureBoxBoton_MouseDown(object sender, MouseEventArgs e)
@@ -59,16 +60,20 @@ namespace StockVentas
             this.Close();
         }
 
-        private void OpacityUp(object source, ElapsedEventArgs e)
+        private void btnInfo_Click(object sender, EventArgs e)
         {
-            if (porcentajeUp == 1)
+            System.Diagnostics.Process.Start(url);
+        }
+
+        private void SlideUp(object source, ElapsedEventArgs e)
+        {
+            if (porcentajeUp < workingRectangle.Height - 205)
             {
                 timerUp.Enabled = false;
-                this.Close();
             }
-            porcentajeUp = porcentajeUp + 0.01;
-            this.Opacity = porcentajeUp;
-            timerUp.Interval = 100;
+            porcentajeUp = porcentajeUp - 3;
+            this.Location = new Point(workingRectangle.Width - 405, porcentajeUp);
+            timerUp.Interval = 1;
         }
 
         private void OpacityDown(object source, ElapsedEventArgs e)
@@ -83,9 +88,9 @@ namespace StockVentas
             timerDown.Interval = 50;
         }
 
-        private void btnInfo_Click(object sender, EventArgs e)
+        private void frmPopupTrend_Deactivate(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(url);
+            this.Close();
         }
 
     }

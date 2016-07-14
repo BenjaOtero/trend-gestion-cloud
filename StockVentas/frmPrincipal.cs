@@ -498,14 +498,14 @@ namespace StockVentas
             string ftpUserID;
             string ftpPassword;
 
-            /*  ftpServerIP = "trendsistemas.com/datos";
+              ftpServerIP = "trendsistemas.com/datos";
               ftpUserID = "benja@trendsistemas.com";
-              ftpPassword = "8953#AFjn";*/
+              ftpPassword = "8953#AFjn";
 
             // FTP local
-            ftpServerIP = "127.0.0.1:22";
-            ftpUserID = "Benja";
-            ftpPassword = "8953#AFjn";
+              /*  ftpServerIP = "127.0.0.1:22";
+                ftpUserID = "Benja";
+                ftpPassword = "8953#AFjn";*/
 
             FileInfo fileInf = new FileInfo(nombreLocal);
             FtpWebRequest reqFTP;
@@ -699,6 +699,54 @@ namespace StockVentas
           //  if (MessageBox.Show("¿Realiza copia de seguridad de los datos?", "Trend", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             //    Backup();
             Application.Exit();
+        }
+
+        private void restaurarBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string rutaDB;
+            OpenFileDialog opFilDlg = new OpenFileDialog();
+            opFilDlg.Filter = "SQL (*.sql)|*.sql";
+            if (opFilDlg.ShowDialog() == DialogResult.OK) rutaDB = opFilDlg.FileName;
+            else return;
+            Cursor.Current = Cursors.WaitCursor;
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\restore_db.bat"); // creo el archivo .bat
+            sw.Close();
+            string programFiles;
+            if (Directory.Exists(@"C:\Program files"))
+            {
+                programFiles = "Program files";
+            }
+            else if (Directory.Exists(@"C:\Archivos de programa"))
+            {
+                programFiles = "Archivos de programa";
+            }
+            else if (Directory.Exists(@"C:\Program files(x86)"))
+            {
+                programFiles = "Program files(x86)";
+            }
+            else
+            {
+                programFiles = "Archivos de programa(x86)";
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("C:");
+            string configMysql = "cd " + "\"C:\\" + programFiles + "\\MySQL\\MySQL Server 5.5\\bin\"";
+            sb.AppendLine(configMysql);
+          //  string rutaDB = Application.StartupPath.ToString() + @"\MySql\ncsoftwa_re.sql";
+            string restaurarDB = "mysql.exe -u ncsoftwa_re -p8953#AFjn ncsoftwa_re < \"" + rutaDB + "\"";
+            sb.AppendLine(restaurarDB);
+            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore_db.bat", true)) // escribo en el archivo .bat
+            {
+                outfile.Write(sb.ToString());
+            }
+            Process process = new Process();
+            process.StartInfo.FileName = "c:\\Windows\\Temp\\restore_db.bat";
+            process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.Start();
+            process.EnableRaisingEvents = true;
+            process.WaitForExit();
+            Application.Restart();
         }
 
     }
