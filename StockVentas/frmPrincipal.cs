@@ -21,8 +21,9 @@ namespace StockVentas
         public frmProgress progreso;
         string origen, accion;
         string idRazonSocial;
-        private static System.Timers.Timer timerInicializar;
+        private System.Timers.Timer tmrSilenceBck;
         string fileSilenceBck;
+        System.Windows.Forms.Timer tmrPopup = new System.Windows.Forms.Timer();
 
         public frmPrincipal()
         {
@@ -42,11 +43,13 @@ namespace StockVentas
         {
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
-
-            timerInicializar = new System.Timers.Timer(10000);
-            timerInicializar.Elapsed += new ElapsedEventHandler(SilenceBackup);
-            timerInicializar.AutoReset = false;
-            timerInicializar.Enabled = true;
+            tmrPopup.Tick += new EventHandler(Popup);
+            tmrPopup.Interval = 3000;
+            tmrPopup.Start();
+            tmrSilenceBck = new System.Timers.Timer(1000);
+            tmrSilenceBck.Elapsed += new ElapsedEventHandler(SilenceBackup);
+            tmrSilenceBck.AutoReset = false;
+            tmrSilenceBck.Enabled = true;
          //   alícuotasIVAToolStripMenuItem.Visible = false;
             //   condiciónIVAToolStripMenuItem.Visible = false;
             //   empleadosToolStripMenuItem.Visible = false;
@@ -360,6 +363,50 @@ namespace StockVentas
             Cursor = Cursors.Arrow;
         }
 
+        private void Popup(Object myObject, EventArgs myEventArgs)
+        {
+            tmrPopup.Stop();
+            DataTable tbl = BL.GetDataBLL.RazonSocial();
+            int razon = Convert.ToInt32(tbl.Rows[0][0].ToString());
+            DataSet ds = BL.TrendBLL.GetDataPopup(razon);
+            DataTable tblProductos = ds.Tables[0];
+            tblProductos.PrimaryKey = new DataColumn[] { tblProductos.Columns["Producto_id_PRD"] }; 
+            DataTable tblProductos_users = ds.Tables[1]; 
+            DataTable tblProductos_top = ds.Tables[2];
+            DataTable tblPromocionarProducto = new DataTable();
+            string producto_top = tblProductos_top.Rows[0][0].ToString();
+            if (producto_top == "False")
+            {
+                tblPromocionarProducto.Columns.Add("id");
+                DataRow[] foundRow;
+                foreach (DataRow rowProducto in tblProductos.Rows)
+                {
+                    foundRow = tblProductos_users.Select("Producto_id_PRUS = " + rowProducto["Producto_id_PRD"]);
+                    if (foundRow.Count() == 0)
+                    {
+                        DataRow row = tblPromocionarProducto.NewRow();
+                        row["id"] = rowProducto["Producto_id_PRD"];
+                        tblPromocionarProducto.Rows.Add(row);
+                    }
+                }
+                int filas = tblPromocionarProducto.Rows.Count - 1;
+                Random rand = new Random();
+                int fila = rand.Next(0, filas);
+                DataRow rowPromocionable = tblPromocionarProducto.Rows[fila];
+                int idPromocionable = Convert.ToInt32(rowPromocionable[0].ToString());
+                DataRow[] rowProductoElegido = tblProductos.Select("Producto_id_PRD = " + idPromocionable);
+                byte[] imgBytes = (byte[])rowProductoElegido[0]["Imagen_PRD"];
+                string url = rowProductoElegido[0]["Url"].ToString();
+                frmPopupTrend frm = new frmPopupTrend(imgBytes, url);
+                frm.Show();
+            }
+            else
+            { 
+            
+            }
+            tmrPopup.Enabled = false;
+        }
+
         private void SilenceBackup(object source, ElapsedEventArgs e)
         {
             DataTable tbl = BL.GetDataBLL.RazonSocial();
@@ -649,5 +696,6 @@ namespace StockVentas
             //    Backup();
             Application.Exit();
         }
+
     }
 }

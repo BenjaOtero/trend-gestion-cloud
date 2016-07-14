@@ -11,6 +11,23 @@ namespace DAL
 {
     public class TrendDAL
     {
+
+        public static DataSet GetDataPopup(int razon)
+        {
+            MySqlConnection SqlConnection1 = DALBase.GetTrendConnection();
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("Productos_Usuarios", SqlConnection1);
+            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
+            SqlSelectCommand1.Parameters.AddWithValue("p_user", razon);
+            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
+            DataSet dt = new DataSet();
+            SqlDataAdapter1.Fill(dt);
+            SqlConnection1.Close();
+            return dt;        
+        }
+
+        // CODIGO ANTERIOR
+
         public static DataTable GetTablaCliente()
         {
             DataTable tbl = new DataTable();

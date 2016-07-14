@@ -232,10 +232,6 @@ namespace StockVentas
 
         private void btnLeftBottom_Click(object sender, EventArgs e)
         {
-            frmPopupTrend frm = new frmPopupTrend();
-            frm.Show();
-            this.Opacity = 0.1;
-            this.Refresh(); 
         }
 
 

@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxBoton = new System.Windows.Forms.PictureBox();
             this.pictureBoxPromo = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPromo)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox3
+            // pictureBoxBoton
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(372, 12);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(16, 14);
-            this.pictureBox3.TabIndex = 3;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.pictureBoxBoton.Location = new System.Drawing.Point(372, 12);
+            this.pictureBoxBoton.Name = "pictureBoxBoton";
+            this.pictureBoxBoton.Size = new System.Drawing.Size(16, 14);
+            this.pictureBoxBoton.TabIndex = 3;
+            this.pictureBoxBoton.TabStop = false;
+            this.pictureBoxBoton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBoton_MouseDown);
+            this.pictureBoxBoton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBoton_MouseUp);
             // 
             // pictureBoxPromo
             // 
@@ -52,6 +52,7 @@
             this.pictureBoxPromo.Size = new System.Drawing.Size(400, 200);
             this.pictureBoxPromo.TabIndex = 4;
             this.pictureBoxPromo.TabStop = false;
+            this.pictureBoxPromo.Click += new System.EventHandler(this.pictureBoxPromo_Click);
             // 
             // frmPopupTrend
             // 
@@ -59,13 +60,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 200);
             this.ControlBox = false;
-            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBoxBoton);
             this.Controls.Add(this.pictureBoxPromo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPopupTrend";
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.frmPopupTrend_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPromo)).EndInit();
             this.ResumeLayout(false);
 
@@ -73,7 +74,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBoxBoton;
         private System.Windows.Forms.PictureBox pictureBoxPromo;
     }
 }

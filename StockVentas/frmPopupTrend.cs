@@ -8,52 +8,84 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Timers;
+using System.Diagnostics;
 
 namespace StockVentas
 {
     public partial class frmPopupTrend : Form
     {
-        private System.Timers.Timer aTimer;
-        double porcentaje = 1;
+        private System.Timers.Timer timerUp;
+        private System.Timers.Timer timerDown;
+        double porcentajeDown = 1;
+        double porcentajeUp = 0.5;
+        byte[] imgBytes;
+        string url;
 
-        public frmPopupTrend()
+        public frmPopupTrend(byte[] imgBytes, string url)
         {
             InitializeComponent();
+            this.imgBytes = imgBytes;
+            this.url = url;
         }
 
         private void frmPopupTrend_Load(object sender, EventArgs e)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
             System.Drawing.Rectangle workingRectangle = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(workingRectangle.Width - 405, workingRectangle.Height - 205);
-            pictureBox3.Image = Properties.Resources.btn_cerrar;
-       //     this.Opacity = 0.35;
+            pictureBoxBoton.Image = Properties.Resources.btn_cerrar;
+            TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+            Bitmap MyBitmap = (Bitmap)tc.ConvertFrom(imgBytes);
+            pictureBoxPromo.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxPromo.Image = MyBitmap;
             this.BackColor = System.Drawing.Color.White;
-            aTimer = new System.Timers.Timer(10000);
-            aTimer.Elapsed += new ElapsedEventHandler(OpacityDown);
-            aTimer.Enabled = true;
+
+            timerUp = new System.Timers.Timer(1);
+            timerUp.Elapsed += new ElapsedEventHandler(OpacityUp);
+            timerUp.Enabled = false;
+
+            timerDown = new System.Timers.Timer(10000);
+            timerDown.Elapsed += new ElapsedEventHandler(OpacityDown);
+            timerDown.Enabled = true;
         }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBoxBoton_MouseDown(object sender, MouseEventArgs e)
         {
-            pictureBox3.Image = Properties.Resources.btn_cerrar_down;
+            pictureBoxBoton.Image = Properties.Resources.btn_cerrar_down;
         }
 
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBoxBoton_MouseUp(object sender, MouseEventArgs e)
         {
-            pictureBox3.Image = Properties.Resources.btn_cerrar;
+            pictureBoxBoton.Image = Properties.Resources.btn_cerrar;
+            this.Close();
+        }
+
+        private void OpacityUp(object source, ElapsedEventArgs e)
+        {
+            if (porcentajeUp == 1)
+            {
+                timerUp.Enabled = false;
+                this.Close();
+            }
+            porcentajeUp = porcentajeUp + 0.01;
+            this.Opacity = porcentajeUp;
+            timerUp.Interval = 100;
         }
 
         private void OpacityDown(object source, ElapsedEventArgs e)
         {
-            if (porcentaje == 0.10)
+            if (porcentajeDown == 0.10)
             {
-                aTimer.Enabled = false;
+                timerDown.Enabled = false;
                 this.Close();
             }
-            porcentaje = porcentaje - 0.01;
-            this.Opacity = porcentaje;
-            aTimer.Interval = 150;
+            porcentajeDown = porcentajeDown - 0.01;
+            this.Opacity = porcentajeDown;
+            timerDown.Interval = 50;
+        }
+
+        private void pictureBoxPromo_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(url);
         }
 
     }

@@ -483,39 +483,50 @@
     <EmbeddedResource Include="bin\Debug\Informes\VentasDetalle.rdlc" />
     <EmbeddedResource Include="frmEmpleados.resx">
       <DependentUpon>frmEmpleados.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmpleadosMov.resx">
       <DependentUpon>frmEmpleadosMov.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmpleadosMovCons.resx">
       <DependentUpon>frmEmpleadosMovCons.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmpleadosMovConsInter.resx">
       <DependentUpon>frmEmpleadosMovConsInter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmpleadosMovTipo.resx">
       <DependentUpon>frmEmpleadosMovTipo.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMarketingEmail.resx">
       <DependentUpon>frmMarketingEmail.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPopupTrend.resx">
       <DependentUpon>frmPopupTrend.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRazonSocial.resx">
       <DependentUpon>frmRazonSocial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAlicuotasIva.resx">
       <DependentUpon>frmAlicuotasIva.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArticulosAgrupar.resx">
       <DependentUpon>frmArticulosAgrupar.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArticulosBorrar.resx">
       <DependentUpon>frmArticulosBorrar.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArticulosEditNews.resx">
       <DependentUpon>frmArticulosEditNews.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArticulosGenerarApartir.resx">
       <DependentUpon>frmArticulosGenerarApartir.cs</DependentUpon>
@@ -523,72 +534,92 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmArticulosPrecios.resx">
       <DependentUpon>frmArticulosPrecios.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmColores.resx">
       <DependentUpon>frmColores.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArqueoCajaAdmin.resx">
       <DependentUpon>frmArqueoCajaAdmin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArqueoInter.resx">
       <DependentUpon>frmArqueoInter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArticulosEditNewsInter.resx">
       <DependentUpon>frmArticulosEditNewsInter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCondicionIva.resx">
       <DependentUpon>frmCondicionIva.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGetDatosCliente.resx">
       <DependentUpon>frmGetDatosCliente.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGetDatosCliente1.resx">
       <DependentUpon>frmGetDatosCliente1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInicio.resx">
       <DependentUpon>frmInicio.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLocales.resx">
       <DependentUpon>frmLocales.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPruebas.resx">
       <DependentUpon>frmPruebas.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRPTstock.resx">
       <DependentUpon>frmRPTstock.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGeneros.resx">
       <DependentUpon>frmGeneros.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockComp.resx">
       <DependentUpon>frmStockComp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockCompInter.resx">
       <DependentUpon>frmStockCompInter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockMov.resx">
       <DependentUpon>frmStockMov.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockMovInforme.resx">
       <DependentUpon>frmStockMovInforme.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockMovInter.resx">
       <DependentUpon>frmStockMovInter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVentasHistoricasInter.resx">
       <DependentUpon>frmVentasHistoricasInter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPedido.resx">
       <DependentUpon>frmPedido.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVentasDetalleInter.resx">
       <DependentUpon>frmVentasDetalleInter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockEntradas.resx">
       <DependentUpon>frmStockEntradas.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFondoCajaCons.resx">
       <DependentUpon>frmFondoCajaCons.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArticulosDetalle.resx">
       <DependentUpon>frmArticulosDetalle.cs</DependentUpon>
@@ -612,9 +643,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmClientes.resx">
       <DependentUpon>frmClientes.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFondoCaja.resx">
       <DependentUpon>frmFondoCaja.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFormasPago.resx">
       <DependentUpon>frmFormasPago.cs</DependentUpon>
@@ -634,21 +667,25 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockInforme.resx">
       <DependentUpon>frmStockInforme.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockInter.resx">
       <DependentUpon>frmStockInter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTesoreriaMov.resx">
       <DependentUpon>frmTesoreriaMov.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVentas.resx">
       <DependentUpon>frmVentas.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVentasPesosCons.resx">
       <DependentUpon>frmVentasPesosCons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVentasPesosDiarias.resx">
       <DependentUpon>frmVentasPesosDiarias.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVentasPesosInter.resx">
       <DependentUpon>frmVentasPesosInter.cs</DependentUpon>
@@ -656,6 +693,7 @@
     <EmbeddedResource Include="Informes\Etiquetas.rdlc" />
     <EmbeddedResource Include="Informes\EtiquetasRpt.resx">
       <DependentUpon>EtiquetasRpt.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\Etiquetasx2.rdlc" />
     <EmbeddedResource Include="Informes\HaberesRpt.resx">
@@ -663,15 +701,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\PedidoRpt.resx">
       <DependentUpon>PedidoRpt.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\StockCompPesosRpt.resx">
       <DependentUpon>StockCompPesosRpt.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\StockRpt.resx">
       <DependentUpon>StockRpt.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\VentasDetalleRpt.resx">
       <DependentUpon>VentasDetalleRpt.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -685,6 +727,7 @@
     </Compile>
     <EmbeddedResource Include="Informes\StockMovRpt.resx">
       <DependentUpon>StockMovRpt.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
@@ -763,7 +806,6 @@
   <ItemGroup>
     <None Include="Resources\progress_bar32.gif" />
     <None Include="Resources\LogoTrend.jpg" />
-    <None Include="Resources\LogoTrend.ico" />
     <None Include="Resources\icono_app.ico" />
     <Content Include="icono_app.ico" />
     <None Include="Resources\camara.jpg" />

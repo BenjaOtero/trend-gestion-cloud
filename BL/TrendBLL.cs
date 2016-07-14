@@ -13,6 +13,12 @@ namespace BL
 {
     public class TrendBLL
     {
+        public static DataSet GetDataPopup(int razon)
+        {
+            DataSet dt = DAL.TrendDAL.GetDataPopup(razon);
+            return dt;
+        }
+
         public static DataTable GetTablaCliente()
         {
             DataTable tbl = DAL.TrendDAL.GetTablaCliente();
