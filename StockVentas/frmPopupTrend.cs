@@ -83,7 +83,7 @@ namespace StockVentas
             timerDown.Interval = 50;
         }
 
-        private void pictureBoxPromo_Click(object sender, EventArgs e)
+        private void btnInfo_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(url);
         }

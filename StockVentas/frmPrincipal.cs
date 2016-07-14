@@ -370,12 +370,12 @@ namespace StockVentas
             int razon = Convert.ToInt32(tbl.Rows[0][0].ToString());
             DataSet ds = BL.TrendBLL.GetDataPopup(razon);
             DataTable tblProductos = ds.Tables[0];
-            tblProductos.PrimaryKey = new DataColumn[] { tblProductos.Columns["Producto_id_PRD"] }; 
+            if (tblProductos.Rows.Count == 0) return;
             DataTable tblProductos_users = ds.Tables[1]; 
             DataTable tblProductos_top = ds.Tables[2];
             DataTable tblPromocionarProducto = new DataTable();
-            string producto_top = tblProductos_top.Rows[0][0].ToString();
-            if (producto_top == "False")
+            int producto_top = Convert.ToInt32(tblProductos_top.Rows[0][0].ToString());
+            if (producto_top == 0)
             {
                 tblPromocionarProducto.Columns.Add("id");
                 DataRow[] foundRow;
@@ -401,8 +401,12 @@ namespace StockVentas
                 frm.Show();
             }
             else
-            { 
-            
+            {
+                DataRow[] rowProductoElegido = tblProductos.Select("Producto_id_PRD = " + producto_top);
+                byte[] imgBytes = (byte[])rowProductoElegido[0]["Imagen_PRD"];
+                string url = rowProductoElegido[0]["Url"].ToString();
+                frmPopupTrend frm = new frmPopupTrend(imgBytes, url);
+                frm.Show();
             }
             tmrPopup.Enabled = false;
         }

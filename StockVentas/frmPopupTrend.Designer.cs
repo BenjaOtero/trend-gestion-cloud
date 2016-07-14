@@ -30,6 +30,7 @@
         {
             this.pictureBoxBoton = new System.Windows.Forms.PictureBox();
             this.pictureBoxPromo = new System.Windows.Forms.PictureBox();
+            this.btnInfo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPromo)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +53,18 @@
             this.pictureBoxPromo.Size = new System.Drawing.Size(400, 200);
             this.pictureBoxPromo.TabIndex = 4;
             this.pictureBoxPromo.TabStop = false;
-            this.pictureBoxPromo.Click += new System.EventHandler(this.pictureBoxPromo_Click);
+            // 
+            // btnInfo
+            // 
+            this.btnInfo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInfo.Location = new System.Drawing.Point(143, 145);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(115, 31);
+            this.btnInfo.TabIndex = 5;
+            this.btnInfo.Text = "Mas info . . .";
+            this.btnInfo.UseVisualStyleBackColor = false;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
             // 
             // frmPopupTrend
             // 
@@ -60,6 +72,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 200);
             this.ControlBox = false;
+            this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.pictureBoxBoton);
             this.Controls.Add(this.pictureBoxPromo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -76,5 +89,6 @@
 
         private System.Windows.Forms.PictureBox pictureBoxBoton;
         private System.Windows.Forms.PictureBox pictureBoxPromo;
+        private System.Windows.Forms.Button btnInfo;
     }
 }
