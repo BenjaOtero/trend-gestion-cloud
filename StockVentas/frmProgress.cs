@@ -367,9 +367,17 @@ namespace StockVentas
                     label1.Text = "Copiando datos...";
                     label1.Left = 108;
                 }
-                else 
+                else
                 {
                     label1.Text = "Cargando datos...";
+                    label1.Left = 108;
+                }
+            }
+            else
+            { 
+                if (origen == "ExportarDatos")
+                {
+                    label1.Text = "Exportando datos...";
                     label1.Left = 108;
                 }
             }
@@ -525,6 +533,12 @@ namespace StockVentas
                             break;
                         case "frmEmpleadosMovTipo":
                             BL.EmpleadosMovTiposBLL.GrabarDB(tabla);
+                            break;
+                        case "ExportarDatos":
+                                DataTable tbl = BL.GetDataBLL.RazonSocial();
+                                string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
+                                BL.Utilitarios.ExportarDatos(idRazonSocial);
+                                BL.RazonSocialBLL.ActualizarDatos();
                             break;
                         case "frmFondoCaja":
                             BL.FondoCajaBLL.GrabarDB(tabla);

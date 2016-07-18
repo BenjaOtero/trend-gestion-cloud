@@ -73,5 +73,32 @@ namespace DAL
             return SqlDataAdapter1;
         }
 
+        public static bool GetActualizarDatos(int PK)
+        {
+            MySqlConnection SqlConnection1 = DALBase.GetConnection();
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("RazonSocial_Listar", SqlConnection1);
+            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
+            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
+            SqlConnection1.Close();
+            DataTable tbl = new DataTable();
+            SqlDataAdapter1.Fill(tbl);
+            bool actualizar = (bool)tbl.Rows[0]["ActualizarDatosRAZ"];
+            return actualizar;
+        }
+
+        public static void ActualizarDatos()
+        {
+            using (MySqlConnection SqlConnection1 = DALBase.GetConnection())
+            {
+                SqlConnection1.Open();
+                MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+                MySqlCommand SqlUpdateCommand1 = new MySqlCommand("RazonSocial_ActualizarDatos", SqlConnection1);
+                SqlDataAdapter1.UpdateCommand = SqlUpdateCommand1;
+                SqlUpdateCommand1.CommandType = CommandType.StoredProcedure;
+                SqlUpdateCommand1.ExecuteNonQuery();
+            }
+        }
+
     }
 }

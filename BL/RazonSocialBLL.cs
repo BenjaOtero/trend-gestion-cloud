@@ -18,5 +18,11 @@ namespace BL
         {
             DAL.RazonSocialDAL.GrabarDB(tblRazonSocial);
         }
+
+
+        public static void ActualizarDatos()
+        {
+            DAL.RazonSocialDAL.ActualizarDatos();
+        }
     }
 }

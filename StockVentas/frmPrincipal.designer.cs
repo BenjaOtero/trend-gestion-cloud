@@ -98,10 +98,10 @@
             this.liquidaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantenimientoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.backupBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restaurarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pruebasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restaurarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -652,30 +652,9 @@
             // backupBaseDeDatosToolStripMenuItem
             // 
             this.backupBaseDeDatosToolStripMenuItem.Name = "backupBaseDeDatosToolStripMenuItem";
-            this.backupBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.backupBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.backupBaseDeDatosToolStripMenuItem.Text = "Backup base de datos";
             this.backupBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.backup_Click);
-            // 
-            // pruebasToolStripMenuItem
-            // 
-            this.pruebasToolStripMenuItem.Name = "pruebasToolStripMenuItem";
-            this.pruebasToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.pruebasToolStripMenuItem.Text = "Pruebas";
-            this.pruebasToolStripMenuItem.Click += new System.EventHandler(this.pruebasToolStripMenuItem_Click);
-            // 
-            // exportarDatosToolStripMenuItem
-            // 
-            this.exportarDatosToolStripMenuItem.Name = "exportarDatosToolStripMenuItem";
-            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.exportarDatosToolStripMenuItem.Text = "Exportar datos";
-            this.exportarDatosToolStripMenuItem.Click += new System.EventHandler(this.exportarDatosToolStripMenuItem_Click);
-            // 
-            // importarDatosToolStripMenuItem
-            // 
-            this.importarDatosToolStripMenuItem.Name = "importarDatosToolStripMenuItem";
-            this.importarDatosToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.importarDatosToolStripMenuItem.Text = "Importar datos";
-            this.importarDatosToolStripMenuItem.Click += new System.EventHandler(this.importarDatosToolStripMenuItem_Click);
             // 
             // restaurarBaseDeDatosToolStripMenuItem
             // 
@@ -683,6 +662,27 @@
             this.restaurarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.restaurarBaseDeDatosToolStripMenuItem.Text = "Restaurar base de datos";
             this.restaurarBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.restaurarBaseDeDatosToolStripMenuItem_Click);
+            // 
+            // pruebasToolStripMenuItem
+            // 
+            this.pruebasToolStripMenuItem.Name = "pruebasToolStripMenuItem";
+            this.pruebasToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.pruebasToolStripMenuItem.Text = "Pruebas";
+            this.pruebasToolStripMenuItem.Click += new System.EventHandler(this.pruebasToolStripMenuItem_Click);
+            // 
+            // exportarDatosToolStripMenuItem
+            // 
+            this.exportarDatosToolStripMenuItem.Name = "exportarDatosToolStripMenuItem";
+            this.exportarDatosToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.exportarDatosToolStripMenuItem.Text = "Exportar datos";
+            this.exportarDatosToolStripMenuItem.Click += new System.EventHandler(this.exportarDatosToolStripMenuItem_Click);
+            // 
+            // importarDatosToolStripMenuItem
+            // 
+            this.importarDatosToolStripMenuItem.Name = "importarDatosToolStripMenuItem";
+            this.importarDatosToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.importarDatosToolStripMenuItem.Text = "Importar datos";
+            this.importarDatosToolStripMenuItem.Click += new System.EventHandler(this.importarDatosToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -697,6 +697,7 @@
             this.Name = "frmPrincipal";
             this.Text = " Trend Gestión";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPrincipal_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrincipal_FormClosed);
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
