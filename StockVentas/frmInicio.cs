@@ -23,7 +23,6 @@ namespace StockVentas
     public partial class frmInicio : Form
     {
         BackgroundWorker bckIniciarComponetes;
-        BackgroundWorker bckServicioBckp;
         bool existeServicio;
         Label label1;
         public static DataSet ds;
@@ -35,7 +34,7 @@ namespace StockVentas
             InitializeComponent();
             System.Drawing.Icon ico = Properties.Resources.icono_app;
             this.Icon = ico;
-            Configuration cm = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+          /*  Configuration cm = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             ConfigurationSection cs = cm.GetSection("connectionStrings");
             if (cs != null)
             {
@@ -45,7 +44,7 @@ namespace StockVentas
                     cs.SectionInformation.ForceSave = true;
                     cm.Save(ConfigurationSaveMode.Full);
                 }
-            }
+            }*/
         }
 
         private void frmInicio_Shown(object sender, EventArgs e)
@@ -56,8 +55,8 @@ namespace StockVentas
             label1.Location = new System.Drawing.Point(28, 190);
             label1.AutoSize = true;
             Controls.Add(label1);
-            string cs = ConnectionStringManager.GetFirstConnectionString();
-          //  string db = ConnectionStringManager.GetDatabaseName();
+        /*    string cs = ConnectionStringManager.GetFirstConnectionString();
+            string db = ConnectionStringManager.GetDatabaseName();
             if (cs == "nuevo_cliente")
             {
                 label1.Text = "Iniciando Trend Gestión por primera vez. . .";
@@ -72,7 +71,15 @@ namespace StockVentas
                 bckIniciarComponetes.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bckIniciarComponetes_DoWork);
                 bckIniciarComponetes.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bckIniciarComponetes_RunWorkerCompleted);
                 bckIniciarComponetes.RunWorkerAsync();
-            }
+            }*/
+            // despues de descomentar lo de arriba borrar lo siguiente
+            this.Visible = true;
+            label1.Text = "Comprobando conexión de red. . .";
+            bckIniciarComponetes = new BackgroundWorker();
+            bckIniciarComponetes.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bckIniciarComponetes_DoWork);
+            bckIniciarComponetes.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bckIniciarComponetes_RunWorkerCompleted);
+            bckIniciarComponetes.RunWorkerAsync();
+            /////////////////////////////////
         }
 
         private void bckIniciarComponetes_DoWork(object sender, DoWorkEventArgs e)
@@ -146,12 +153,13 @@ namespace StockVentas
                         Application.Exit();
                     });
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
                     this.Invoke((Action)delegate
                     {
                         this.Visible = false;
-                        MessageBox.Show("Se produjo un error inesperado. Consulte al administrador del sistema.", "Trend Gestión",
+                        string error = ex.Message;
+                        MessageBox.Show(error, "Trend Gestión",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Application.Exit();
                     });
@@ -178,51 +186,6 @@ namespace StockVentas
             this.Visible = false;
             frmPrincipal principal = new frmPrincipal();
             principal.Show();
-            bckServicioBckp = new BackgroundWorker();
-            bckServicioBckp.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bckServicioBckp_DoWork);
-        //    bckServicioBckp.RunWorkerAsync();
-        }
-
-        private void bckServicioBckp_DoWork(object sender, DoWorkEventArgs e)
-        {
-            if (!BL.Utilitarios.ExisteServicio("AVGzh"))
-            {
-                string path = Application.StartupPath;
-                System.IO.StreamWriter sw = System.IO.File.CreateText(path + @"\Backup\servicio.bat"); // creo el archivo .bat
-                sw.Close();
-                StringBuilder sb = new StringBuilder();
-                string unidad = path.Substring(0, 2);
-                sb.AppendLine(unidad);
-                sb.AppendLine(@"cd " + path + @"\Backup");
-                sb.AppendLine("InstallUtil.exe Backup.exe");
-             //   sb.AppendLine("PAUSE");
-                using (StreamWriter outfile = new StreamWriter(path + @"\Backup\servicio.bat", true)) // escribo el archivo .bat
-                {
-                    outfile.Write(sb.ToString());
-                }
-                Process process = new Process();
-                process.StartInfo.FileName = path + @"\Backup\servicio.bat";
-                process.StartInfo.CreateNoWindow = false;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-                process.Exited += new EventHandler(process_Exited);
-                process.Start();
-            }
-        }
-
-        private void process_Exited(object sender, System.EventArgs e)
-        {
-            if (File.Exists("c:\\Windows\\Temp\\backup.bat"))
-            {
-                File.Delete("c:\\Windows\\Temp\\backup.bat");
-            }
-        }
-
-        private bool ExisteBD()
-        {
-            existeServicio = false;
-            MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(ConnectionStringManager.GetFirstConnectionString());
-            return existeServicio;
         }
 
         private void Mantenimiento()
@@ -235,11 +198,6 @@ namespace StockVentas
             catch (Exception)
             { 
             }
-        }
-
-        private void frmInicio_FormClosing(object sender, FormClosingEventArgs e)
-        {
-          //  BL.Utilitarios.StartService("AVGzh");
         }
 
         private bool ExisteServicioMySQL()

@@ -471,6 +471,7 @@ namespace StockVentas
                 sb.AppendLine(unidad);
                 sb.AppendLine(@"cd " + path + @"\Backup");
                 sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re articulos clientes formaspago generos alicuotasiva razonsocial | gzip > c:\windows\temp\" + idRazonSocial);
+                //sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re articulos clientes formaspago generos alicuotasiva razonsocial | gzip > c:\windows\temp\" + idRazonSocial);
                 using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
                 {
                     outfile.Write(sb.ToString());
@@ -498,14 +499,14 @@ namespace StockVentas
             string ftpUserID;
             string ftpPassword;
 
-              ftpServerIP = "trendsistemas.com/datos";
-              ftpUserID = "benja@trendsistemas.com";
-              ftpPassword = "8953#AFjn";
+            /*     ftpServerIP = "trendsistemas.com/datos";
+                ftpUserID = "benja@trendsistemas.com";
+                ftpPassword = "8953#AFjn";*/
 
             // FTP local
-              /*  ftpServerIP = "127.0.0.1:22";
-                ftpUserID = "Benja";
-                ftpPassword = "8953#AFjn";*/
+                 ftpServerIP = "127.0.0.1:22";
+                  ftpUserID = "Benja";
+                  ftpPassword = "8953#AFjn";
 
             FileInfo fileInf = new FileInfo(nombreLocal);
             FtpWebRequest reqFTP;
