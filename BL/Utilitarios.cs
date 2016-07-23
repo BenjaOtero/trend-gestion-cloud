@@ -512,14 +512,14 @@ namespace BL
             string ftpUserID;
             string ftpPassword;
 
-                 ftpServerIP = "trendsistemas.com/datos";
-                ftpUserID = "benja@trendsistemas.com";
-                ftpPassword = "8953#AFjn";
+            /*    ftpServerIP = "trendsistemas.com/datos";
+               ftpUserID = "benja@trendsistemas.com";
+               ftpPassword = "8953#AFjn";*/
 
             // FTP local
-                /* ftpServerIP = "127.0.0.1:22";
-                 ftpUserID = "Benja";
-                 ftpPassword = "8953#AFjn";*/
+                ftpServerIP = "127.0.0.1:22";
+                ftpUserID = "Benja";
+                ftpPassword = "8953#AFjn";
 
             FileInfo fileInf = new FileInfo(nombreLocal);
             FtpWebRequest reqFTP;

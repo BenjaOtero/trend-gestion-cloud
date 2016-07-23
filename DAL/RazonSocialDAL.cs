@@ -73,7 +73,7 @@ namespace DAL
             return SqlDataAdapter1;
         }
 
-        public static bool GetActualizarDatos(int PK)
+        public static bool GetActualizarDatos()
         {
             MySqlConnection SqlConnection1 = DALBase.GetConnection();
             MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
