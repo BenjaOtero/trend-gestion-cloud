@@ -455,8 +455,12 @@ namespace StockVentas
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmProgress frm = new frmProgress("ExportarDatos", "grabar");
-            frm.Show();
+            Cursor.Current = Cursors.WaitCursor;
+            DataTable tbl = BL.GetDataBLL.RazonSocial();
+            string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
+            BL.Utilitarios.ExportarDatos(idRazonSocial);
+            BL.RazonSocialBLL.ActualizarDatos();
+            Cursor.Current = Cursors.Arrow;
         }
 
         private void borradoMasivoArtículosToolStripMenuItem_Click(object sender, EventArgs e)

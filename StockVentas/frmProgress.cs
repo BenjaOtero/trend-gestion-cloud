@@ -535,10 +535,7 @@ namespace StockVentas
                             BL.EmpleadosMovTiposBLL.GrabarDB(tabla);
                             break;
                         case "ExportarDatos":
-                                DataTable tbl = BL.GetDataBLL.RazonSocial();
-                                string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
-                                BL.Utilitarios.ExportarDatos(idRazonSocial);
-                                BL.RazonSocialBLL.ActualizarDatos();
+
                             break;
                         case "frmFondoCaja":
                             BL.FondoCajaBLL.GrabarDB(tabla);

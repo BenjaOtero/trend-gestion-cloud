@@ -570,7 +570,6 @@ namespace BL
                 // Close the file stream and the Request Stream
                 strm.Close();
                 fs.Close();
-                Application.Exit();
             }
             catch (Exception ex)
             {
