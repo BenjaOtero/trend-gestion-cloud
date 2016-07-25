@@ -32,7 +32,7 @@ namespace DAL
             connectionString += "Persist Security Info=False;";
             connectionString += "database=" + db + ";";
             connectionString += "Pwd=" + pass;
-         //   connectionString = ConfigurationManager.ConnectionStrings["DBMainLocal"].ConnectionString;        
+            connectionString = ConfigurationManager.ConnectionStrings["DBMainLocal"].ConnectionString;        
             objCon = new MySqlConnection(connectionString);
             return objCon;
         }

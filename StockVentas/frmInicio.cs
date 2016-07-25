@@ -28,6 +28,8 @@ namespace StockVentas
         public static DataSet ds;
         public static DataTable tblArticulos;
         public static DataTable tblArticulosCons;
+        string razonSocial;
+        bool exportaronDatos = false;
 
         public frmInicio()
         {
@@ -267,6 +269,137 @@ namespace StockVentas
             using (StreamWriter file = new StreamWriter("C:\\" + programFiles + "\\MySQL\\MySQL Server 5.5\\my.ini", true))
             {
                 file.Write(sb_myIni.ToString());
+            }
+        }
+
+        private void frmInicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (exportaronDatos) return;
+            bool actualizar = BL.RazonSocialBLL.GetActualizarDatos();
+            if (actualizar)
+            {
+                e.Cancel = true;
+                this.Visible = true;
+                label1.Text = "Exportando datos. . .";
+                Cursor.Current = Cursors.WaitCursor;
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            DataTable tbl = BL.GetDataBLL.RazonSocial();
+            string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
+            ExportarDatos(idRazonSocial);
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            exportaronDatos = true;
+            Application.Exit();
+            Cursor.Current = Cursors.Arrow;
+        }
+
+        public void ExportarDatos(string idRazonSocial)
+        {
+            razonSocial = idRazonSocial;
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); //MO creo el archivo .bat
+            sw.Close();
+            StringBuilder sb = new StringBuilder();
+            string path = Application.StartupPath;
+            string unidad = path.Substring(0, 2);
+            sb.AppendLine(unidad);
+            sb.AppendLine(@"cd " + path + @"\Backup");
+            sb.AppendLine(@"mysqldump -t --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re articulos clientes formaspago generos alicuotasiva razonsocial | gzip > c:\windows\temp\" + razonSocial);
+            //sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re articulos clientes formaspago generos alicuotasiva razonsocial | gzip > c:\windows\temp\" + razonSocial);
+            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
+            {
+                outfile.Write(sb.ToString());
+            }
+            Process process = new Process();
+            process.StartInfo.FileName = "c:\\Windows\\Temp\\backup.bat";
+            process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            process.Exited += new EventHandler(ExportarDatos_Exited);
+            process.Start();
+            process.WaitForExit();
+        }
+
+        private void ExportarDatos_Exited(object sender, System.EventArgs e)
+        {
+            UploadDatosPos(@"c:\windows\temp\" + razonSocial, razonSocial);
+            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
+        }
+
+        private static void UploadDatosPos(string nombreLocal, string nombreServidor)
+        {
+            string ftpServerIP;
+            string ftpUserID;
+            string ftpPassword;
+
+            ftpServerIP = "trendsistemas.com/datos";
+            ftpUserID = "benja@trendsistemas.com";
+            ftpPassword = "8953#AFjn";
+
+            // FTP local
+            /*  ftpServerIP = "127.0.0.1:22";
+              ftpUserID = "Benja";
+              ftpPassword = "8953#AFjn";*/
+
+            FileInfo fileInf = new FileInfo(nombreLocal);
+            FtpWebRequest reqFTP;
+
+            // Create FtpWebRequest object from the Uri provided
+            reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + ftpServerIP + "/" + nombreServidor));
+
+            // Provide the WebPermission Credintials
+            reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+
+            // By default KeepAlive is true, where the control connection is not closed
+            // after a command is executed.
+            reqFTP.KeepAlive = false;
+
+            // Specify the command to be executed.
+            reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
+
+            // Specify the data transfer type.
+            reqFTP.UseBinary = true;
+
+            // Notify the server about the size of the uploaded file
+            reqFTP.ContentLength = fileInf.Length;
+
+            // The buffer size is set to 2kb
+            int buffLength = 2048;
+            byte[] buff = new byte[buffLength];
+            int contentLen;
+
+            // Opens a file stream (System.IO.FileStream) to read the file to be uploaded
+            FileStream fs = fileInf.OpenRead();
+
+            try
+            {
+                // Stream to which the file to be upload is written
+                Stream strm = reqFTP.GetRequestStream();
+
+                // Read from the file stream 2kb at a time
+                contentLen = fs.Read(buff, 0, buffLength);
+
+                // Till Stream content ends
+                while (contentLen != 0)
+                {
+                    // Write Content from the file stream to the FTP Upload Stream
+                    strm.Write(buff, 0, contentLen);
+                    contentLen = fs.Read(buff, 0, buffLength);
+                }
+
+                // Close the file stream and the Request Stream
+                strm.Close();
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Upload Error");
             }
         }
 

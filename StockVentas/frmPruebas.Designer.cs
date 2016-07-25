@@ -37,6 +37,8 @@
             this.btnDownLoadImage = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnLeftBottom = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +70,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Test AFIP 2";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnCompararStock
             // 
@@ -127,11 +130,28 @@
             this.btnLeftBottom.UseVisualStyleBackColor = true;
             this.btnLeftBottom.Click += new System.EventHandler(this.btnLeftBottom_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(179, 78);
+            this.progressBar1.MarqueeAnimationSpeed = 40;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(268, 15);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar1.TabIndex = 5;
+            this.progressBar1.UseWaitCursor = true;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
             // frmPruebas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 485);
+            this.ClientSize = new System.Drawing.Size(566, 483);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnLeftBottom);
             this.Controls.Add(this.btnDownLoadImage);
@@ -160,5 +180,7 @@
         private System.Windows.Forms.Button btnDownLoadImage;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnLeftBottom;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
