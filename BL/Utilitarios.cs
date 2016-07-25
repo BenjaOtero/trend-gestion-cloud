@@ -334,14 +334,14 @@ namespace BL
             string ftpUserID;
             string ftpPassword;
 
-            ftpServerIP = "karminna.com/public_html/images";
-            ftpUserID = "benja@karminna.com";
-            ftpPassword = "8953#AFjn";
+            /* ftpServerIP = "karminna.com/public_html/images";
+             ftpUserID = "benja@karminna.com";
+             ftpPassword = "8953#AFjn";*/
 
             // FTP local
-            /* ftpServerIP = "127.0.0.1:22";
-              ftpUserID = "Benja";
-              ftpPassword = "8953#AFjn";*/
+              ftpServerIP = "127.0.0.1:22";
+               ftpUserID = "Benja";
+               ftpPassword = "8953#AFjn";
 
             FileInfo fileInf = new FileInfo(nombreLocal);
             FtpWebRequest reqFTP;
@@ -506,80 +506,10 @@ namespace BL
 
         private static void ExportarDatos_Exited(object sender, System.EventArgs e)
         {
-            UploadDatosPos(@"c:\windows\temp\" + razonSocial, razonSocial);
+            UploadFromFile(@"c:\windows\temp\" + razonSocial, razonSocial);
             if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
         }
 
-        private static void UploadDatosPos(string nombreLocal, string nombreServidor)
-        {
-            string ftpServerIP;
-            string ftpUserID;
-            string ftpPassword;
-
-            /*    ftpServerIP = "trendsistemas.com/datos";
-               ftpUserID = "benja@trendsistemas.com";
-               ftpPassword = "8953#AFjn";*/
-
-            // FTP local
-                ftpServerIP = "127.0.0.1:22";
-                ftpUserID = "Benja";
-                ftpPassword = "8953#AFjn";
-
-            FileInfo fileInf = new FileInfo(nombreLocal);
-            FtpWebRequest reqFTP;
-
-            // Create FtpWebRequest object from the Uri provided
-            reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + ftpServerIP + "/" + nombreServidor));
-
-            // Provide the WebPermission Credintials
-            reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-
-            // By default KeepAlive is true, where the control connection is not closed
-            // after a command is executed.
-            reqFTP.KeepAlive = false;
-
-            // Specify the command to be executed.
-            reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
-
-            // Specify the data transfer type.
-            reqFTP.UseBinary = true;
-
-            // Notify the server about the size of the uploaded file
-            reqFTP.ContentLength = fileInf.Length;
-
-            // The buffer size is set to 2kb
-            int buffLength = 2048;
-            byte[] buff = new byte[buffLength];
-            int contentLen;
-
-            // Opens a file stream (System.IO.FileStream) to read the file to be uploaded
-            FileStream fs = fileInf.OpenRead();
-
-            try
-            {
-                // Stream to which the file to be upload is written
-                Stream strm = reqFTP.GetRequestStream();
-
-                // Read from the file stream 2kb at a time
-                contentLen = fs.Read(buff, 0, buffLength);
-
-                // Till Stream content ends
-                while (contentLen != 0)
-                {
-                    // Write Content from the file stream to the FTP Upload Stream
-                    strm.Write(buff, 0, contentLen);
-                    contentLen = fs.Read(buff, 0, buffLength);
-                }
-
-                // Close the file stream and the Request Stream
-                strm.Close();
-                fs.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Upload Error");
-            }
-        }
 
     }
 }

@@ -535,7 +535,9 @@ namespace StockVentas
                             BL.EmpleadosMovTiposBLL.GrabarDB(tabla);
                             break;
                         case "ExportarDatos":
-
+                                DataTable tbl = BL.GetDataBLL.RazonSocial();
+                                string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
+                                BL.Utilitarios.ExportarDatos(idRazonSocial);
                             break;
                         case "frmFondoCaja":
                             BL.FondoCajaBLL.GrabarDB(tabla);
@@ -665,6 +667,9 @@ namespace StockVentas
                 {
                     switch (origen)
                     {
+                        case "ExportarDatos":
+                            BL.RazonSocialBLL.ActualizarDatos();
+                            break;
                         case "frmStockMov":
                             break;
                         case "frmVentas":
@@ -784,6 +789,11 @@ namespace StockVentas
                     tabla.RejectChanges();
                     break;
             }
+        }
+
+        private void btnMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
 
     }

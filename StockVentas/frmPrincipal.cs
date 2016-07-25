@@ -455,12 +455,8 @@ namespace StockVentas
 
         private void exportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            DataTable tbl = BL.GetDataBLL.RazonSocial();
-            string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
-            BL.Utilitarios.ExportarDatos(idRazonSocial);
-            BL.RazonSocialBLL.ActualizarDatos();
-            Cursor.Current = Cursors.Arrow;
+            frmProgress frm = new frmProgress("ExportarDatos", "grabar");
+            frm.ShowDialog();
         }
 
         private void borradoMasivoArtículosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -647,28 +643,6 @@ namespace StockVentas
             process.EnableRaisingEvents = true;
             process.WaitForExit();
             Application.Restart();
-        }
-
-        private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            /*   bool actualizar = BL.RazonSocialBLL.GetActualizarDatos();
-               if (actualizar)
-               {
-                   if (MessageBox.Show("¿Exportar datos a puntos de venta?", "Trend",
-                       MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                   {
-                       e.Cancel = true;
-                       Cursor.Current = Cursors.WaitCursor;
-                       DataTable tbl = BL.GetDataBLL.RazonSocial();
-                       string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
-                       BL.Utilitarios.ExportarDatos(idRazonSocial);
-                       BL.RazonSocialBLL.ActualizarDatos();
-                       if (MessageBox.Show("Los datos se exportaron con éxito", "Trend",
-                           MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK) Application.Exit();
-
-                       Cursor.Current = Cursors.Arrow;
-                   }
-               }*/
         }
 
     }
