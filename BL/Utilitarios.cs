@@ -180,6 +180,10 @@ namespace BL
                     ctl.Enter += new System.EventHandler(SelTextoTextBox);
                     ctl.KeyDown += new System.Windows.Forms.KeyEventHandler(EnterTab);
                 }
+                else if (ctl is CheckBox)
+                {
+                    ctl.KeyDown += new System.Windows.Forms.KeyEventHandler(EnterTab);
+                }
             }
         }
 
@@ -477,7 +481,7 @@ namespace BL
         {
             
             razonSocial = idRazonSocial;
-            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); // creo el archivo .bat
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); //MO creo el archivo .bat
             sw.Close();
             StringBuilder sb = new StringBuilder();
             string path = Application.StartupPath;

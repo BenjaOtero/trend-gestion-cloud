@@ -82,7 +82,7 @@
             this.grpBotones.Location = new System.Drawing.Point(333, 69);
             this.grpBotones.Name = "grpBotones";
             this.grpBotones.Size = new System.Drawing.Size(200, 293);
-            this.grpBotones.TabIndex = 2;
+            this.grpBotones.TabIndex = 1;
             this.grpBotones.TabStop = false;
             // 
             // btnCancelar
@@ -162,7 +162,7 @@
             this.groupBox1.Location = new System.Drawing.Point(333, 9);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 54);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
@@ -224,7 +224,7 @@
             this.txtDescripcionGEN.Location = new System.Drawing.Point(122, 42);
             this.txtDescripcionGEN.Name = "txtDescripcionGEN";
             this.txtDescripcionGEN.Size = new System.Drawing.Size(164, 20);
-            this.txtDescripcionGEN.TabIndex = 1;
+            this.txtDescripcionGEN.TabIndex = 0;
             // 
             // label4
             // 
@@ -243,7 +243,7 @@
             this.chkActivoWebGEN.Location = new System.Drawing.Point(123, 72);
             this.chkActivoWebGEN.Name = "chkActivoWebGEN";
             this.chkActivoWebGEN.Size = new System.Drawing.Size(15, 14);
-            this.chkActivoWebGEN.TabIndex = 3;
+            this.chkActivoWebGEN.TabIndex = 1;
             this.chkActivoWebGEN.UseVisualStyleBackColor = true;
             // 
             // grpCampos

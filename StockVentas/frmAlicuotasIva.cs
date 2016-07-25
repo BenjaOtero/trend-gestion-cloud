@@ -77,7 +77,7 @@ namespace StockVentas
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             if (bindingSource1.Count == 0) return;
-            if (MessageBox.Show("¿Desea borrar este registro?", "Buscar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("¿El borrado de datos puede alterar el buen funcionamiento de la facturación. ¿Desea continuar?", "Trend", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 bindingSource1.RemoveCurrent();
                 bindingSource1.EndEdit();

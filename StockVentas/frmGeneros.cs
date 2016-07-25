@@ -38,6 +38,8 @@ namespace StockVentas
             this.ControlBox = true;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             ToolTip tooltip = new ToolTip();
+            txtIdGeneroGEN.TabStop = false;
+            txtParametros.TabStop = false;
             tooltip.SetToolTip(chkActivoWebGEN, "Esta información se utiliza para determinar si el género producirá un elemento de menú en el sitio web.");
             bindingSource1.DataSource = tblGeneros;
             tblGeneros.ColumnChanged += new DataColumnChangeEventHandler(tblGeneros_ColumnChanged);
