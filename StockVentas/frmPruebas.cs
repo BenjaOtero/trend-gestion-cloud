@@ -95,7 +95,7 @@ namespace StockVentas
             string Connection = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Benja\\Desktop\\liquidacion.xlsx;Extended Properties=\"Excel 12.0;HDR=YES;IMEX=1\";";
             OleDbConnection con = new OleDbConnection(Connection);
             System.Data.DataTable tblPrecioNuevos = new System.Data.DataTable();
-            OleDbDataAdapter myCommand = new OleDbDataAdapter("select * from [Hoja2$]", con);
+            OleDbDataAdapter myCommand = new OleDbDataAdapter("select * from [Hoja1$]", con);
             myCommand.Fill(tblPrecioNuevos);
             DataTable tblArticulos = BL.GetDataBLL.Articulos();
             foreach (DataRow rowPreciosNuevos in tblPrecioNuevos.Rows)
@@ -112,8 +112,12 @@ namespace StockVentas
                     DataRow[] foundRow = tblArticulos.Select("IdArticuloART LIKE '" + articulo + "*'");
                     foreach (DataRow rowArticulos in foundRow)
                     {
-                        rowArticulos["PrecioPublicoART"] = rowPreciosNuevos["Makro"].ToString();
-                        rowArticulos["PrecioMayorART"] = rowPreciosNuevos["Jesus"].ToString();
+                        if (!string.IsNullOrEmpty(rowPreciosNuevos["Makro"].ToString()) && !string.IsNullOrEmpty(rowPreciosNuevos["Jesus"].ToString()))
+                        {
+                            rowArticulos["PrecioPublicoART"] = rowPreciosNuevos["Makro"];
+                            rowArticulos["PrecioMayorART"] = rowPreciosNuevos["Jesus"];
+                        }
+
                     }                
                 }
             }
@@ -312,14 +316,6 @@ namespace StockVentas
 
         private void frmPruebas_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (exportaronDatos) return;
-            bool actualizar = BL.RazonSocialBLL.GetActualizarDatos();
-            if (actualizar)
-            {
-                e.Cancel = true;
-                Cursor.Current = Cursors.WaitCursor;
-                backgroundWorker1.RunWorkerAsync();
-            }
 
         }
 
