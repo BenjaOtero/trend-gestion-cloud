@@ -39,7 +39,7 @@
             }
 
 
-frmStockComp error Datagridview (ver los otros frm)
+prever caida servicio mysql y reiniciarlo
 
 
 

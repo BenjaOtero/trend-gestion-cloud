@@ -125,8 +125,8 @@ namespace StockVentas
             rowView.CancelEdit();
             bindingSource1.DataSource = viewStockMovDetalle;
             bindingNavigator1.BindingSource = bindingSource1;
+            dgvDatos.DataSource = bindingSource1;
             dgvDatos.AutoGenerateColumns = false;
-            dgvDatos.DataSource = viewStockMovDetalle;
             AddColumns();
             dgvDatos.AllowUserToOrderColumns = false;
             dgvDatos.EditMode = DataGridViewEditMode.EditOnKeystroke;
