@@ -339,7 +339,7 @@ namespace BL
              ftpPassword = "8953#AFjn";*/
 
             // FTP local
-              ftpServerIP = "127.0.0.1:22";
+              ftpServerIP = "127.0.0.1:22/datos";
                ftpUserID = "Benja";
                ftpPassword = "8953#AFjn";
 
