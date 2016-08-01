@@ -516,7 +516,7 @@ namespace StockVentas
                             {
                                 if (archivo.Contains(idRazonSocial))
                                 {
-                                    if (!archivo.Contains("datos") || !archivo.Contains("locales") || !archivo.Contains("pcs"))
+                                    if (!archivo.Contains("datos") && !archivo.Contains("locales") && !archivo.Contains("pcs"))
                                     {
                                         string ftpPath = "ftp://" + ftpServerIP + "/" + archivo;
                                         string localPath = @"c:\windows\temp\datos\" + archivo;
@@ -529,7 +529,7 @@ namespace StockVentas
                         foreach (string archivo in dirs)
                         {
                             RestaurarDatos(archivo);
-                            BL.ImportDataBLL.InsertarMovimientos();
+                            BL.DatosBLL.InsertarMovimientos();
                         }
                         foreach (string archivo in directories)
                         {

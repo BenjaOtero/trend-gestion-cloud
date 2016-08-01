@@ -539,6 +539,10 @@ namespace StockVentas
                                 string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
                                 BL.Utilitarios.ExportarDatos(idRazonSocial);
                             break;
+                        case "ImportarDatos":
+
+
+                            break;
                         case "frmFondoCaja":
                             BL.FondoCajaBLL.GrabarDB(tabla);
                             break;

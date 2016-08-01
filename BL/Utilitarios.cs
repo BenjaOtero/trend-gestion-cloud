@@ -511,6 +511,64 @@ namespace BL
             if (File.Exists(@"c:\windows\temp\" + razonSocial)) File.Delete(@"c:\windows\temp\" + razonSocial);
         }
 
+        // IMPORTAR DATOS POS
+
+
+        public static FtpWebRequest FtpRequest()
+        {
+            string ftpServerIP;
+            string ftpUserID;
+            string ftpPassword;
+
+            /*ftpServerIP = "trendsistemas.com/datos";
+              ftpUserID = "benja@trendsistemas.com";
+              ftpPassword = "8953#AFjn";*/
+
+            // FTP local
+            ftpServerIP = "127.0.0.1:22/datos";
+            ftpUserID = "Benja";
+            ftpPassword = "8953#AFjn";
+            FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP);
+            ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+            return ftpRequest;
+        }
+
+        public static List<string> GetDirectoriesFTP()
+        {
+            FtpWebRequest ftpRequest = FtpRequest();
+            ftpRequest.Method = WebRequestMethods.Ftp.ListDirectory;
+            FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
+            StreamReader streamReader = new StreamReader(response.GetResponseStream());
+            List<string> directories = new List<string>();
+            string line = streamReader.ReadLine();
+            while (!string.IsNullOrEmpty(line))
+            {
+                directories.Add(line);
+                line = streamReader.ReadLine();
+            }
+            streamReader.Close();
+            return directories;
+        }
+
+        public static WebClient ClienteWeb()
+        {
+            string ftpServerIP;
+            string ftpUserID;
+            string ftpPassword;
+
+            /*ftpServerIP = "trendsistemas.com/datos";
+              ftpUserID = "benja@trendsistemas.com";
+              ftpPassword = "8953#AFjn";*/
+
+            // FTP local
+            ftpServerIP = "127.0.0.1:22/datos";
+            ftpUserID = "Benja";
+            ftpPassword = "8953#AFjn";
+
+            WebClient ftpClient = new WebClient();
+            ftpClient.Credentials = new System.Net.NetworkCredential(ftpUserID, ftpPassword);
+            return ftpClient;
+        }
 
     }
 }

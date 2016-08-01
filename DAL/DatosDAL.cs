@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace DAL
 {
-    public static class ImportDataDAL
+    public static class DatosDAL
     {
 
         public static string GetFechaImport()

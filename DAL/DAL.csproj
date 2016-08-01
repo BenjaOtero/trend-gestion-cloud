@@ -66,7 +66,7 @@
     <Compile Include="GetDataDAL.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ImportDataDAL.cs">
+    <Compile Include="DatosDAL.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RazonSocialDAL.cs" />
