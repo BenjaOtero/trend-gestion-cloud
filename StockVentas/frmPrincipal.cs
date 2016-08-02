@@ -475,83 +475,9 @@ namespace StockVentas
         {
             if (BL.Utilitarios.HayInternet())
             {
-                try
-                {
-                    string ftpServerIP;
-                    string ftpUserID;
-                    string ftpPassword;
+                frmProgress frm = new frmProgress("ImportarDatos", "grabar");
+                frm.ShowDialog();
 
-                    /*  ftpServerIP = "trendsistemas.com/datos";
-                      ftpUserID = "benja@trendsistemas.com";
-                      ftpPassword = "8953#AFjn";*/
-
-                    // FTP local
-                    ftpServerIP = "127.0.0.1:22/datos";
-                    ftpUserID = "Benja";
-                    ftpPassword = "8953#AFjn";
-
-                    FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP);
-                    ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                    ftpRequest.Method = WebRequestMethods.Ftp.ListDirectory;
-                    FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
-                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                    List<string> directories = new List<string>();
-                    string line = streamReader.ReadLine();
-                    while (!string.IsNullOrEmpty(line))
-                    {
-                        directories.Add(line);
-                        line = streamReader.ReadLine();
-                    }
-                    streamReader.Close();
-                    if (directories.Count() > 0)
-                    {
-                        if (Directory.Exists(@"c:\windows\temp\datos")) Directory.Delete(@"c:\windows\temp\datos", true);
-                        Directory.CreateDirectory(@"c:\windows\temp\datos");
-                        DataTable tbl = BL.GetDataBLL.RazonSocial();
-                        idRazonSocial = tbl.Rows[0][0].ToString() + "_";
-                        using (WebClient ftpClient = new WebClient())
-                        {
-                            ftpClient.Credentials = new System.Net.NetworkCredential(ftpUserID, ftpPassword);
-                            foreach (string archivo in directories)
-                            {
-                                if (archivo.Contains(idRazonSocial))
-                                {
-                                    if (!archivo.Contains("datos") && !archivo.Contains("locales") && !archivo.Contains("pcs"))
-                                    {
-                                        string ftpPath = "ftp://" + ftpServerIP + "/" + archivo;
-                                        string localPath = @"c:\windows\temp\datos\" + archivo;
-                                        ftpClient.DownloadFile(ftpPath, localPath);
-                                    }
-                                }
-                            }
-                        }
-                        string[] dirs = Directory.GetFiles(@"c:\windows\temp\datos", idRazonSocial + "*");
-                        foreach (string archivo in dirs)
-                        {
-                            RestaurarDatos(archivo);
-                            BL.DatosBLL.InsertarMovimientos();
-                        }
-                        foreach (string archivo in directories)
-                        {
-                            if (archivo.Contains(idRazonSocial))
-                            {
-                                if (!archivo.Contains("datos") || !archivo.Contains("locales") || !archivo.Contains("pcs"))
-                                {
-                                    string ftpPath = "ftp://" + ftpServerIP + "/" + archivo;
-                                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
-                                    request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-                                    request.Method = WebRequestMethods.Ftp.DeleteFile;
-                                    FtpWebResponse respuesta = (FtpWebResponse)request.GetResponse();
-                                }
-                            } 
-                        }
-                    }                
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Se produjo un error al importar los datos", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
             }
             else
                 MessageBox.Show("Verifique la conexión a internet. No se importaron datos.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);

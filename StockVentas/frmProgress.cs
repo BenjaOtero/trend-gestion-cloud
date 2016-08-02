@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using BL;
 using StockVentas.com.karminna;
+using System.Net;
 
 
 namespace StockVentas
@@ -540,8 +541,7 @@ namespace StockVentas
                                 BL.Utilitarios.ExportarDatos(idRazonSocial);
                             break;
                         case "ImportarDatos":
-
-
+                            BL.DatosBLL.GetDataPOS();
                             break;
                         case "frmFondoCaja":
                             BL.FondoCajaBLL.GrabarDB(tabla);
@@ -595,6 +595,15 @@ namespace StockVentas
             catch (NullReferenceException)
             {
                 codigoError = 8954; // El número 8954 lo asigné al azar
+            }
+            catch (WebException)
+            {
+                this.Invoke((Action)delegate
+                {
+                    this.Visible = false;
+                    MessageBox.Show("No se pudo establecer conexión con el servidor remoto. No se actualizaron los datos.", "Trend Gestión",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
             }
             catch (Exception)
             {

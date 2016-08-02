@@ -123,7 +123,7 @@ namespace BL
             int timeout = 10000; //cambiar el valor a 10000
             try
             {
-                if (Pings.Send("127.0.0.1", timeout).Status == IPStatus.Success) // cambiar ip 127.0.0.1 a google.com
+                if (Pings.Send("google.com", timeout).Status == IPStatus.Success) // cambiar ip 127.0.0.1 a google.com
                 {
                     conexion = true;
                 }
@@ -514,35 +514,18 @@ namespace BL
         // IMPORTAR DATOS POS
 
 
-        public static FtpWebRequest FtpRequest()
+        public static FtpWebRequest FtpRequest(string path)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
-            //   string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
             Char delimiter = ';';
             String[] substrings = connectionString.Split(delimiter);
-            string ftpServerIP = substrings[0] + "/datos";
+            string ftpServerIP = substrings[0];
             string ftpUserID = substrings[1];
             string ftpPassword = substrings[2];
-            FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP);
+            FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP + path);
             ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
             return ftpRequest;
-        }
-
-        public static List<string> GetDirectoriesFTP()
-        {
-            FtpWebRequest ftpRequest = FtpRequest();
-            ftpRequest.Method = WebRequestMethods.Ftp.ListDirectory;
-            FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
-            StreamReader streamReader = new StreamReader(response.GetResponseStream());
-            List<string> directories = new List<string>();
-            string line = streamReader.ReadLine();
-            while (!string.IsNullOrEmpty(line))
-            {
-                directories.Add(line);
-                line = streamReader.ReadLine();
-            }
-            streamReader.Close();
-            return directories;
         }
 
     }

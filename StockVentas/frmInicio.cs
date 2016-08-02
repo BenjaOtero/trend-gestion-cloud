@@ -97,6 +97,7 @@ namespace StockVentas
                         ConfigurarMySQL();
                     }
                     ds = BL.GetDataBLL.GetData();
+                    BL.DatosBLL.GetDataPOS();
                     try
                     {
                         string idRazonSocial = BL.GetDataBLL.RazonSocial().Rows[0][0].ToString();
@@ -155,6 +156,15 @@ namespace StockVentas
                         Application.Exit();
                     });
                 }
+                catch (WebException)
+                {
+                    this.Invoke((Action)delegate
+                    {
+                        this.Visible = false;
+                        MessageBox.Show("No se pudo establecer conexión con el servidor remoto. No se actualizaron los datos.", "Trend Gestión",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
+                }
                 catch(Exception ex)
                 {
                     this.Invoke((Action)delegate
@@ -163,7 +173,6 @@ namespace StockVentas
                         string error = ex.Message;
                         MessageBox.Show(error, "Trend Gestión",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Application.Exit();
                     });
                 }
                 Mantenimiento();
@@ -172,12 +181,11 @@ namespace StockVentas
             {
                 if (this.InvokeRequired) //si da true es porque estoy en un subproceso distinto al hilo principal
                 {
-                    string mensaje = "No se puede iniciar la aplicación sin internet.";
+                    string mensaje = "Comprueba la conexión a internet. No se actualizaron los datos.";
                     //invoca al hilo principal através de un delegado
                     this.Invoke((Action)delegate
                     {
                         MessageBox.Show(this, mensaje, "Trend Sistemas", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Application.Exit();
                     });
                 }
             }

@@ -41,6 +41,9 @@
 
 prever caida servicio mysql y reiniciarlo
 
+probar importar datos
+probar y refactorizar exportar datos
+
 
 
 
