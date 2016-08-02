@@ -516,18 +516,13 @@ namespace BL
 
         public static FtpWebRequest FtpRequest()
         {
-            string ftpServerIP;
-            string ftpUserID;
-            string ftpPassword;
-
-            /*ftpServerIP = "trendsistemas.com/datos";
-              ftpUserID = "benja@trendsistemas.com";
-              ftpPassword = "8953#AFjn";*/
-
-            // FTP local
-            ftpServerIP = "127.0.0.1:22/datos";
-            ftpUserID = "Benja";
-            ftpPassword = "8953#AFjn";
+            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            //   string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            Char delimiter = ';';
+            String[] substrings = connectionString.Split(delimiter);
+            string ftpServerIP = substrings[0] + "/datos";
+            string ftpUserID = substrings[1];
+            string ftpPassword = substrings[2];
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP);
             ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
             return ftpRequest;
@@ -548,26 +543,6 @@ namespace BL
             }
             streamReader.Close();
             return directories;
-        }
-
-        public static WebClient ClienteWeb()
-        {
-            string ftpServerIP;
-            string ftpUserID;
-            string ftpPassword;
-
-            /*ftpServerIP = "trendsistemas.com/datos";
-              ftpUserID = "benja@trendsistemas.com";
-              ftpPassword = "8953#AFjn";*/
-
-            // FTP local
-            ftpServerIP = "127.0.0.1:22/datos";
-            ftpUserID = "Benja";
-            ftpPassword = "8953#AFjn";
-
-            WebClient ftpClient = new WebClient();
-            ftpClient.Credentials = new System.Net.NetworkCredential(ftpUserID, ftpPassword);
-            return ftpClient;
         }
 
     }
