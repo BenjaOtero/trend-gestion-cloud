@@ -18,22 +18,6 @@ namespace BL
     public class DatosBLL
     {
 
-        public static string GetFechaImport()
-        {
-            string fecha = DAL.DatosDAL.GetFechaImport();
-            return fecha;
-        }
-
-        public static void BorrarMovimientos(string fecha)
-        {
-            DAL.DatosDAL.BorrarMovimientos(fecha);
-        }
-
-        public static void InsertarMovimientos()
-        {
-            DAL.DatosDAL.InsertarMovimientos();
-        }
-
         // GET DATOS POS
 
         public static void GetDataPOS()
@@ -45,21 +29,24 @@ namespace BL
                 string idRazonSocial = tbl.Rows[0][0].ToString() + "_";
                 DescargarArchivos(directories, idRazonSocial);
                 string[] archivos = Directory.GetFiles(@"c:\windows\temp\data_import", idRazonSocial + "*");
-                foreach (string archivo in archivos)
-                {
-                    RestaurarDatos(archivo);
-                    BL.DatosBLL.InsertarMovimientos();
-                }
-                // borro archivos en el servidor ftp
                 FtpWebRequest ftpRequest;
                 foreach (string archivo in archivos)
                 {
-                    Char delimitador = '\\';
-                    String[] cadena = archivo.Split(delimitador);
-                    string borrar = cadena[4];
-                    ftpRequest = Utilitarios.FtpRequest(@"/datos/" + borrar);
-                    ftpRequest.Method = WebRequestMethods.Ftp.DeleteFile;
-                    FtpWebResponse respuesta = (FtpWebResponse)ftpRequest.GetResponse();
+                    if (RestaurarDatos(archivo))
+                    {
+                        BL.DatosBLL.InsertarMovimientos();
+                        // borro archivos en el servidor ftp
+                        Char delimitador = '\\';
+                        String[] cadena = archivo.Split(delimitador);
+                        string borrar = cadena[4];                        
+                        ftpRequest = Utilitarios.FtpRequest(@"/datos/" + borrar);
+                        ftpRequest.Method = WebRequestMethods.Ftp.DeleteFile;
+                        FtpWebResponse respuesta = (FtpWebResponse)ftpRequest.GetResponse();
+                    }
+                    else
+                    {
+                        GetDataPOS();
+                    }
                 }
             }  
         }
@@ -85,8 +72,8 @@ namespace BL
         {
             if (Directory.Exists(@"c:\windows\temp\data_import")) Directory.Delete(@"c:\windows\temp\data_import", true);
             Directory.CreateDirectory(@"c:\windows\temp\data_import");
-            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
-            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
             Char delimiter = ';';
             String[] substrings = connectionString.Split(delimiter);
             string ftpServerIP = substrings[0] + "/datos";
@@ -111,8 +98,9 @@ namespace BL
             }
         }
 
-        private static void RestaurarDatos(string archivo)
+        private static bool RestaurarDatos(string archivo)
         {
+            bool restaurarDatos = false;
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\data_import\\restore.bat"); // creo el archivo .bat
             sw.Close();
             StringBuilder sb = new StringBuilder();
@@ -135,6 +123,14 @@ namespace BL
             process.Exited += new EventHandler(RestaurarDatos_Exited);
             process.Start();
             process.WaitForExit();
+            // compruebo si se restauraron los datos
+            Char delimiter = '_';
+            String[] substrings = archivo.Split(delimiter);
+            int pc =  Convert.ToInt32(substrings[2].Substring(2));
+            string fecha = substrings[3].Substring(0,10);
+            int registroRestaurado = DAL.DatosDAL.RegistroRestaurado(fecha, pc);
+            if (registroRestaurado > 0) restaurarDatos = true;
+            return restaurarDatos;
         }
 
         private static void RestaurarDatos_Exited(object sender, System.EventArgs e)
@@ -142,6 +138,11 @@ namespace BL
             if (File.Exists("c:\\Windows\\Temp\\data_import\\restore.bat")) File.Delete("c:\\Windows\\Temp\\data_import\\restore.bat");
             if (File.Exists("c:\\Windows\\Temp\\datos.sql")) File.Delete("c:\\Windows\\Temp\\datos.sql");
             if (File.Exists("c:\\Windows\\Temp\\datos.sql.gz")) File.Delete("c:\\Windows\\Temp\\datos.sql.gz");
+        }
+
+        public static void InsertarMovimientos()
+        {
+            DAL.DatosDAL.InsertarMovimientos();
         }
 
         // END GET DATOS POS

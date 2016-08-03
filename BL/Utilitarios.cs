@@ -516,8 +516,8 @@ namespace BL
 
         public static FtpWebRequest FtpRequest(string path)
         {
-            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
-            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
             Char delimiter = ';';
             String[] substrings = connectionString.Split(delimiter);
             string ftpServerIP = substrings[0];
