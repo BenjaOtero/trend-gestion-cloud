@@ -17,9 +17,9 @@ namespace BL
 {
     public class DatosBLL
     {
-
-        // GET DATOS POS
-
+        //
+        // IMPORTAR MOVIMIENTOS POS
+        //
         public static void GetDataPOS()
         {
             List<string> directories = GetDirectoriesFTP();
@@ -145,7 +145,10 @@ namespace BL
             DAL.DatosDAL.InsertarMovimientos();
         }
 
-        // END GET DATOS POS
+        //
+        // EXPORTAR DATOS POS
+        //
+
 
     }
 }
