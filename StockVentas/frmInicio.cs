@@ -98,6 +98,8 @@ namespace StockVentas
                     }
                     ds = BL.GetDataBLL.GetData();
                     BL.DatosBLL.GetDataPOS();
+                    label1.Text = "Exportando datos . . .";
+                    BL.DatosBLL.ExportarDatos();
                     try
                     {
                         string idRazonSocial = BL.GetDataBLL.RazonSocial().Rows[0][0].ToString();

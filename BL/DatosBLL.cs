@@ -17,8 +17,11 @@ namespace BL
 {
     public class DatosBLL
     {
+        static string idRazonSocial;
+        static string strFile;
+
         //
-        // IMPORTAR MOVIMIENTOS POS
+        // IMPORTAR MOVIMIENTOS POS           COMPROBAR
         //
         public static void GetDataPOS()
         {
@@ -148,7 +151,48 @@ namespace BL
         //
         // EXPORTAR DATOS POS
         //
+        public static void ExportarDatos()
+        {
+            DumpBD();
+            Utilitarios.UploadFromFile(@"c:\windows\temp\" + strFile, "/datos/" + strFile);
+            Utilitarios.DownloadFile(@"c:\windows\temp\tmp_" + strFile, "/datos/" + strFile);
+            if (!Utilitarios.FileCompare(@"c:\windows\temp\tmp_" + strFile, @"c:\windows\temp\" + strFile))
+                ExportarDatos();
 
+        }
+
+        private static void DumpBD()
+        {
+            DataTable tbl = BL.GetDataBLL.RazonSocial();
+            idRazonSocial = tbl.Rows[0][0].ToString();
+            strFile = idRazonSocial + "_datos.sql.xz";
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); //MO creo el archivo .bat
+            sw.Close();
+            StringBuilder sb = new StringBuilder();
+            string path = Application.StartupPath;
+            string unidad = path.Substring(0, 2);
+            sb.AppendLine(unidad);
+            sb.AppendLine(@"cd " + path + @"\Backup");
+            sb.AppendLine(@"mysqldump -t --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re alicuotasiva articulos clientes formaspago generos razonsocial stock | xz > c:\windows\temp\" + strFile);
+            //sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re alicuotasiva articulos clientes formaspago generos razonsocial stock | gzip > c:\windows\temp\" + razonSocial);
+            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
+            {
+                outfile.Write(sb.ToString());
+            }
+            Process process = new Process();
+            process.StartInfo.FileName = "c:\\Windows\\Temp\\backup.bat";
+            process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+            process.Exited += new EventHandler(ExportarDatos_Exited);
+            process.Start();
+            process.WaitForExit();
+        }
+
+        private static void ExportarDatos_Exited(object sender, System.EventArgs e)
+        {
+            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
+        }
 
     }
 }

@@ -330,73 +330,53 @@ namespace BL
 
         public static void UploadFromFile(string nombreLocal, string nombreServidor)
         {            
-            string ftpServerIP;
-            string ftpUserID;
-            string ftpPassword;
+          //  string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            Char delimiter = ';';
+            String[] substrings = connectionString.Split(delimiter);
+            string ftpServerIP = substrings[0];
+            string ftpUserID = substrings[1];
+            string ftpPassword = substrings[2];
 
-            /* ftpServerIP = "karminna.com/public_html/images";
-             ftpUserID = "benja@karminna.com";
-             ftpPassword = "8953#AFjn";*/
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP + nombreServidor);
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+            request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+            byte[] fileContents = File.ReadAllBytes(nombreLocal);
+            request.ContentLength = fileContents.Length;
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(fileContents, 0, fileContents.Length);
+            requestStream.Close();
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            response.Close();
+        }
 
-            // FTP local
-              ftpServerIP = "127.0.0.1:22/datos";
-               ftpUserID = "Benja";
-               ftpPassword = "8953#AFjn";
-
-            FileInfo fileInf = new FileInfo(nombreLocal);
-            FtpWebRequest reqFTP;
-
-            // Create FtpWebRequest object from the Uri provided
-            reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + ftpServerIP + "/" + nombreServidor));
-
-            // Provide the WebPermission Credintials
-            reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
-
-            // By default KeepAlive is true, where the control connection is not closed
-            // after a command is executed.
-            reqFTP.KeepAlive = false;
-
-            // Specify the command to be executed.
-            reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
-
-            // Specify the data transfer type.
-            reqFTP.UseBinary = true;
-
-            // Notify the server about the size of the uploaded file
-            reqFTP.ContentLength = fileInf.Length;
-
-            // The buffer size is set to 2kb
-            int buffLength = 2048;
-            byte[] buff = new byte[buffLength];
-            int contentLen;
-
-            // Opens a file stream (System.IO.FileStream) to read the file to be uploaded
-            FileStream fs = fileInf.OpenRead();
-
-            try
+        public static void DownloadFile(string nombreLocal, string nombreServidor)
+        {
+            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            Char delimiter = ';';
+            String[] substrings = connectionString.Split(delimiter);
+            string ftpServerIP = substrings[0];
+            string ftpUserID = substrings[1];
+            string ftpPassword = substrings[2];
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP + nombreServidor);
+            request.Method = WebRequestMethods.Ftp.DownloadFile;
+            request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+            FtpWebResponse objResponse = (FtpWebResponse)request.GetResponse();
+            byte[] buffer = new byte[32768];
+            using (Stream input = objResponse.GetResponseStream())
             {
-                // Stream to which the file to be upload is written
-                Stream strm = reqFTP.GetRequestStream();
-
-                // Read from the file stream 2kb at a time
-                contentLen = fs.Read(buff, 0, buffLength);
-
-                // Till Stream content ends
-                while (contentLen != 0)
+                if (File.Exists(nombreLocal)) File.Delete(nombreLocal);
+                using (FileStream output = new FileStream(nombreLocal, FileMode.CreateNew))
                 {
-                    // Write Content from the file stream to the FTP Upload Stream
-                    strm.Write(buff, 0, contentLen);
-                    contentLen = fs.Read(buff, 0, buffLength);
+                    int bytesRead;
+                    while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        output.Write(buffer, 0, bytesRead);
+                    }
                 }
-
-                // Close the file stream and the Request Stream
-                strm.Close();
-                fs.Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Upload Error");
-            }
+            objResponse.Close();
         }
 
         public static void UploadFromMemoryStream(MemoryStream memoryStream, string nombreRemoto, string servidor)
@@ -511,9 +491,6 @@ namespace BL
             if (File.Exists(@"c:\windows\temp\" + razonSocial)) File.Delete(@"c:\windows\temp\" + razonSocial);
         }
 
-        // IMPORTAR DATOS POS
-
-
         public static FtpWebRequest FtpRequest(string path)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
@@ -527,6 +504,41 @@ namespace BL
             ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
             return ftpRequest;
         }
+
+        public static bool FileCompare(string file1, string file2)
+        {
+            int file1byte;
+            int file2byte;
+            FileStream fs1;
+            FileStream fs2;
+            if (file1 == file2)
+            {
+                return true;
+            }
+            fs1 = new FileStream(file1, FileMode.Open);
+            fs2 = new FileStream(file2, FileMode.Open);
+            if (fs1.Length != fs2.Length)
+            {
+                fs1.Close();
+                fs2.Close();
+                return false;
+            }
+            do
+            {
+                // Read one byte from each file.
+                file1byte = fs1.ReadByte();
+                file2byte = fs2.ReadByte();
+            }
+            while ((file1byte == file2byte) && (file1byte != -1));
+            fs1.Close();
+            fs2.Close();
+            // Return the success of the comparison. "file1byte" is 
+            // equal to "file2byte" at this point only if the files are 
+            // the same.
+            return ((file1byte - file2byte) == 0);
+        }
+
+
 
     }
 }
