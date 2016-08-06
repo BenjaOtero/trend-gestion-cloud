@@ -297,9 +297,7 @@ namespace StockVentas
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            DataTable tbl = BL.GetDataBLL.RazonSocial();
-            string idRazonSocial = tbl.Rows[0][0].ToString() + "_datos.sql.gz";
-            BL.Utilitarios.ExportarDatos(idRazonSocial);
+            BL.DatosBLL.ExportarDatos();
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

@@ -150,9 +150,9 @@ namespace BL
             DAL.DatosDAL.InsertarMovimientos();
         }
 
-        //
+
         // EXPORTAR DATOS POS
-        //
+
         public static void ExportarDatos()
         {
             DumpBD();
@@ -218,6 +218,15 @@ namespace BL
         {
             bool comprobarDump = true;
             DAL.DatosDAL.DeleteAll();
+            if (!Directory.Exists(@"c:\windows\temp\data"))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(@"c:\windows\temp\data");
+            }
+              // copio el archivo para ejecutar el dump desde la copia porque al descomprimirlo se borra y no lo puedo subir
+            if (File.Exists(@"c:\windows\temp\data\" + strFile)) File.Delete(@"c:\windows\temp\data\" + strFile);
+            File.Copy(@"c:\windows\temp\" + strFile, @"c:\windows\temp\data\" + strFile);    
+            string restaurar = strFile.Substring(0, strFile.Length - 3);
+            if (File.Exists("C:\\Windows\\Temp\\data\\" + restaurar)) File.Delete("C:\\Windows\\Temp\\data\\" + restaurar);
             if (File.Exists(@"C:\Windows\Temp\restore.bat")) File.Delete(@"C:\Windows\Temp\restore.bat");
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\restore.bat"); // creo el archivo .bat
             sw.Close();
@@ -226,9 +235,9 @@ namespace BL
             string unidad = path.Substring(0, 2);
             sb.AppendLine(unidad);
             sb.AppendLine(@"cd " + path + @"\Backup");
-            sb.AppendLine("xz -d \"C:\\Windows\\Temp\\" + strFile + "\"");
-            string restaurar = strFile.Substring(0, strFile.Length - 3);
-            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn dump_admin < \"C:\\Windows\\Temp\\" + restaurar + "\"");
+            sb.AppendLine("xz -d \"C:\\Windows\\Temp\\data\\" + strFile + "\"");
+            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn dump_admin < \"C:\\Windows\\Temp\\data\\" + restaurar + "\"");
+          //  sb.AppendLine("pause");
             using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
             {
                 outfile.Write(sb.ToString());

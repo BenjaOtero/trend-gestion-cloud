@@ -456,40 +456,6 @@ namespace BL
             }
         }
 
-        public static void ExportarDatos(string idRazonSocial)
-        {
-            
-            razonSocial = idRazonSocial;
-            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); //MO creo el archivo .bat
-            sw.Close();
-            StringBuilder sb = new StringBuilder();
-            string path = Application.StartupPath;
-            string unidad = path.Substring(0, 2);
-            sb.AppendLine(unidad);
-            sb.AppendLine(@"cd " + path + @"\Backup");
-            sb.AppendLine(@"mysqldump -t --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re alicuotasiva articulos clientes formaspago generos razonsocial stock | gzip > c:\windows\temp\" + razonSocial);
-            //sb.AppendLine(@"mysqldump --skip-comments -u ncsoftwa_re -p8953#AFjn -h localhost --opt ncsoftwa_re alicuotasiva articulos clientes formaspago generos razonsocial stock | gzip > c:\windows\temp\" + razonSocial);
-            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\backup.bat", true)) // escribo el archivo .bat
-            {
-                outfile.Write(sb.ToString());
-            }
-            Process process = new Process();
-            process.StartInfo.FileName = "c:\\Windows\\Temp\\backup.bat";
-            process.StartInfo.CreateNoWindow = false;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            process.Exited += new EventHandler(ExportarDatos_Exited);
-            process.Start();
-            process.WaitForExit();
-        }
-
-        private static void ExportarDatos_Exited(object sender, System.EventArgs e)
-        {
-            UploadFromFile(@"c:\windows\temp\" + razonSocial, razonSocial);
-            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
-            if (File.Exists(@"c:\windows\temp\" + razonSocial)) File.Delete(@"c:\windows\temp\" + razonSocial);
-        }
-
         public static FtpWebRequest FtpRequest(string path)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
