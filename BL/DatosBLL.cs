@@ -19,6 +19,8 @@ namespace BL
     {
         static string idRazonSocial;
         static string strFile;
+        static int intentosDump = 0;
+        static int intentosUpload = 0;
 
         //
         // IMPORTAR MOVIMIENTOS POS           COMPROBAR
@@ -154,11 +156,28 @@ namespace BL
         public static void ExportarDatos()
         {
             DumpBD();
-            Utilitarios.UploadFromFile(@"c:\windows\temp\" + strFile, "/datos/" + strFile);
-            Utilitarios.DownloadFile(@"c:\windows\temp\tmp_" + strFile, "/datos/" + strFile);
-            if (!Utilitarios.FileCompare(@"c:\windows\temp\tmp_" + strFile, @"c:\windows\temp\" + strFile))
-                ExportarDatos();
-
+            if (ComprobarDump())
+            {
+            Reintentar:
+                Utilitarios.UploadFromFile(@"c:\windows\temp\" + strFile, "/datos/" + strFile);
+                Utilitarios.DownloadFile(@"c:\windows\temp\tmp_" + strFile, "/datos/" + strFile);
+                if (!Utilitarios.FileCompare(@"c:\windows\temp\tmp_" + strFile, @"c:\windows\temp\" + strFile))
+                {
+                    if (intentosUpload < 5)
+                    {
+                        intentosUpload++;
+                        goto Reintentar;
+                    } 
+                }
+            }
+            else
+            {
+                if (intentosDump < 5)
+                {
+                    intentosDump++;
+                    ExportarDatos();
+                }                
+            }
         }
 
         private static void DumpBD()
@@ -166,6 +185,7 @@ namespace BL
             DataTable tbl = BL.GetDataBLL.RazonSocial();
             idRazonSocial = tbl.Rows[0][0].ToString();
             strFile = idRazonSocial + "_datos.sql.xz";
+            if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
             System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\backup.bat"); //MO creo el archivo .bat
             sw.Close();
             StringBuilder sb = new StringBuilder();
@@ -184,7 +204,7 @@ namespace BL
             process.StartInfo.CreateNoWindow = false;
             process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
-            process.Exited += new EventHandler(ExportarDatos_Exited);
+         //   process.Exited += new EventHandler(ExportarDatos_Exited);
             process.Start();
             process.WaitForExit();
         }
@@ -192,6 +212,48 @@ namespace BL
         private static void ExportarDatos_Exited(object sender, System.EventArgs e)
         {
             if (File.Exists("c:\\Windows\\Temp\\backup.bat")) File.Delete("c:\\Windows\\Temp\\backup.bat");
+        }
+
+        private static bool ComprobarDump()
+        {
+            bool comprobarDump = true;
+            DAL.DatosDAL.DeleteAll();
+            if (File.Exists(@"C:\Windows\Temp\restore.bat")) File.Delete(@"C:\Windows\Temp\restore.bat");
+            System.IO.StreamWriter sw = System.IO.File.CreateText("c:\\Windows\\Temp\\restore.bat"); // creo el archivo .bat
+            sw.Close();
+            StringBuilder sb = new StringBuilder();
+            string path = Application.StartupPath;
+            string unidad = path.Substring(0, 2);
+            sb.AppendLine(unidad);
+            sb.AppendLine(@"cd " + path + @"\Backup");
+            sb.AppendLine("xz -d \"C:\\Windows\\Temp\\" + strFile + "\"");
+            string restaurar = strFile.Substring(0, strFile.Length - 3);
+            sb.AppendLine("mysql -u ncsoftwa_re -p8953#AFjn dump_admin < \"C:\\Windows\\Temp\\" + restaurar + "\"");
+            using (StreamWriter outfile = new StreamWriter("c:\\Windows\\Temp\\restore.bat", true)) // escribo el archivo .bat
+            {
+                outfile.Write(sb.ToString());
+            }
+            Process process = new Process();
+            process.StartInfo.FileName = "c:\\Windows\\Temp\\restore.bat";
+            process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.EnableRaisingEvents = true;  // permite disparar el evento process_Exited
+         //   process.Exited += new EventHandler(RestaurarDatos_Exited);
+            process.Start();
+            process.WaitForExit();
+
+            DataSet ds = DAL.DatosDAL.ControlarUpdate();
+            int records;
+            foreach (DataTable tbl in ds.Tables)
+            {
+                records = Convert.ToInt16(tbl.Rows[0][0].ToString());
+                if (records == 0)
+                {
+                    comprobarDump = false;
+                    break;
+                }
+            }
+            return comprobarDump;
         }
 
     }

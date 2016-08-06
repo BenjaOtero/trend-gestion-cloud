@@ -330,14 +330,13 @@ namespace BL
 
         public static void UploadFromFile(string nombreLocal, string nombreServidor)
         {            
-          //  string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
-            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            //  string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
             Char delimiter = ';';
             String[] substrings = connectionString.Split(delimiter);
             string ftpServerIP = substrings[0];
             string ftpUserID = substrings[1];
             string ftpPassword = substrings[2];
-
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + ftpServerIP + nombreServidor);
             request.Method = WebRequestMethods.Ftp.UploadFile;
             request.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
@@ -352,8 +351,8 @@ namespace BL
 
         public static void DownloadFile(string nombreLocal, string nombreServidor)
         {
-            //string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
-            string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["FtpLocal"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["Ftp"].ConnectionString;
             Char delimiter = ';';
             String[] substrings = connectionString.Split(delimiter);
             string ftpServerIP = substrings[0];

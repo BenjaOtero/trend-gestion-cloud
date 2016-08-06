@@ -37,6 +37,15 @@ namespace DAL
             return objCon;
         }
 
+        public static MySqlConnection GetDumpAdminConnection()
+        {
+            string connectionString;
+            MySqlConnection objCon;
+            connectionString = ConfigurationManager.ConnectionStrings["DBDumpAdmin"].ConnectionString;
+            objCon = new MySqlConnection(connectionString);
+            return objCon;
+        }
+
         public static MySqlConnection GetTrendConnection()
         {
             string connectionString;

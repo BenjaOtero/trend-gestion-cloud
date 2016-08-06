@@ -38,5 +38,33 @@ namespace DAL
             return registroRestaurado;
         }
 
+        //
+        // EXPORTAR DATOS POS
+        //
+        public static DataSet ControlarUpdate()
+        {
+            MySqlConnection SqlConnection1 = DALBase.GetDumpAdminConnection();
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlSelectCommand1 = new MySqlCommand("DatosPos_ControlarUpdate", SqlConnection1);
+            SqlDataAdapter1.SelectCommand = SqlSelectCommand1;
+            SqlSelectCommand1.CommandType = CommandType.StoredProcedure;
+            DataSet ds = new DataSet();
+            SqlDataAdapter1.Fill(ds);
+            SqlConnection1.Close();
+            return ds;
+        }
+
+        public static void DeleteAll()
+        {
+            MySqlConnection SqlConnection1 = DALBase.GetDumpAdminConnection();
+            SqlConnection1.Open();
+            MySqlDataAdapter SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlDeleteCommand1 = new MySqlCommand("DatosPos_Borrar", SqlConnection1);
+            SqlDataAdapter1.DeleteCommand = SqlDeleteCommand1;
+            SqlDeleteCommand1.CommandType = CommandType.StoredProcedure;
+            SqlDeleteCommand1.ExecuteNonQuery();
+            SqlConnection1.Close();
+        }
+
     }
 }
