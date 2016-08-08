@@ -89,20 +89,20 @@ namespace StockVentas
         {
             try
             {
+            string idAlicuota;
+            if (editar)
+            {
+                if (string.IsNullOrEmpty(oldId)) oldId = txtIdAlicuotaALI.Text;
+                idAlicuota = txtIdAlicuotaALI.Text;
+            }
+            else
+            {
+                oldId = txtIdAlicuotaALI.Text;
+                idAlicuota = txtIdAlicuotaALI.Text;
+            }
             bindingSource1.EndEdit();
             if (tblAlicuotasIva.GetChanges() != null)
             {
-                string idAlicuota;
-                if (editar)
-                {
-                    if (string.IsNullOrEmpty(oldId)) oldId = txtIdAlicuotaALI.Text;
-                    idAlicuota = txtIdAlicuotaALI.Text;
-                }
-                else
-                {
-                    oldId = txtIdAlicuotaALI.Text;
-                    idAlicuota = txtIdAlicuotaALI.Text;
-                }
                 frmProgress progreso = new frmProgress(tblAlicuotasIva, "frmAlicuotasIva", "grabar", idAlicuota, oldId);
                 progreso.ShowDialog();
             }
