@@ -153,23 +153,41 @@ namespace StockVentas
             }
             if (MessageBox.Show("¿Desea borrar este registro?", "Buscar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                bindingSource1.RemoveCurrent();
-                bindingSource1.EndEdit();
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    bindingSource1.RemoveCurrent();
+                    bindingSource1.EndEdit();
+                    if (tblClientes.GetChanges() != null)
+                    {
+                        BL.ClientesBLL.GrabarDB(tblClientes);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                Cursor.Current = Cursors.Arrow;
             }
             SetStateForm(FormState.inicial);
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 if (ValidarFormulario())
-                {
+                {                    
                     bindingSource1.EndEdit();
+                    if (tblClientes.GetChanges() != null)
+                    {
+                        BL.ClientesBLL.GrabarDB(tblClientes);
+                    }
                     bindingSource1.Position = 0;
                     bindingSource1.Sort = "ApellidoCLI";
-                    SetStateForm(FormState.inicial);
                     bindingSource1.RemoveFilter();
+                    SetStateForm(FormState.inicial);                    
                 }
             }
             catch (ConstraintException)
@@ -178,10 +196,16 @@ namespace StockVentas
                 MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtCorreoCLI.Focus();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Cursor.Current = Cursors.Arrow;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            if (insertando) bindingSource1.RemoveCurrent();
             bindingSource1.CancelEdit();
             SetStateForm(FormState.inicial);
             errorProvider1.Clear();
@@ -194,32 +218,22 @@ namespace StockVentas
 
         private void frmClientes_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (insertando || editando)
-            {
-                if (ValidarFormulario())
-                {
-                    bindingSource1.EndEdit();
-                    if (tblClientes.GetChanges() != null)
-                    {
-                        frmProgress progress = new frmProgress(tblClientes, "frmClientes", "grabar");
-                    }
-                    bindingSource1.RemoveFilter();
-                    if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
-                }
-                else e.Cancel = true;
-            }
-            else 
+            Cursor.Current = Cursors.WaitCursor;
+            try
             {
                 bindingSource1.EndEdit();
                 if (tblClientes.GetChanges() != null)
                 {
-                    frmProgress progress = new frmProgress(tblClientes, "frmClientes", "grabar");
-                    progress.Show();
+                    BL.ClientesBLL.GrabarDB(tblClientes);
                 }
                 bindingSource1.RemoveFilter();
-                if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
             }
-          
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Cursor.Current = Cursors.Arrow;
+            if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
         }
 
         private bool ValidarFormulario()

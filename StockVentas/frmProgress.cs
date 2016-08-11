@@ -518,7 +518,7 @@ namespace StockVentas
                             BL.ArticulosItemsBLL.GrabarDB(tabla);
                             break;
                         case "frmClientes":
-                            BL.ClientesBLL.GrabarDB(tabla, ref codigoError);
+                            BL.ClientesBLL.GrabarDB(tabla);
                             break;
                         case "frmColores":
                             BL.ColoresBLL.GrabarDB(tabla);

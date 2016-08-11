@@ -23,25 +23,9 @@ namespace BL
             return dt;
         }
 
-        public static void GrabarDB(DataTable tbl, ref int? codigoError)
+        public static void GrabarDB(DataTable tbl)
         {
-            try
-            {
-                DAL.ClientesDAL.GrabarDB(tbl);
-            }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1042) //no se pudo abrir la conexion por falta de internet
-                {
-                    tbl.RejectChanges(); ;
-                    codigoError = 1042;
-                }
-                else
-                {
-                    tbl.RejectChanges();
-                    codigoError = ex.Number;
-                }
-            }
+            DAL.ClientesDAL.GrabarDB(tbl);
         }
 
     }

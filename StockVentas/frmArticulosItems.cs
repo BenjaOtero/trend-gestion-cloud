@@ -110,19 +110,37 @@ namespace StockVentas
             if (bindingSource1.Count == 0) return;
             if (MessageBox.Show("¿Desea borrar este registro?", "Trend Gestión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                bindingSource1.RemoveCurrent();
-                bindingSource1.EndEdit();
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    bindingSource1.RemoveCurrent();
+                    bindingSource1.EndEdit();
+                    if (tblArticulosItems.GetChanges() != null)
+                    {
+                        BL.ArticulosItemsBLL.GrabarDB(tblArticulosItems);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                Cursor.Current = Cursors.Arrow;
             }
             SetStateForm(FormState.inicial); 
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 bindingSource1.EndEdit();
                 bindingSource1.Position = 0;
                 bindingSource1.Sort = "DescripcionITE";
+                if (tblArticulosItems.GetChanges() != null)
+                {
+                    BL.ArticulosItemsBLL.GrabarDB(tblArticulosItems);
+                }
                 SetStateForm(FormState.inicial);
                 bindingSource1.RemoveFilter(); 
             }
@@ -132,6 +150,7 @@ namespace StockVentas
                 MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtDescripcionITE.Focus();
             }
+            Cursor.Current = Cursors.Arrow;
 
         }
 
@@ -148,13 +167,21 @@ namespace StockVentas
 
         private void frmArticulosItems_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bindingSource1.EndEdit();
-            if (tblArticulosItems.GetChanges() != null)
+            Cursor.Current = Cursors.WaitCursor;
+            try
             {
-                frmProgress progreso = new frmProgress(tblArticulosItems, "frmArticulosItems", "grabar");
-                progreso.ShowDialog();
+                bindingSource1.EndEdit();
+                if (tblArticulosItems.GetChanges() != null)
+                {
+                    BL.ArticulosItemsBLL.GrabarDB(tblArticulosItems);
+                }
+                bindingSource1.RemoveFilter();
             }
-            bindingSource1.RemoveFilter();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Cursor.Current = Cursors.Arrow;
         }        
 
         private void binding_Format(object sender, ConvertEventArgs e)
@@ -274,6 +301,10 @@ namespace StockVentas
             clave = rand.Next(1, 1000000000);
             txtDescripcionITE.Text = clave.ToString();
             btnGrabar.PerformClick();
+            if (tblArticulosItems.GetChanges() != null)
+            {
+                BL.ArticulosItemsBLL.GrabarDB(tblArticulosItems);
+            }
         }
 
     }
