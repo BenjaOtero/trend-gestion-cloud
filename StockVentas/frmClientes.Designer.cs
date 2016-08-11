@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClientes));
             this.label14 = new System.Windows.Forms.Label();
             this.grpCampos = new System.Windows.Forms.GroupBox();
@@ -97,7 +100,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label14.ForeColor = System.Drawing.Color.White;
             this.label14.Location = new System.Drawing.Point(10, 70);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 15);
@@ -106,6 +109,7 @@
             // 
             // grpCampos
             // 
+            this.grpCampos.BackColor = System.Drawing.Color.Transparent;
             this.grpCampos.Controls.Add(this.label9);
             this.grpCampos.Controls.Add(this.label8);
             this.grpCampos.Controls.Add(this.label5);
@@ -138,7 +142,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(10, 175);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 15);
@@ -149,7 +153,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(10, 149);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(61, 15);
@@ -160,7 +164,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(10, 123);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 15);
@@ -195,7 +199,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(10, 44);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 15);
@@ -206,7 +210,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(10, 97);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 15);
@@ -217,7 +221,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label10.ForeColor = System.Drawing.Color.White;
             this.label10.Location = new System.Drawing.Point(10, 233);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(36, 15);
@@ -228,7 +232,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(10, 206);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 15);
@@ -239,7 +243,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 15);
@@ -276,7 +280,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(10, 260);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 15);
@@ -298,7 +302,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(10, 285);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 15);
@@ -414,16 +418,39 @@
             // 
             this.gvwDatos.AllowUserToAddRows = false;
             this.gvwDatos.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DarkOrchid;
+            this.gvwDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gvwDatos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gvwDatos.BackgroundColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.ColorTranslator.FromHtml("#224B86");
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvwDatos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gvwDatos.Location = new System.Drawing.Point(12, 17);
             this.gvwDatos.Name = "gvwDatos";
             this.gvwDatos.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvwDatos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gvwDatos.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            this.gvwDatos.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Black;
+            this.gvwDatos.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
             this.gvwDatos.Size = new System.Drawing.Size(615, 172);
             this.gvwDatos.TabIndex = 0;
             this.gvwDatos.Text = "DataGridView1";
             // 
             // grpBotones
             // 
+            this.grpBotones.BackColor = System.Drawing.Color.Transparent;
             this.grpBotones.Controls.Add(this.btnCancelar);
             this.grpBotones.Controls.Add(this.btnSalir);
             this.grpBotones.Controls.Add(this.btnGrabar);
@@ -439,78 +466,86 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.BackColor = System.Drawing.Color.White;
             this.btnCancelar.Location = new System.Drawing.Point(20, 185);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(160, 26);
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.White;
             this.btnSalir.Location = new System.Drawing.Point(20, 217);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(160, 26);
             this.btnSalir.TabIndex = 6;
             this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnGrabar
             // 
+            this.btnGrabar.BackColor = System.Drawing.Color.White;
             this.btnGrabar.Location = new System.Drawing.Point(20, 153);
             this.btnGrabar.Name = "btnGrabar";
             this.btnGrabar.Size = new System.Drawing.Size(160, 26);
             this.btnGrabar.TabIndex = 4;
             this.btnGrabar.Text = "Grabar";
-            this.btnGrabar.UseVisualStyleBackColor = true;
+            this.btnGrabar.UseVisualStyleBackColor = false;
             this.btnGrabar.Click += new System.EventHandler(this.btnGrabar_Click);
             // 
             // btnBorrar
             // 
+            this.btnBorrar.BackColor = System.Drawing.Color.White;
             this.btnBorrar.Location = new System.Drawing.Point(20, 121);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(160, 26);
             this.btnBorrar.TabIndex = 3;
             this.btnBorrar.Text = "Borrar";
-            this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.UseVisualStyleBackColor = false;
             this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // btnEditar
             // 
+            this.btnEditar.BackColor = System.Drawing.Color.White;
             this.btnEditar.Location = new System.Drawing.Point(20, 89);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(160, 26);
             this.btnEditar.TabIndex = 2;
             this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.UseVisualStyleBackColor = false;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnNuevo
             // 
+            this.btnNuevo.BackColor = System.Drawing.Color.White;
             this.btnNuevo.Location = new System.Drawing.Point(20, 57);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(160, 26);
             this.btnNuevo.TabIndex = 1;
             this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.UseVisualStyleBackColor = false;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnBuscar
             // 
+            this.btnBuscar.BackColor = System.Drawing.Color.White;
             this.btnBuscar.Location = new System.Drawing.Point(20, 25);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(160, 26);
             this.btnBuscar.TabIndex = 0;
             this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.txtParametros);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(427, 199);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 54);
@@ -529,9 +564,10 @@
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = null;
+            this.bindingNavigator1.BackColor = System.Drawing.Color.Transparent;
             this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
             this.bindingNavigator1.DeleteItem = null;
-            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.None;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -542,14 +578,14 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 532);
+            this.bindingNavigator1.Location = new System.Drawing.Point(11, 532);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(639, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(210, 25);
             this.bindingNavigator1.TabIndex = 29;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using BL;
 using System.Text.RegularExpressions;
+using System.Drawing.Drawing2D;
 
 namespace StockVentas
 {
@@ -32,6 +33,17 @@ namespace StockVentas
         public frmClientes()
         {
             InitializeComponent();
+            gvwDatos.EnableHeadersVisualStyles = false;
+         //   gvwDatos.RowHeadersVisible = false;
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            using (LinearGradientBrush brush =
+                new LinearGradientBrush(this.ClientRectangle, Color.FromArgb(0, 0, 0), Color.FromArgb(57, 128, 227), 65f))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
         }
 
         public frmClientes(ref frmVentas instanciaVentas)
