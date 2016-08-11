@@ -62,6 +62,7 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnProbar = new System.Windows.Forms.Button();
             this.grpBotones.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).BeginInit();
@@ -75,6 +76,7 @@
             // grpBotones
             // 
             this.grpBotones.Controls.Add(this.btnCancelar);
+            this.grpBotones.Controls.Add(this.btnProbar);
             this.grpBotones.Controls.Add(this.btnSalir);
             this.grpBotones.Controls.Add(this.btnGrabar);
             this.grpBotones.Controls.Add(this.btnBorrar);
@@ -380,6 +382,16 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnProbar
+            // 
+            this.btnProbar.Location = new System.Drawing.Point(20, 278);
+            this.btnProbar.Name = "btnProbar";
+            this.btnProbar.Size = new System.Drawing.Size(160, 26);
+            this.btnProbar.TabIndex = 5;
+            this.btnProbar.Text = "Probar";
+            this.btnProbar.UseVisualStyleBackColor = true;
+            this.btnProbar.Click += new System.EventHandler(this.btnProbar_Click);
+            // 
             // frmArticulosItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -447,6 +459,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btnProbar;
     }
 }
 

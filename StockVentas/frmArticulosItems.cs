@@ -266,5 +266,15 @@ namespace StockVentas
             }
         }
 
+        private void btnProbar_Click(object sender, EventArgs e)
+        {
+            btnNuevo.PerformClick();
+
+            Random rand = new Random();
+            clave = rand.Next(1, 1000000000);
+            txtDescripcionITE.Text = clave.ToString();
+            btnGrabar.PerformClick();
+        }
+
     }
 }
