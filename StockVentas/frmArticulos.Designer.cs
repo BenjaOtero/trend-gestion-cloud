@@ -398,7 +398,6 @@
             this.MaximizeBox = false;
             this.Name = "frmArticulos";
             this.Text = "Artículos";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmArticulos_FormClosed);
             this.Load += new System.EventHandler(this.frmArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).EndInit();
             this.groupBox2.ResumeLayout(false);

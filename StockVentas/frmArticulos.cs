@@ -295,15 +295,6 @@ namespace StockVentas
             btnAceptar.PerformClick();
         }
 
-        private void frmArticulos_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (tblArticulos.GetChanges() != null)
-            {
-                frmProgress progreso = new frmProgress(tblArticulos, "frmArticulos", "grabar");
-                progreso.ShowDialog();
-            }
-        }
-
         public void SetStateForm(FormState state)
         {
             if (state == FormState.inicial)

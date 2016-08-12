@@ -14,6 +14,7 @@ namespace StockVentas
         private DataTable tblAlicuotasIva;
         string oldId = string.Empty;
         bool editar = false;
+        string idAlicuota;
 
         public enum FormState
         {
@@ -79,16 +80,24 @@ namespace StockVentas
             if (bindingSource1.Count == 0) return;
             if (MessageBox.Show("¿El borrado de datos puede alterar el buen funcionamiento de la facturación. ¿Desea continuar?", "Trend", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+                string idAlicuota;
+                if (editar)
+                {
+                    if (string.IsNullOrEmpty(oldId)) oldId = txtIdAlicuotaALI.Text;
+                    idAlicuota = txtIdAlicuotaALI.Text;
+                }
+                else
+                {
+                    oldId = txtIdAlicuotaALI.Text;
+                    idAlicuota = txtIdAlicuotaALI.Text;
+                }
                 bindingSource1.RemoveCurrent();
-                bindingSource1.EndEdit();
+                Grabar(idAlicuota, oldId);
             }
-            SetStateForm(FormState.inicial); 
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            try
-            {
             string idAlicuota;
             if (editar)
             {
@@ -100,34 +109,7 @@ namespace StockVentas
                 oldId = txtIdAlicuotaALI.Text;
                 idAlicuota = txtIdAlicuotaALI.Text;
             }
-            bindingSource1.EndEdit();
-            if (tblAlicuotasIva.GetChanges() != null)
-            {
-                frmProgress progreso = new frmProgress(tblAlicuotasIva, "frmAlicuotasIva", "grabar", idAlicuota, oldId);
-                progreso.ShowDialog();
-            }
-            bindingSource1.RemoveFilter();
-            bindingSource1.Sort = "IdAlicuotaALI";
-            editar = false;
-            SetStateForm(FormState.inicial);
-            }
-            catch (ConstraintException ex)
-            {
-                bool b;
-                if (b = ex.Message.ToString().Contains("IdAlicuotaALI"))
-                {
-                    string mensaje = "No se puede agregar el ID '" + txtIdAlicuotaALI.Text.ToUpper() + "' porque ya existe";
-                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtIdAlicuotaALI.Focus();
-                }
-                else
-                {
-                    string mensaje = "No se puede agregar el porcentaje '" + txtPorcentajeALI.Text.ToUpper() + "' porque ya existe";
-                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtPorcentajeALI.Focus();
-                }                
-
-            }
+            Grabar(idAlicuota, oldId);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -143,14 +125,92 @@ namespace StockVentas
 
         private void frmAlicuotasIva_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bindingSource1.EndEdit();
-            if (tblAlicuotasIva.GetChanges() != null)
+            try
             {
-                DataTable tbl = tblAlicuotasIva.GetChanges();
-                frmProgress progreso = new frmProgress(tblAlicuotasIva, "frmAlicuotasIva", "grabar");
-                progreso.ShowDialog();
+                string idAlicuota;
+                if (editar)
+                {
+                    if (string.IsNullOrEmpty(oldId)) oldId = txtIdAlicuotaALI.Text;
+                    idAlicuota = txtIdAlicuotaALI.Text;
+                }
+                else
+                {
+                    oldId = txtIdAlicuotaALI.Text;
+                    idAlicuota = txtIdAlicuotaALI.Text;
+                }
+                bindingSource1.EndEdit();
+                if (tblAlicuotasIva.GetChanges() != null)
+                {
+                    DialogResult respuesta =
+                            MessageBox.Show("¿Desea guardar los cambios?", "Trend", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    switch (respuesta)
+                    {
+                        case DialogResult.Yes:
+                            Grabar(idAlicuota, oldId);
+                            bindingSource1.RemoveFilter();
+                            break;
+                        case DialogResult.No:
+                            tblAlicuotasIva.RejectChanges();
+                            break;
+                        case DialogResult.Cancel:
+                            e.Cancel = true;
+                            break;
+                    }
+                }
+
+            }
+            catch (ConstraintException ex)
+            {
+                bool b;
+                if (b = ex.Message.ToString().Contains("IdAlicuotaALI"))
+                {
+                    string mensaje = "No se puede agregar el ID '" + txtIdAlicuotaALI.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtIdAlicuotaALI.Focus();
+                }
+                else
+                {
+                    string mensaje = "No se puede agregar el porcentaje '" + txtPorcentajeALI.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtPorcentajeALI.Focus();
+                }
+
             }
             bindingSource1.RemoveFilter();
+        }
+
+        private void Grabar(string id, string old)
+        {
+            try
+            {
+                bindingSource1.EndEdit();
+                if (tblAlicuotasIva.GetChanges() != null)
+                {
+                    BL.AlicuotasIvaBLL.GrabarDB(tblAlicuotasIva, id, old);
+                    tblAlicuotasIva.AcceptChanges();
+                }
+                bindingSource1.RemoveFilter();
+                bindingSource1.Sort = "IdAlicuotaALI";
+                editar = false;
+                SetStateForm(FormState.inicial);
+            }
+            catch (ConstraintException ex)
+            {
+                bool b;
+                if (b = ex.Message.ToString().Contains("IdAlicuotaALI"))
+                {
+                    string mensaje = "No se puede agregar el ID '" + txtIdAlicuotaALI.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtIdAlicuotaALI.Focus();
+                }
+                else
+                {
+                    string mensaje = "No se puede agregar el porcentaje '" + txtPorcentajeALI.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtPorcentajeALI.Focus();
+                }
+
+            }
         }
 
         private void bindingSource1_BindingComplete(object sender, BindingCompleteEventArgs e)
