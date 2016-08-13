@@ -106,12 +106,59 @@ namespace StockVentas
                 cmbAlicuota.DataBindings.Add("SelectedValue", fila, "IdAliculotaIvaART", false, DataSourceUpdateMode.OnPropertyChanged);
 
                 cmbProveedor.DataBindings.Add("SelectedValue", fila, "IdProveedorART", false, DataSourceUpdateMode.OnPropertyChanged);
+                txtFoto.DataBindings.Add("Text", fila, "ImagenART", false, DataSourceUpdateMode.OnPropertyChanged);
+                txtFotoBack.DataBindings.Add("Text", fila, "ImagenBackART", false, DataSourceUpdateMode.OnPropertyChanged);
+                txtFotoColor.DataBindings.Add("Text", fila, "ImagenColorART", false, DataSourceUpdateMode.OnPropertyChanged);
 
               //  chkActivo.CheckState = CheckState.Checked; // Tildo el checkbox para bindearlo
                 Binding bind = new Binding("Checked", fila, "ActivoWebART", false, DataSourceUpdateMode.OnPropertyChanged);
                 bind.Format += new ConvertEventHandler(binding_Format);
                 bind.Parse += new ConvertEventHandler(binding_Parse);
+                chkActivo.DataBindings.Add(bind);
 
+            }
+        }
+
+        private void btnImagen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opFilDlg = new OpenFileDialog();
+            opFilDlg.Filter = "JPG (*.jpg)|*.jpg";
+            if (opFilDlg.ShowDialog() == DialogResult.OK)
+            {
+                strFileName = opFilDlg.FileName;
+                nombreServidor = fila["IdArticuloART"].ToString();
+                nombreServidor = nombreServidor.Substring(0, nombreServidor.Length - 2);
+                txtFoto.Text = nombreServidor;
+                btnGrabar.Enabled = true;
+            }
+        }
+
+        private void btnImagenBck_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opFilDlg = new OpenFileDialog();
+            opFilDlg.Filter = "JPG (*.jpg)|*.jpg";
+            if (opFilDlg.ShowDialog() == DialogResult.OK)
+            {
+                strFileNameBck = opFilDlg.FileName;
+                nombreServidor = fila["IdArticuloART"].ToString();
+                nombreServidor = nombreServidor.Substring(0, nombreServidor.Length - 2);
+                txtFotoBack.Text = nombreServidor;
+                btnGrabar.Enabled = true;
+            }
+        }
+
+        private void btnImagenColor_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opFilDlg = new OpenFileDialog();
+            opFilDlg.Filter = "JPG (*.jpg)|*.jpg";
+            if (opFilDlg.ShowDialog() == DialogResult.OK)
+            {
+                strFileNameColor = opFilDlg.FileName;
+                nombreServidorColor = fila["IdArticuloART"].ToString();
+                nombreServidorColor = nombreServidorColor.Substring(0, nombreServidorColor.Length - 2);
+                nombreServidorColor = nombreServidorColor + "_col.jpg";
+                txtFotoColor.Text = nombreServidorColor;
+                btnGrabar.Enabled = true;
             }
         }
 
@@ -265,6 +312,19 @@ namespace StockVentas
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataTable tblArticulos = dt.Tables["Articulos"];
+            DataView viewArticulos = new DataView(tblArticulos);
+            viewArticulos.RowFilter = "IdArticuloART LIKE '" + txtIdArticulo.Text.Substring(0,7) + "*'";
+            foreach (DataRowView row in viewArticulos)
+            {
+                row.BeginEdit();
+                row["ImagenColorART"] = txtFotoColor.Text;
+                row.EndEdit();
+            }
         }
 
         private void frmArticulosDetalle_FormClosing(object sender, FormClosingEventArgs e)

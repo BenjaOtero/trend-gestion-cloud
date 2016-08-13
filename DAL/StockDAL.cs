@@ -60,13 +60,23 @@ namespace DAL
         private static MySqlDataAdapter AdaptadorUpdate(MySqlConnection SqlConnection1, MySqlTransaction tr)
         {
             SqlDataAdapter1 = new MySqlDataAdapter();
+            MySqlCommand SqlInsertCommand1;
             SqlUpdateCommand1 = new MySqlCommand("Stock_Actualizar", SqlConnection1);
+            SqlInsertCommand1 = new MySqlCommand("Stock_Insertar", SqlConnection1);
             SqlUpdateCommand1.Transaction = tr;
+            SqlDataAdapter1.InsertCommand = SqlInsertCommand1;
             SqlDataAdapter1.UpdateCommand = SqlUpdateCommand1;
+
+            SqlInsertCommand1.Parameters.Add("p_id_articulo", MySqlDbType.VarChar, 50, "IdArticuloSTK");
+            SqlInsertCommand1.Parameters.Add("p_id_local", MySqlDbType.Int32, 11, "IdLocalSTK");
+            SqlInsertCommand1.Parameters.Add("p_cantidad", MySqlDbType.Int32, 11, "CantidadSTK");
+
             SqlUpdateCommand1.Parameters.Add("p_id_articulo", MySqlDbType.VarChar, 50, "IdArticuloSTK");
             SqlUpdateCommand1.Parameters.Add("p_id_local", MySqlDbType.Int32, 11, "IdLocalSTK");
             SqlUpdateCommand1.Parameters.Add("p_cantidad", MySqlDbType.Int32, 11, "CantidadSTK");
+
             SqlUpdateCommand1.CommandType = CommandType.StoredProcedure;
+            SqlInsertCommand1.CommandType = CommandType.StoredProcedure;
             return SqlDataAdapter1;
         }
 

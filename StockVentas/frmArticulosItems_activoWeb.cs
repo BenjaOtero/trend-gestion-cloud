@@ -17,18 +17,7 @@ namespace StockVentas
         int clave;
         bool editando;
         bool insertando;
-        string descripcion = string.Empty;
-        private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar de frmProgress
-        
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams myCp = base.CreateParams;
-                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
-                return myCp;
-            }
-        } 
+        int position;
 
         public enum FormState
         {
@@ -60,6 +49,7 @@ namespace StockVentas
             Binding bind = new Binding("Checked", bindingSource1, "ActivoWebITE", false, DataSourceUpdateMode.OnPropertyChanged);
             bind.Format += new ConvertEventHandler(binding_Format);
             bind.Parse += new ConvertEventHandler(binding_Parse);
+            chkActivoWebITE.DataBindings.Add(bind);
             gvwDatos.DataSource = bindingSource1;
             gvwDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gvwDatos.Columns["IdItemITE"].HeaderText = "Nº Item";
@@ -86,7 +76,9 @@ namespace StockVentas
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             bindingSource1.AddNew();
+            position = bindingSource1.Position;
             // tildo el checkbox para disparar el evento parse del objeto bind
+            chkActivoWebITE.CheckState = CheckState.Checked;
             Random rand = new Random();
             clave = rand.Next(1, 999);
             bool existe = true;
@@ -103,6 +95,7 @@ namespace StockVentas
                     clave = rand.Next(1, 999);
                 }
             }
+            bindingSource1.Position = bindingSource1.Count - 1;
             txtIdItemITE.ReadOnly = false;
             txtIdItemITE.Text = clave.ToString();            
             txtIdItemITE.ReadOnly = true;
@@ -113,6 +106,7 @@ namespace StockVentas
         private void btnEditar_Click(object sender, EventArgs e)
         {
             if (bindingSource1.Count == 0) return;
+            position = bindingSource1.Position;
             SetStateForm(FormState.edicion);
         }
 
@@ -121,17 +115,48 @@ namespace StockVentas
             if (bindingSource1.Count == 0) return;
             if (MessageBox.Show("¿Desea borrar este registro?", "Trend Gestión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                bindingSource1.RemoveCurrent();
-                Grabar();
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    bindingSource1.RemoveCurrent();
+                    bindingSource1.EndEdit();
+                    if (tblArticulosItems.GetChanges() != null)
+                    {
+                        BL.ArticulosItemsBLL.GrabarDB(tblArticulosItems);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                Cursor.Current = Cursors.Arrow;
             }
             SetStateForm(FormState.inicial); 
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            descripcion = txtDescripcionITE.Text;            
-            Grabar();
-            SetStateForm(FormState.inicial);
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                bindingSource1.EndEdit();
+                bindingSource1.Position = 0;
+                bindingSource1.Sort = "DescripcionITE";
+                if (tblArticulosItems.GetChanges() != null)
+                {
+                    BL.ArticulosItemsBLL.GrabarDB(tblArticulosItems);
+                }
+                SetStateForm(FormState.inicial);
+                bindingSource1.RemoveFilter(); 
+            }
+            catch (ConstraintException)
+            {
+                string mensaje = "No se puede agregar el ítem " + txtDescripcionITE.Text.ToUpper() + " porque ya existe.";
+                MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDescripcionITE.Focus();
+            }
+            Cursor.Current = Cursors.Arrow;
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -148,30 +173,6 @@ namespace StockVentas
 
         private void frmArticulosItems_FormClosing(object sender, FormClosingEventArgs e)
         {
-          /*  bindingSource1.EndEdit();
-            if (tblArticulosItems.GetChanges() != null)
-            {
-                DialogResult respuesta =
-                        MessageBox.Show("¿Desea guardar los cambios?", "Trend", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                switch (respuesta)
-                {
-                    case DialogResult.Yes:
-                        Grabar();
-                        bindingSource1.RemoveFilter();
-                        break;
-                    case DialogResult.No:
-                        tblArticulosItems.RejectChanges();
-                        bindingSource1.RemoveFilter();
-                        break;
-                    case DialogResult.Cancel:
-                        e.Cancel = true;
-                        break;
-                }
-            }*/
-        }
-
-        private void Grabar()
-        {
             Cursor.Current = Cursors.WaitCursor;
             try
             {
@@ -181,8 +182,24 @@ namespace StockVentas
                     BL.ArticulosItemsBLL.GrabarDB(tblArticulosItems);
                 }
                 bindingSource1.RemoveFilter();
-                int itemFound = bindingSource1.Find("DescripcionITE", descripcion);
-                bindingSource1.Position = itemFound;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Cursor.Current = Cursors.Arrow;
+        }
+
+        private void Grabar()
+        {
+            try
+            {
+                bindingSource1.EndEdit();
+                if (tblArticulosItems.GetChanges() != null)
+                {
+                    BL.ColoresBLL.GrabarDB(tblArticulosItems);
+                }
+                bindingSource1.Position = position;
             }
             catch (ConstraintException)
             {
@@ -205,7 +222,6 @@ namespace StockVentas
             {
                 MessageBox.Show(ex.Message);
             }
-            Cursor.Current = Cursors.Arrow;
         }
 
         private void binding_Format(object sender, ConvertEventArgs e)
@@ -320,7 +336,6 @@ namespace StockVentas
                 editando = true;
             }
         }
-
 
     }
 }

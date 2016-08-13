@@ -57,6 +57,8 @@
             this.txtHasta = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtDescripcionWeb = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.chkActivoWeb = new System.Windows.Forms.CheckBox();
             this.cmbGenero = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbAlicuota = new System.Windows.Forms.ComboBox();
@@ -122,7 +124,7 @@
             this.groupBox2.Controls.Add(this.btnGrabar);
             this.groupBox2.Location = new System.Drawing.Point(439, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(160, 522);
+            this.groupBox2.Size = new System.Drawing.Size(160, 547);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             // 
@@ -288,7 +290,7 @@
             this.groupBox1.Controls.Add(this.rd2);
             this.groupBox1.Controls.Add(this.rd1);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBox1.Location = new System.Drawing.Point(16, 459);
+            this.groupBox1.Location = new System.Drawing.Point(16, 484);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(413, 66);
             this.groupBox1.TabIndex = 13;
@@ -352,6 +354,26 @@
             this.txtDescripcionWeb.Size = new System.Drawing.Size(301, 20);
             this.txtDescripcionWeb.TabIndex = 3;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label11.Location = new System.Drawing.Point(13, 448);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(94, 15);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Activo en la web";
+            // 
+            // chkActivoWeb
+            // 
+            this.chkActivoWeb.AutoSize = true;
+            this.chkActivoWeb.Location = new System.Drawing.Point(126, 444);
+            this.chkActivoWeb.Name = "chkActivoWeb";
+            this.chkActivoWeb.Size = new System.Drawing.Size(15, 14);
+            this.chkActivoWeb.TabIndex = 12;
+            this.chkActivoWeb.UseVisualStyleBackColor = true;
+            // 
             // cmbGenero
             // 
             this.cmbGenero.FormattingEnabled = true;
@@ -394,7 +416,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 537);
+            this.ClientSize = new System.Drawing.Size(606, 562);
+            this.Controls.Add(this.chkActivoWeb);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtDescripcionWeb);
             this.Controls.Add(this.txtHasta);
@@ -410,6 +433,7 @@
             this.Controls.Add(this.txtPublico);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label12);
@@ -465,6 +489,8 @@
         private System.Windows.Forms.TextBox txtHasta;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtDescripcionWeb;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox chkActivoWeb;
         private System.Windows.Forms.ComboBox cmbGenero;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbAlicuota;

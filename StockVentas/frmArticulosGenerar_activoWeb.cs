@@ -108,6 +108,7 @@ namespace StockVentas
             cmbAlicuota.AutoCompleteCustomSource = alicuotasColection;
             cmbAlicuota.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbAlicuota.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            chkActivoWeb.Checked = true;
             txtCosto.Text = "0";
             txtPublico.Text = "0";
             txtMayor.Text = "0";
@@ -149,7 +150,16 @@ namespace StockVentas
             string codigoColor;
             string codigoTalle;
             string nombreColor;
+            int activoWeb;
             int incrementar;
+            if (chkActivoWeb.Checked == true)
+            {
+                activoWeb = 1;
+            }
+            else
+            {
+                activoWeb = 0;
+            }
             if (validarControles())
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -207,6 +217,7 @@ namespace StockVentas
                                 entidad.Imagen = "";
                                 entidad.ImagenBack = "";
                                 entidad.ImagenColor = "";
+                                entidad.ActivoWeb = activoWeb;
                                 entidad.NuevoWeb = 1;
                                 entidad.Proveedor = cmbProveedor.Text;
                                 BL.ArticulosBLL.InsertarDT(tblArticulos, entidad);
@@ -245,6 +256,7 @@ namespace StockVentas
                             entidad.Imagen = "";
                             entidad.ImagenBack = "";
                             entidad.ImagenColor = "";
+                            entidad.ActivoWeb = activoWeb;
                             entidad.NuevoWeb = 1;
                             entidad.Proveedor = cmbProveedor.Text;
                             BL.ArticulosBLL.InsertarDT(tblArticulos, entidad);
@@ -291,6 +303,7 @@ namespace StockVentas
                             entidad.Imagen = "";
                             entidad.ImagenBack = "";
                             entidad.ImagenColor = "";
+                            entidad.ActivoWeb = activoWeb;
                             entidad.NuevoWeb = 1;
                             entidad.Proveedor = cmbProveedor.Text;
                             BL.ArticulosBLL.InsertarDT(tblArticulos, entidad);
@@ -320,6 +333,7 @@ namespace StockVentas
                         entidad.Imagen = "";
                         entidad.ImagenBack = "";
                         entidad.ImagenColor = "";
+                        entidad.ActivoWeb = activoWeb;
                         entidad.NuevoWeb = 1;
                         entidad.Proveedor = cmbProveedor.Text;
                         BL.ArticulosBLL.InsertarDT(tblArticulos, entidad);

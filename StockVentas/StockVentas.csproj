@@ -79,6 +79,24 @@
     <Compile Include="frmArticulosBorradoMasivo.Designer.cs">
       <DependentUpon>frmArticulosBorradoMasivo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmArticulosDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmArticulosDetalle.Designer.cs">
+      <DependentUpon>frmArticulosDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmArticulosGenerar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmArticulosGenerar.Designer.cs">
+      <DependentUpon>frmArticulosGenerar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmArticulosItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmArticulosItems.Designer.cs">
+      <DependentUpon>frmArticulosItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEmpleados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,35 +328,17 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Dynamic.cs" />
-    <Compile Include="frmArticulosDetalle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmArticulosDetalle.Designer.cs">
-      <DependentUpon>frmArticulosDetalle.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmArticulos.Designer.cs">
       <DependentUpon>frmArticulos.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmArticulosGenerar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmArticulosGenerar.Designer.cs">
-      <DependentUpon>frmArticulosGenerar.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmArticulosGenerarInter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmArticulosGenerarInter.Designer.cs">
       <DependentUpon>frmArticulosGenerarInter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmArticulosItems.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmArticulosItems.Designer.cs">
-      <DependentUpon>frmArticulosItems.cs</DependentUpon>
     </Compile>
     <Compile Include="frmClientes.cs">
       <SubType>Form</SubType>
@@ -481,6 +481,18 @@
     <EmbeddedResource Include="bin\Debug\Informes\StockCompPesos.rdlc" />
     <EmbeddedResource Include="bin\Debug\Informes\StockMov.rdlc" />
     <EmbeddedResource Include="bin\Debug\Informes\VentasDetalle.rdlc" />
+    <EmbeddedResource Include="frmArticulosDetalle.resx">
+      <DependentUpon>frmArticulosDetalle.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmArticulosGenerar.resx">
+      <DependentUpon>frmArticulosGenerar.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmArticulosItems.resx">
+      <DependentUpon>frmArticulosItems.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEmpleados.resx">
       <DependentUpon>frmEmpleados.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -621,24 +633,12 @@
       <DependentUpon>frmFondoCajaCons.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmArticulosDetalle.resx">
-      <DependentUpon>frmArticulosDetalle.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmArticulos.resx">
       <DependentUpon>frmArticulos.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmArticulosGenerar.resx">
-      <DependentUpon>frmArticulosGenerar.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmArticulosGenerarInter.resx">
       <DependentUpon>frmArticulosGenerarInter.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmArticulosItems.resx">
-      <DependentUpon>frmArticulosItems.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmClientes.resx">

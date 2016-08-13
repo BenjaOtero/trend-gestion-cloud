@@ -15,6 +15,17 @@ namespace StockVentas
         string oldId = string.Empty;
         bool editar = false;
         string idAlicuota;
+        private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar de frmProgress
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        } 
 
         public enum FormState
         {
@@ -31,7 +42,7 @@ namespace StockVentas
             BL.Utilitarios.AddEventosABM(grpCampos, ref btnGrabar, ref tblAlicuotasIva);
             bindingSource1.BindingComplete += new BindingCompleteEventHandler(bindingSource1_BindingComplete);
             txtIdAlicuotaALI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(BL.Utilitarios.SoloNumeros);
-            txtPorcentajeALI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(BL.Utilitarios.SoloNumerosConComa);            
+         //   txtPorcentajeALI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(BL.Utilitarios.SoloNumerosConComa);            
         }
 
         private void frmAlicuotasIva_Load(object sender, EventArgs e)
@@ -201,13 +212,13 @@ namespace StockVentas
                 {
                     string mensaje = "No se puede agregar el ID '" + txtIdAlicuotaALI.Text.ToUpper() + "' porque ya existe";
                     MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtIdAlicuotaALI.Focus();
+                    btnCancelar.PerformClick();
                 }
                 else
                 {
                     string mensaje = "No se puede agregar el porcentaje '" + txtPorcentajeALI.Text.ToUpper() + "' porque ya existe";
                     MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtPorcentajeALI.Focus();
+                    btnCancelar.PerformClick();
                 }
 
             }
@@ -334,6 +345,38 @@ namespace StockVentas
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
             }
+        }
+
+        private void txtPorcentajeALI_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 8)
+            {
+                e.Handled = false;
+                return;
+            }            
+            bool IsDec = false;
+            int nroDec = 0;
+
+            for (int i = 0; i < txtPorcentajeALI.Text.Length; i++)
+            {
+                if (txtPorcentajeALI.Text[i] == '.')
+                    IsDec = true;
+
+                if (IsDec && nroDec++ >= 2)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+
+            }
+
+            if (e.KeyChar >= 48 && e.KeyChar <= 57)
+                e.Handled = false;
+            else if (e.KeyChar == 46)
+                e.Handled = (IsDec) ? true : false;
+            else
+                e.Handled = true;
         }
 
     }

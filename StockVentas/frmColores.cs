@@ -14,6 +14,8 @@ namespace StockVentas
     public partial class frmColores : Form
     {
         private DataTable tblColores;
+        bool editando;
+        bool insertando;
 
         public enum FormState
         {
@@ -91,31 +93,23 @@ namespace StockVentas
             if (MessageBox.Show("¿Desea borrar este registro?", "Buscar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingSource1.RemoveCurrent();
-                bindingSource1.EndEdit();
+                Grabar();
             }
             SetStateForm(FormState.inicial); 
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                bindingSource1.EndEdit();
-                bindingSource1.Position = 0;
-                bindingSource1.Sort = "DescripcionCOL";
-                SetStateForm(FormState.inicial);
-                bindingSource1.RemoveFilter();
-            }
-            catch (ConstraintException)
-            {
-                string mensaje = "No se puede agregar el color '" + txtDescripcionCOL.Text.ToUpper() + "' porque ya existe";
-                MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtDescripcionCOL.Focus();
-            }
+            Grabar();
+          //  bindingSource1.Position = 0;
+            bindingSource1.Sort = "DescripcionCOL";
+            SetStateForm(FormState.inicial);
+            bindingSource1.RemoveFilter();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            if (insertando) bindingSource1.RemoveCurrent();
             bindingSource1.CancelEdit();
             SetStateForm(FormState.inicial);
         }
@@ -140,10 +134,56 @@ namespace StockVentas
             bindingSource1.EndEdit();
             if (tblColores.GetChanges() != null)
             {
-                frmProgress progreso = new frmProgress(tblColores, "frmColores", "grabar");
-                progreso.ShowDialog();
+                DialogResult respuesta =
+                        MessageBox.Show("¿Desea guardar los cambios?", "Trend", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                switch (respuesta)
+                {
+                    case DialogResult.Yes:
+                        Grabar();
+                        bindingSource1.RemoveFilter();
+                        break;
+                    case DialogResult.No:
+                        tblColores.RejectChanges();
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
             }
             bindingSource1.RemoveFilter();
+        }
+
+        private void Grabar()
+        {
+            try
+            {
+                bindingSource1.EndEdit();
+                if (tblColores.GetChanges() != null)
+                {
+                    BL.ColoresBLL.GrabarDB(tblColores);
+                }
+            }
+            catch (ConstraintException)
+            {
+                string mensaje;
+                if (insertando)
+                {
+                    mensaje = "No se puede agregar el color '" + txtDescripcionCOL.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.RemoveCurrent();                
+                }
+
+                if (editando)
+                {
+                    mensaje = "No se puede modificar el color  a '" + txtDescripcionCOL.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.CancelEdit();
+                }                    
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ValidarCampos(object sender, CancelEventArgs e)
@@ -205,6 +245,8 @@ namespace StockVentas
                 btnColor.Enabled = false;
                 btnSalir.Enabled = true;
                 DelEventosValidacion();
+                insertando = false;
+                editando = false;
                 txtParametros.Focus();
             }
             if (state == FormState.insercion)
@@ -223,6 +265,7 @@ namespace StockVentas
                 btnColor.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                insertando = true;
             }
             if (state == FormState.edicion)
             {
@@ -239,6 +282,7 @@ namespace StockVentas
                 btnColor.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                editando = true;
             }
         }
 

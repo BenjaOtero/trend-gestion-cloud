@@ -62,8 +62,7 @@ namespace StockVentas
 
             viewDestino = new DataView(tblArticulos);
             viewDestino.RowFilter = "IdArticuloART LIKE '000000000'";
-            bindingSource1.DataSource = viewDestino;
-            dgvDatosDestino.DataSource = bindingSource1; 
+            dgvDatosDestino.DataSource = viewDestino; 
             dgvDatosDestino.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvDatosDestino.EditMode = DataGridViewEditMode.EditOnKeystroke;
             dgvDatosDestino.Columns["IdItemART"].Visible = false;
@@ -176,6 +175,7 @@ namespace StockVentas
             viewLocales.RowFilter = "IdLocalLOC <> 1 AND IdLocalLOC <> 2";
             string articuloDestino = dgvDatosDestino.CurrentRow.Cells["IdArticuloART"].Value.ToString();
             int cantidadArticulos = 0;
+            int cantidadDestino = 0;
             ArrayList articulosBorrar = new ArrayList();
             foreach (DataGridViewRow rowOrigen in dgvDatosOrigen.Rows)
             {
@@ -187,11 +187,27 @@ namespace StockVentas
                         foreach (DataRowView rowLocales in viewLocales)
                         {
                             string local = rowLocales["IdLocalLOC"].ToString();
-                            viewStock.RowFilter = "IdLocalSTK = '" + local + "' AND IdArticuloSTK = '" + articuloOrigen + "'";
-                            int cantidadOrigen = Convert.ToInt32(viewStock[0]["CantidadSTK"].ToString());
-                            viewStock.RowFilter = "IdLocalSTK = '" + local + "' AND IdArticuloSTK = '" + articuloDestino + "'";
-                            int cantidadDestino = Convert.ToInt32(viewStock[0]["CantidadSTK"].ToString());
-                            viewStock[0]["CantidadSTK"] = cantidadOrigen + cantidadDestino;
+                            if (local != "1" && local != "2")
+                            {
+                                viewStock.RowFilter = "IdLocalSTK = '" + local + "' AND IdArticuloSTK = '" + articuloOrigen + "'";
+                                int cantidadOrigen = Convert.ToInt32(viewStock[0]["CantidadSTK"].ToString());
+                                viewStock.RowFilter = "IdLocalSTK = '" + local + "' AND IdArticuloSTK = '" + articuloDestino + "'";
+                                if (viewStock.Count > 0)
+                                {
+                                    cantidadDestino = Convert.ToInt32(viewStock[0]["CantidadSTK"].ToString());
+                                    viewStock[0]["CantidadSTK"] = cantidadOrigen + cantidadDestino;
+                                }                                    
+                                else // no existe el registro en la tabla stock. Lo agrego
+                                {
+                                    DataRowView rowView = viewStock.AddNew();
+                                    rowView["IdArticuloSTK"] = articuloDestino;
+                                    rowView["IdLocalSTK"] = local;
+                                    rowView["CantidadSTK"] = cantidadOrigen;
+                                    rowView.EndEdit();
+                                }
+
+                            }
+
                         }
                         articulosBorrar.Add(articuloOrigen); // agrego los articulos agrupados para luego borrarlos
                     }
@@ -228,14 +244,8 @@ namespace StockVentas
         {
             Cursor.Current = Cursors.WaitCursor;
             frmArticulosGenerar generar = new frmArticulosGenerar();
-            generar.FormClosed += frmArticulosGenerarInter_FormClosed;
             generar.ShowDialog();
             Cursor.Current = Cursors.Arrow;
-        }
-
-        void frmArticulosGenerarInter_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            bindingSource1.Sort = "IdArticuloART";
         }
 
         private void frmProgress_FormClosed(object sender, FormClosedEventArgs e)

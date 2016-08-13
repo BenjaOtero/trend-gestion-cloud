@@ -39,7 +39,6 @@
             this.btnAgrupar = new System.Windows.Forms.Button();
             this.btnActualizarPrecios = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
-            this.btnEditarNuevos = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -96,7 +95,6 @@
             this.groupBox2.Controls.Add(this.btnAgrupar);
             this.groupBox2.Controls.Add(this.btnActualizarPrecios);
             this.groupBox2.Controls.Add(this.btnEditar);
-            this.groupBox2.Controls.Add(this.btnEditarNuevos);
             this.groupBox2.Controls.Add(this.btnBuscar);
             this.groupBox2.Location = new System.Drawing.Point(905, 230);
             this.groupBox2.Name = "groupBox2";
@@ -117,7 +115,7 @@
             // btnAceptar
             // 
             this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptar.Location = new System.Drawing.Point(19, 244);
+            this.btnAceptar.Location = new System.Drawing.Point(19, 212);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(135, 26);
             this.btnAceptar.TabIndex = 7;
@@ -127,7 +125,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(19, 276);
+            this.btnSalir.Location = new System.Drawing.Point(19, 244);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(135, 26);
             this.btnSalir.TabIndex = 8;
@@ -147,7 +145,7 @@
             // 
             // btnAgrupar
             // 
-            this.btnAgrupar.Location = new System.Drawing.Point(19, 212);
+            this.btnAgrupar.Location = new System.Drawing.Point(19, 180);
             this.btnAgrupar.Name = "btnAgrupar";
             this.btnAgrupar.Size = new System.Drawing.Size(135, 26);
             this.btnAgrupar.TabIndex = 6;
@@ -157,7 +155,7 @@
             // 
             // btnActualizarPrecios
             // 
-            this.btnActualizarPrecios.Location = new System.Drawing.Point(19, 180);
+            this.btnActualizarPrecios.Location = new System.Drawing.Point(19, 148);
             this.btnActualizarPrecios.Name = "btnActualizarPrecios";
             this.btnActualizarPrecios.Size = new System.Drawing.Size(135, 26);
             this.btnActualizarPrecios.TabIndex = 5;
@@ -174,16 +172,6 @@
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // btnEditarNuevos
-            // 
-            this.btnEditarNuevos.Location = new System.Drawing.Point(19, 148);
-            this.btnEditarNuevos.Name = "btnEditarNuevos";
-            this.btnEditarNuevos.Size = new System.Drawing.Size(135, 26);
-            this.btnEditarNuevos.TabIndex = 4;
-            this.btnEditarNuevos.Text = "Editar nuevos";
-            this.btnEditarNuevos.UseVisualStyleBackColor = true;
-            this.btnEditarNuevos.Click += new System.EventHandler(this.btnEditarNuevos_Click);
             // 
             // btnBuscar
             // 
@@ -422,7 +410,6 @@
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnEditar;
-        private System.Windows.Forms.Button btnEditarNuevos;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.GroupBox groupBox3;
