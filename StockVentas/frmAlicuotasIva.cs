@@ -204,6 +204,8 @@ namespace StockVentas
                 bindingSource1.RemoveFilter();
                 bindingSource1.Sort = "IdAlicuotaALI";
                 editar = false;
+                esDecimal = false;
+                decimales = 0;
                 SetStateForm(FormState.inicial);
             }
             catch (ConstraintException ex)
