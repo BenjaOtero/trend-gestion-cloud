@@ -15,6 +15,8 @@ namespace StockVentas
         string oldId = string.Empty;
         bool editar = false;
         string idAlicuota;
+        bool esDecimal = false;
+        int decimales = 0;
         private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar de frmProgress
 
         protected override CreateParams CreateParams
@@ -41,8 +43,7 @@ namespace StockVentas
             tblAlicuotasIva = BL.GetDataBLL.AlicuotasIva();
             BL.Utilitarios.AddEventosABM(grpCampos, ref btnGrabar, ref tblAlicuotasIva);
             bindingSource1.BindingComplete += new BindingCompleteEventHandler(bindingSource1_BindingComplete);
-            txtIdAlicuotaALI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(BL.Utilitarios.SoloNumeros);
-         //   txtPorcentajeALI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(BL.Utilitarios.SoloNumerosConComa);            
+            txtIdAlicuotaALI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(BL.Utilitarios.SoloNumeros);          
         }
 
         private void frmAlicuotasIva_Load(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace StockVentas
             bindingSource1.DataSource = tblAlicuotasIva;
             bindingNavigator1.BindingSource = bindingSource1;
             BL.Utilitarios.DataBindingsAdd(bindingSource1, grpCampos);
-            gvwDatos.DataSource = bindingSource1;
+            gvwDatos.DataSource = tblAlicuotasIva;
             gvwDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gvwDatos.Columns["IdAlicuotaALI"].HeaderText = "ID";
             gvwDatos.Columns["PorcentajeALI"].HeaderText = "Porcentaje";
@@ -264,6 +265,31 @@ namespace StockVentas
                     this.errorProvider1.SetError(txtPorcentajeALI, "Debe escribir un porcentaje.");
                     e.Cancel = true;
                 }
+                else
+                {
+                    Char delimiter = ',';
+                    String[] substrings = txtPorcentajeALI.Text.Split(delimiter);                    
+                    if (substrings.Count() == 2)
+                    {
+                        if(string.IsNullOrEmpty(substrings[0].ToString()))
+                        {
+                            this.errorProvider1.SetError(txtPorcentajeALI, "El porcentaje debe ser un número con dos decimales. Ejemplo: 21.00");
+                            e.Cancel = true;
+                        }
+                        int largo = substrings[1].Length; // largo es la parte decimal
+                        if (largo < 2)
+                        {
+                            this.errorProvider1.SetError(txtPorcentajeALI, "El porcentaje debe ser un número con dos decimales. Ejemplo: 21.00");
+                            e.Cancel = true;
+                        }
+                    }
+                    else if (substrings.Count() == 1)
+                    {
+                        this.errorProvider1.SetError(txtPorcentajeALI, "El porcentaje debe ser un número con dos decimales. Ejemplo: 21.00");
+                        e.Cancel = true;
+                    }
+
+                }
             }
         }
 
@@ -348,35 +374,61 @@ namespace StockVentas
         }
 
         private void txtPorcentajeALI_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 8)
+        {                        
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && txtPorcentajeALI.Text.Length == 0) // no permite el punto si antes no se agregaron números
+            {
+                e.Handled = true;
+                return;
+            }
+            if (e.KeyChar == ',' && txtPorcentajeALI.Text.Length == 0) // no permite el punto si antes no se agregaron números
+            {
+                e.Handled = true;
+                return;
+            }
+            if (e.KeyChar == ',')
             {
                 e.Handled = false;
-                return;
-            }            
-            bool IsDec = false;
-            int nroDec = 0;
-
-            for (int i = 0; i < txtPorcentajeALI.Text.Length; i++)
+            }
+            if (e.KeyChar == '.')
             {
-                if (txtPorcentajeALI.Text[i] == '.')
-                    IsDec = true;
-
-                if (IsDec && nroDec++ >= 2)
+                if (txtPorcentajeALI.Text.Contains(",")) // no permite la coma mas de una vez
                 {
                     e.Handled = true;
                     return;
                 }
-
-
+                else
+                {
+                    e.Handled = true;
+                    SendKeys.Send(","); // cambia el punto por coma
+                    esDecimal = true;
+                }
             }
-
-            if (e.KeyChar >= 48 && e.KeyChar <= 57)
+            if (e.KeyChar == ',')
+            {
+                if (txtPorcentajeALI.Text.Contains(",")) // no permite la coma mas de una vez
+                {
+                    e.Handled = true;
+                    return;
+                }
+                else
+                {
+                    e.Handled = false;
+                    esDecimal = true;
+                }
+            }
+            if (e.KeyChar == '\b')
+            {
                 e.Handled = false;
-            else if (e.KeyChar == 46)
-                e.Handled = (IsDec) ? true : false;
-            else
-                e.Handled = true;
+            }
+            if (char.IsDigit(e.KeyChar) && esDecimal)
+            {
+                decimales++;
+                if (decimales > 2) e.Handled = true;               
+            }
         }
 
     }
