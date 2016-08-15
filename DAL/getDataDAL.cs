@@ -68,6 +68,11 @@ namespace DAL
         {
             DataTable tblClientes = datos.Tables[2];
             tblClientes.TableName = "Clientes";
+            if (!tblClientes.Constraints.Contains("idConstraint"))
+            {
+                UniqueConstraint uniqueConstraint = new UniqueConstraint("idConstraint", tblClientes.Columns["CorreoCLI"]);
+                tblClientes.Constraints.Add(uniqueConstraint);
+            }
             return tblClientes;
         }
 

@@ -16,6 +16,18 @@ namespace StockVentas
         private DataTable tblColores;
         bool editando;
         bool insertando;
+        string buscado = string.Empty;
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        } 
 
         public enum FormState
         {
@@ -90,21 +102,19 @@ namespace StockVentas
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             if (bindingSource1.Count == 0) return;
-            if (MessageBox.Show("¿Desea borrar este registro?", "Buscar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("¿Desea borrar este registro?", "Trend Gestión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingSource1.RemoveCurrent();
                 Grabar();
             }
-            SetStateForm(FormState.inicial); 
+            SetStateForm(FormState.inicial);
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
+            buscado = txtDescripcionCOL.Text;
             Grabar();
-          //  bindingSource1.Position = 0;
-            bindingSource1.Sort = "DescripcionCOL";
             SetStateForm(FormState.inicial);
-            bindingSource1.RemoveFilter();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -131,7 +141,7 @@ namespace StockVentas
 
         private void frmBindingSource_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bindingSource1.EndEdit();
+          /*  bindingSource1.EndEdit();
             if (tblColores.GetChanges() != null)
             {
                 DialogResult respuesta =
@@ -149,12 +159,13 @@ namespace StockVentas
                         e.Cancel = true;
                         break;
                 }
-            }
+            }*/
             bindingSource1.RemoveFilter();
         }
 
         private void Grabar()
         {
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 bindingSource1.EndEdit();
@@ -162,6 +173,9 @@ namespace StockVentas
                 {
                     BL.ColoresBLL.GrabarDB(tblColores);
                 }
+                bindingSource1.RemoveFilter();
+                int itemFound = bindingSource1.Find("DescripcionCOL", buscado);
+                bindingSource1.Position = itemFound;
             }
             catch (ConstraintException)
             {
@@ -170,7 +184,7 @@ namespace StockVentas
                 {
                     mensaje = "No se puede agregar el color '" + txtDescripcionCOL.Text.ToUpper() + "' porque ya existe";
                     MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    bindingSource1.RemoveCurrent();                
+                    bindingSource1.RemoveCurrent();
                 }
 
                 if (editando)
@@ -178,13 +192,14 @@ namespace StockVentas
                     mensaje = "No se puede modificar el color  a '" + txtDescripcionCOL.Text.ToUpper() + "' porque ya existe";
                     MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     bindingSource1.CancelEdit();
-                }                    
+                }  
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
+            Cursor.Current = Cursors.Arrow;
+        } 
 
         private void ValidarCampos(object sender, CancelEventArgs e)
         {

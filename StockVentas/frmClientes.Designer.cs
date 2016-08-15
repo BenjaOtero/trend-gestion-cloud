@@ -56,8 +56,6 @@
             this.txtMovilCLI = new System.Windows.Forms.TextBox();
             this.txtTelefonoCLI = new System.Windows.Forms.TextBox();
             this.txtIdClienteCLI = new System.Windows.Forms.TextBox();
-            this.txtFechaNacCLI = new System.Windows.Forms.MaskedTextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.txtRazonSocialCLI = new System.Windows.Forms.TextBox();
             this.cmbCondicion = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -86,6 +84,8 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtFechaNacCLI = new System.Windows.Forms.MaskedTextBox();
             this.grpCampos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvwDatos)).BeginInit();
             this.grpBotones.SuspendLayout();
@@ -339,42 +339,20 @@
             this.txtIdClienteCLI.Size = new System.Drawing.Size(295, 20);
             this.txtIdClienteCLI.TabIndex = 0;
             // 
-            // txtFechaNacCLI
-            // 
-            this.txtFechaNacCLI.Location = new System.Drawing.Point(127, 552);
-            this.txtFechaNacCLI.Mask = "00/00/0000";
-            this.txtFechaNacCLI.Name = "txtFechaNacCLI";
-            this.txtFechaNacCLI.Size = new System.Drawing.Size(270, 20);
-            this.txtFechaNacCLI.TabIndex = 7;
-            this.txtFechaNacCLI.TabStop = false;
-            this.txtFechaNacCLI.ValidatingType = typeof(System.DateTime);
-            this.txtFechaNacCLI.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label11.Location = new System.Drawing.Point(22, 552);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(56, 15);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "Fecha N.";
-            this.label11.Visible = false;
-            // 
             // txtRazonSocialCLI
             // 
             this.txtRazonSocialCLI.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtRazonSocialCLI.Location = new System.Drawing.Point(407, 552);
+            this.txtRazonSocialCLI.Location = new System.Drawing.Point(427, 576);
             this.txtRazonSocialCLI.Name = "txtRazonSocialCLI";
             this.txtRazonSocialCLI.Size = new System.Drawing.Size(200, 20);
             this.txtRazonSocialCLI.TabIndex = 1;
+            this.txtRazonSocialCLI.TabStop = false;
             this.txtRazonSocialCLI.Visible = false;
             // 
             // cmbCondicion
             // 
             this.cmbCondicion.FormattingEnabled = true;
-            this.cmbCondicion.Location = new System.Drawing.Point(270, 527);
+            this.cmbCondicion.Location = new System.Drawing.Point(308, 549);
             this.cmbCondicion.Name = "cmbCondicion";
             this.cmbCondicion.Size = new System.Drawing.Size(159, 21);
             this.cmbCondicion.TabIndex = 28;
@@ -386,7 +364,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label13.Location = new System.Drawing.Point(184, 528);
+            this.label13.Location = new System.Drawing.Point(222, 550);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(80, 15);
             this.label13.TabIndex = 27;
@@ -398,7 +376,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label7.Location = new System.Drawing.Point(15, 528);
+            this.label7.Location = new System.Drawing.Point(53, 550);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 15);
             this.label7.TabIndex = 18;
@@ -407,7 +385,7 @@
             // 
             // txtCUIT
             // 
-            this.txtCUIT.Location = new System.Drawing.Point(55, 526);
+            this.txtCUIT.Location = new System.Drawing.Point(93, 548);
             this.txtCUIT.Name = "txtCUIT";
             this.txtCUIT.Size = new System.Drawing.Size(121, 20);
             this.txtCUIT.TabIndex = 2;
@@ -578,7 +556,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(11, 532);
+            this.bindingNavigator1.Location = new System.Drawing.Point(12, 525);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -660,11 +638,34 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label11.Location = new System.Drawing.Point(42, 576);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(56, 15);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Fecha N.";
+            this.label11.Visible = false;
+            // 
+            // txtFechaNacCLI
+            // 
+            this.txtFechaNacCLI.Location = new System.Drawing.Point(147, 576);
+            this.txtFechaNacCLI.Mask = "00/00/0000";
+            this.txtFechaNacCLI.Name = "txtFechaNacCLI";
+            this.txtFechaNacCLI.Size = new System.Drawing.Size(270, 20);
+            this.txtFechaNacCLI.TabIndex = 7;
+            this.txtFechaNacCLI.TabStop = false;
+            this.txtFechaNacCLI.ValidatingType = typeof(System.DateTime);
+            this.txtFechaNacCLI.Visible = false;
+            // 
             // frmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 557);
+            this.ClientSize = new System.Drawing.Size(639, 561);
             this.ControlBox = false;
             this.Controls.Add(this.cmbCondicion);
             this.Controls.Add(this.label13);
@@ -729,9 +730,7 @@
         private System.Windows.Forms.TextBox txtCUIT;
         private System.Windows.Forms.TextBox txtMovilCLI;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtCorreoCLI;
-        private System.Windows.Forms.MaskedTextBox txtFechaNacCLI;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
@@ -755,5 +754,7 @@
         private System.Windows.Forms.TextBox txtLocalidadCLI;
         private System.Windows.Forms.TextBox txtDireccionCLI;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.MaskedTextBox txtFechaNacCLI;
+        private System.Windows.Forms.Label label11;
     }
 }

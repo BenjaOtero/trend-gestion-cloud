@@ -17,8 +17,7 @@ namespace StockVentas
         string idAlicuota;
         bool esDecimal = false;
         int decimales = 0;
-        private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar de frmProgress
-
+        private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar del formulario
         protected override CreateParams CreateParams
         {
             get
@@ -57,7 +56,7 @@ namespace StockVentas
             bindingSource1.DataSource = tblAlicuotasIva;
             bindingNavigator1.BindingSource = bindingSource1;
             BL.Utilitarios.DataBindingsAdd(bindingSource1, grpCampos);
-            gvwDatos.DataSource = tblAlicuotasIva;
+            gvwDatos.DataSource = bindingSource1;
             gvwDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gvwDatos.Columns["IdAlicuotaALI"].HeaderText = "ID";
             gvwDatos.Columns["PorcentajeALI"].HeaderText = "Porcentaje";
@@ -127,6 +126,8 @@ namespace StockVentas
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             bindingSource1.CancelEdit();
+            esDecimal = false;
+            decimales = 0;
             SetStateForm(FormState.inicial);
         }
 
@@ -376,7 +377,19 @@ namespace StockVentas
         }
 
         private void txtPorcentajeALI_KeyPress(object sender, KeyPressEventArgs e)
-        {                        
+        {
+            //resto los decimales usados al borrar con la tecla backspace o delete
+            if ((e.KeyChar == '\b' || e.KeyChar == (char)Keys.Delete) && esDecimal) 
+            {
+                int largo = txtPorcentajeALI.Text.Length;
+                int posicion = txtPorcentajeALI.SelectionStart;
+                if (posicion == largo || posicion ==  largo - 1)
+                {
+                    decimales--;
+                    e.Handled = false;
+                    return;
+                }
+            }
             if (!char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -391,13 +404,9 @@ namespace StockVentas
                 e.Handled = true;
                 return;
             }
-            if (e.KeyChar == ',')
-            {
-                e.Handled = false;
-            }
             if (e.KeyChar == '.')
             {
-                if (txtPorcentajeALI.Text.Contains(",")) // no permite la coma mas de una vez
+                if (txtPorcentajeALI.Text.Contains(",") || txtPorcentajeALI.Text.Contains(".")) // no permite la coma mas de una vez
                 {
                     e.Handled = true;
                     return;
@@ -411,7 +420,7 @@ namespace StockVentas
             }
             if (e.KeyChar == ',')
             {
-                if (txtPorcentajeALI.Text.Contains(",")) // no permite la coma mas de una vez
+                if (txtPorcentajeALI.Text.Contains(",") || txtPorcentajeALI.Text.Contains(".")) // no permite la coma mas de una vez
                 {
                     e.Handled = true;
                     return;
@@ -422,15 +431,22 @@ namespace StockVentas
                     esDecimal = true;
                 }
             }
-            if (e.KeyChar == '\b')
-            {
-                e.Handled = false;
-            }
             if (char.IsDigit(e.KeyChar) && esDecimal)
             {
                 decimales++;
-                if (decimales > 2) e.Handled = true;               
+                if (decimales > 2)
+                {
+                    // no permito que sigan incrementandose los decimales si despues de haber introducido los dos necesarios 
+                    // se vuelve a presionar un número
+                    decimales--; 
+                    e.Handled = true;
+                }                                  
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Cursor.Position.ToString());            
         }
 
     }

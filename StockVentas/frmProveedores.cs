@@ -13,6 +13,20 @@ namespace StockVentas
     public partial class frmProveedores : Form
     {
         private DataTable tblProveedores;
+        bool editando;
+        bool insertando;
+        string buscado = string.Empty;
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        } 
 
         public enum FormState
         {
@@ -94,33 +108,24 @@ namespace StockVentas
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             if (bindingSource1.Count == 0) return;
-            if (MessageBox.Show("¿Desea borrar este registro?", "Buscar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("¿Desea borrar este registro?", "Trend Gestión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingSource1.RemoveCurrent();
-                bindingSource1.EndEdit();
+                Grabar();
             }
+            SetStateForm(FormState.inicial);
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                bindingSource1.EndEdit();
-                bindingSource1.Position = 0;
-                bindingSource1.Sort = "RazonSocialPRO";
-                SetStateForm(FormState.inicial);
-                bindingSource1.RemoveFilter();
-            }
-            catch (ConstraintException)
-            {
-                string mensaje = "No se puede agregar el proveedor '" + txtRazonSocialPRO.Text.ToUpper() + "' porque ya existe";
-                MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtRazonSocialPRO.Focus();
-            }
+            buscado = txtRazonSocialPRO.Text;
+            Grabar();
+            SetStateForm(FormState.inicial);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            if (insertando) bindingSource1.RemoveCurrent();
             bindingSource1.CancelEdit();
             SetStateForm(FormState.inicial);
         }
@@ -132,14 +137,46 @@ namespace StockVentas
 
         private void frmProveedores_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bindingSource1.EndEdit();
-            if (tblProveedores.GetChanges() != null)
-            {
-                frmProgress progreso = new frmProgress(tblProveedores, "frmProveedores", "grabar");
-                progreso.ShowDialog();
-            }
             bindingSource1.RemoveFilter();
         }
+
+        private void Grabar()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                bindingSource1.EndEdit();
+                if (tblProveedores.GetChanges() != null)
+                {
+                    BL.ProveedoresBLL.GrabarDB(tblProveedores);
+                }
+                bindingSource1.RemoveFilter();
+                int itemFound = bindingSource1.Find("RazonSocialPRO", buscado);
+                bindingSource1.Position = itemFound;
+            }
+            catch (ConstraintException)
+            {
+                string mensaje;
+                if (insertando)
+                {
+                    mensaje = "No se puede agregar el proveedor '" + txtRazonSocialPRO.Text.ToUpper() + "' porque ya existe.";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.RemoveCurrent();
+                }
+
+                if (editando)
+                {
+                    mensaje = "No se puede modificar el proveedor  a '" + txtRazonSocialPRO.Text.ToUpper() + "' porque ya existe.";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.CancelEdit();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Cursor.Current = Cursors.Arrow;
+        }  
 
         private void ValidarCampos(object sender, CancelEventArgs e)
         {
@@ -209,6 +246,8 @@ namespace StockVentas
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
                 DelEventosValidacion();
+                insertando = false;
+                editando = false;
                 txtParametros.Focus();
             }
 
@@ -234,6 +273,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                insertando = true;                
             }
 
             if (state == FormState.edicion)
@@ -253,6 +293,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                editando = true;
             }
         }
 

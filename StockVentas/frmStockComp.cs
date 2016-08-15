@@ -33,6 +33,7 @@ namespace StockVentas
         public string idArticulo;
         private bool grabacionCorrecta;
         bool formClosing = false;
+        private int? codigoError = null;
 
         public frmStockComp()
         {
@@ -463,26 +464,30 @@ namespace StockVentas
 
         private void grabar()
         {
-            if (tblStockMovDetalle.GetChanges() != null)
+            Cursor.Current = Cursors.WaitCursor;
+            rowView.EndEdit();
+            BL.TransaccionesBLL.GrabarStockMovimientos(dsStockMov, ref codigoError);
+            Cursor.Current = Cursors.WaitCursor;
+            switch (codigoError)
             {
-                // finalizo la edición para que se graben los datos
-                dgvDatos.CurrentRow.DataGridView.EndEdit();
-                //     bindingSource1.EndEdit();
-                rowView.EndEdit();
-                progreso = new frmProgress(dsStockMov, "frmStockMov", "grabar", instanciaStockComp);
-                progreso.FormClosed += frmProgress_FormClosed;
-                progreso.Show();                
+                case null:
+                    break;
+                case 0:
+                    MessageBox.Show("Procedure or function cannot be found in database. No se grabaron los datos. Consulte al administrador del sistema.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case 1042:
+                    MessageBox.Show("Unable to connect to any of the specified MySQL hosts. No se grabaron los datos. Consulte al administrador del sistema.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    MessageBox.Show("Se produjo un error inesperado. No se grabaron los datos. Consulte al administrador del sistema."
+                                    , "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
             }
+            ResetForm();
         }
 
-        private void frmProgress_FormClosed(object sender, FormClosedEventArgs e)
+        private void ResetForm()
         {
-            if (!grabacionCorrecta)
-            {
-                tblStockMovDetalle.AcceptChanges();
-                Close();
-                return;
-            }
             if (string.IsNullOrEmpty(PK) && !formClosing)
             {
                 Random rand = new Random();
@@ -509,9 +514,8 @@ namespace StockVentas
                 }
                 tblStockMovDetalle.AcceptChanges();
                 cmbDestino.Focus();
-                cmbDestino.DroppedDown = true;
             }
-            if (PK != null) Close();
+            if (!string.IsNullOrEmpty(PK)) Close();
         }
 
         private void frmArticulos_FormClosed(object sender, FormClosedEventArgs e)

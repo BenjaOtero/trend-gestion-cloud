@@ -172,29 +172,23 @@ namespace StockVentas
         public frmProgress(DataSet dt, string origen, string accion)
             : this()
         {
+            this.origen = origen;
+            this.accion = accion;
             if (dt.DataSetName == "dsVentas")
             {
                 this.dsVentas = dt;
-                this.origen = origen;
-                this.accion = accion;
             }
             else if (dt.DataSetName == "dsStockMov") // Constructor para frmStockEntradas
             {
                 this.dsStockMov = dt;
-                this.origen = origen;
-                this.accion = accion;
             }
             else if (dt.DataSetName == "dsTesoreriaMov")
             {
                 this.dsTesoreriaMov = dt;
-                this.origen = origen;
-                this.accion = accion;
             }
             else if (dt.DataSetName == "dsFondoCaja")
             {
                 this.dsFondoCaja = dt;
-                this.origen = origen;
-                this.accion = accion;
                 this.tabla = dt.Tables[0];
             }
         }
@@ -565,13 +559,13 @@ namespace StockVentas
                             BL.RazonSocialBLL.GrabarDB(tabla);
                             break;
                         case "frmStockMov":
-                            BL.TransaccionesBLL.GrabarStockMovimientos(dsStockMov, origen, ref codigoError);
+                            BL.TransaccionesBLL.GrabarStockMovimientos(dsStockMov);
                             break;
                         case "frmStockMov_borrar":
                             BL.StockMovBLL.BorrarByPK(PK);
                             break;
                         case "frmStockEntradas":
-                            BL.TransaccionesBLL.GrabarStockMovimientos(dsStockMov, origen, ref codigoError);
+                            BL.TransaccionesBLL.GrabarStockMovimientos(dsStockMov);
                             break;
                         case "frmVentas":
                             BL.TransaccionesBLL.GrabarVentas(dsVentas, ref codigoError);

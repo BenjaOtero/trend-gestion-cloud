@@ -13,6 +13,20 @@ namespace StockVentas
     public partial class frmFormasPago : Form
     {
         private DataTable tblFormasPago;
+        bool editando;
+        bool insertando;
+        string buscado = string.Empty;
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        } 
 
         public enum FormState
         {
@@ -88,34 +102,24 @@ namespace StockVentas
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             if (bindingSource1.Count == 0) return;
-            if (MessageBox.Show("¿Desea borrar este registro?", "Buscar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("¿Desea borrar este registro?", "Trend Gestión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingSource1.RemoveCurrent();
-                bindingSource1.EndEdit();
+                Grabar();
             }
-            SetStateForm(FormState.inicial); 
+            SetStateForm(FormState.inicial);
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            try
-            {
-            bindingSource1.EndEdit();
-            bindingSource1.Position = 0;
-            bindingSource1.Sort = "DescripcionFOR";
+            buscado = txtDescripcionFOR.Text;
+            Grabar();
             SetStateForm(FormState.inicial);
-          //  bindingSource1.RemoveFilter();
-            }
-            catch (ConstraintException)
-            {
-                string mensaje = "No se puede agregar la forma de pago '" + txtDescripcionFOR.Text.ToUpper() + "' porque ya existe";
-                MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtDescripcionFOR.Focus();
-            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            if (insertando) bindingSource1.RemoveCurrent();
             bindingSource1.CancelEdit();
             SetStateForm(FormState.inicial);
         }
@@ -127,14 +131,46 @@ namespace StockVentas
 
         private void frmFormasPago_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bindingSource1.EndEdit();
-            if (tblFormasPago.GetChanges() != null)
-            {
-                frmProgress progreso = new frmProgress(tblFormasPago, "frmFormasPago", "grabar");
-                progreso.ShowDialog();
-            }
             bindingSource1.RemoveFilter();
         }
+
+        private void Grabar()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                bindingSource1.EndEdit();
+                if (tblFormasPago.GetChanges() != null)
+                {
+                    BL.FormasPagoBLL.GrabarDB(tblFormasPago);
+                }
+                bindingSource1.RemoveFilter();
+                int itemFound = bindingSource1.Find("DescripcionFOR", buscado);
+                bindingSource1.Position = itemFound;
+            }
+            catch (ConstraintException)
+            {
+                string mensaje;
+                if (insertando)
+                {
+                    mensaje = "No se puede agregar la forma de pago '" + txtDescripcionFOR.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.RemoveCurrent();
+                }
+
+                if (editando)
+                {
+                    mensaje = "No se puede modificar la forma de pago  a '" + txtDescripcionFOR.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.CancelEdit();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Cursor.Current = Cursors.Arrow;
+        } 
 
         private void bindingSource1_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
@@ -203,6 +239,8 @@ namespace StockVentas
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
                 DelEventosValidacion();
+                insertando = false;
+                editando = false;
                 txtParametros.Focus();
             }
 
@@ -220,6 +258,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                insertando = true;
             }
 
             if (state == FormState.edicion)
@@ -235,6 +274,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                editando = true;
             }
         }
 

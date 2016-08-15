@@ -18,9 +18,20 @@ namespace StockVentas
         DataSet dsClientes;
         private DataTable tblClientes;
         DataTable tblFallidas;
-        private int? codigoError = null;
         bool editando;
         bool insertando;
+        string buscado = string.Empty;
+        private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar del formularios
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        } 
 
         public enum FormState
         {
@@ -86,6 +97,10 @@ namespace StockVentas
             cmbCondicion.DataBindings.Add("SelectedValue", bindingSource1, "CondicionIvaCLI", false, DataSourceUpdateMode.OnPropertyChanged);
             gvwDatos.DataSource = bindingSource1;
             gvwDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gvwDatos.Columns["IdClienteCLI"].DisplayIndex = 0;
+            gvwDatos.Columns["ApellidoCLI"].DisplayIndex = 1;
+            gvwDatos.Columns["NombreCLI"].DisplayIndex = 2;
+            gvwDatos.Columns["CorreoCLI"].DisplayIndex = 3;
             gvwDatos.Columns["IdClienteCLI"].HeaderText = "Nº cliente";
             gvwDatos.Columns["NombreCLI"].HeaderText = "Nombre";
             gvwDatos.Columns["ApellidoCLI"].HeaderText = "Apellido";
@@ -102,7 +117,7 @@ namespace StockVentas
             gvwDatos.Columns["FechaNacCLI"].Visible = false;
             gvwDatos.Columns["CondicionIvaCLI"].Visible = false;
             gvwDatos.Columns["NombreCompletoCLI"].Visible = false;
-            bindingSource1.Sort = "RazonSocialCLI";
+            bindingSource1.Sort = "ApellidoCLI ASC, NombreCLI ASC";
             int itemFound = bindingSource1.Find("RazonSocialCLI", "PUBLICO");
             bindingSource1.Position = itemFound;
             SetStateForm(FormState.inicial);            
@@ -140,67 +155,32 @@ namespace StockVentas
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            if (bindingSource1.Count == 0) return;
             SetStateForm(FormState.edicion);
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
+            if (bindingSource1.Count == 0) return;
             if (txtRazonSocialCLI.Text == "PUBLICO")
             {
                 MessageBox.Show("No se puede borrar el registro porque es un registro propio del sistema.", "Trend Gestión",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
-            }
-            if (MessageBox.Show("¿Desea borrar este registro?", "Buscar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            }            
+            if (MessageBox.Show("¿Desea borrar este registro?", "Trend Gestión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Cursor.Current = Cursors.WaitCursor;
-                try
-                {
-                    bindingSource1.RemoveCurrent();
-                    bindingSource1.EndEdit();
-                    if (tblClientes.GetChanges() != null)
-                    {
-                        BL.ClientesBLL.GrabarDB(tblClientes);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                Cursor.Current = Cursors.Arrow;
+                bindingSource1.RemoveCurrent();
+                Grabar();
             }
-            SetStateForm(FormState.inicial);
+            SetStateForm(FormState.inicial); 
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            try
-            {
-                if (ValidarFormulario())
-                {                    
-                    bindingSource1.EndEdit();
-                    if (tblClientes.GetChanges() != null)
-                    {
-                        BL.ClientesBLL.GrabarDB(tblClientes);
-                    }
-                    bindingSource1.Position = 0;
-                    bindingSource1.Sort = "ApellidoCLI";
-                    bindingSource1.RemoveFilter();
-                    SetStateForm(FormState.inicial);                    
-                }
-            }
-            catch (ConstraintException)
-            {
-                string mensaje = "No se puede agregar el cliente '" + txtNombreCLI.Text.ToUpper() + "' porque ya existe un cliente con el mismo correo electrónico.";
-                MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtCorreoCLI.Focus();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            Cursor.Current = Cursors.Arrow;
+            buscado = txtCorreoCLI.Text;
+            Grabar();
+            SetStateForm(FormState.inicial);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -218,23 +198,52 @@ namespace StockVentas
 
         private void frmClientes_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bindingSource1.RemoveFilter();
+            if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
+        }
+
+        private void Grabar()
+        {
             Cursor.Current = Cursors.WaitCursor;
             try
             {
                 bindingSource1.EndEdit();
                 if (tblClientes.GetChanges() != null)
-                {
+                {                    
                     BL.ClientesBLL.GrabarDB(tblClientes);
                 }
                 bindingSource1.RemoveFilter();
+                if (insertando || editando)
+                {
+                    int itemFound = bindingSource1.Find("CorreoCLI", buscado);
+                    bindingSource1.Position = itemFound;
+                }
+                bindingSource1.Sort = "ApellidoCLI ASC, NombreCLI ASC";
+            }
+            catch (ConstraintException)
+            {
+                string mensaje;
+                if (insertando)
+                {
+                    mensaje = "No se puede agregar el cliente '" + txtNombreCLI.Text.ToUpper() + " " + txtApellidoCLI.Text.ToUpper() +
+                        "' porque ya existe otro con el mismo correo electrónico.";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.RemoveCurrent();
+                }
+                if (editando)
+                {
+                    mensaje = "No se puede modificar el cliente '" + txtNombreCLI.Text.ToUpper() + " " + txtApellidoCLI.Text.ToUpper() +
+                        "' porque ya existe otro con el mismo correo electrónico.";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.CancelEdit();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message);
             }
             Cursor.Current = Cursors.Arrow;
-            if (instanciaVentas != null) instanciaVentas.idCliente = Convert.ToInt32(txtIdClienteCLI.Text);
-        }
+        } 
 
         private bool ValidarFormulario()
         {

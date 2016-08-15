@@ -12,6 +12,20 @@ namespace StockVentas
     public partial class frmLocales : Form
     {
         private DataTable tblLocales;
+        bool editando;
+        bool insertando;
+        string buscado = string.Empty;
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        } 
 
         public enum FormState
         {
@@ -88,38 +102,31 @@ namespace StockVentas
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            if (bindingSource1.Count == 0) return;
             SetStateForm(FormState.edicion);
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Desea borrar este registro?", "Buscar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (bindingSource1.Count == 0) return;
+            if (MessageBox.Show("¿Desea borrar este registro?", "Trend Gestión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingSource1.RemoveCurrent();
-                bindingSource1.EndEdit();
+                Grabar();
             }
-            SetStateForm(FormState.inicial); 
+            SetStateForm(FormState.inicial);
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                bindingSource1.EndEdit();
-                bindingSource1.Position = 0;
-                bindingSource1.Sort = "NombreLOC";
-                SetStateForm(FormState.inicial);                
-            }
-            catch (ConstraintException)
-            {
-                string mensaje = "No se puede agregar el local " + txtNombreLOC.Text.ToUpper() + " porque ya existe.";
-                MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtNombreLOC.Focus();
-            }
+            buscado = txtNombreLOC.Text;
+            Grabar();
+            SetStateForm(FormState.inicial);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            if (insertando) bindingSource1.RemoveCurrent();
             bindingSource1.CancelEdit();
             SetStateForm(FormState.inicial);
         }
@@ -131,13 +138,46 @@ namespace StockVentas
 
         private void frmBindingSource_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bindingSource1.EndEdit();
-            if (tblLocales.GetChanges() != null)
-            {
-                frmProgress progreso = new frmProgress(tblLocales, "frmLocales", "grabar");
-                progreso.ShowDialog();
-            }
+            bindingSource1.RemoveFilter();
         }
+
+        private void Grabar()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                bindingSource1.EndEdit();
+                if (tblLocales.GetChanges() != null)
+                {
+                    BL.LocalesBLL.GrabarDB(tblLocales);
+                }
+                bindingSource1.RemoveFilter();
+                int itemFound = bindingSource1.Find("NombreLOC", buscado);
+                bindingSource1.Position = itemFound;
+            }
+            catch (ConstraintException)
+            {
+                string mensaje;
+                if (insertando)
+                {
+                    mensaje = "No se puede agregar el local '" + txtNombreLOC.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.RemoveCurrent();
+                }
+
+                if (editando)
+                {
+                    mensaje = "No se puede modificar el local  a '" + txtNombreLOC.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.CancelEdit();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Cursor.Current = Cursors.Arrow;
+        }  
 
         void binding_Format(object sender, ConvertEventArgs e)
         {
@@ -220,6 +260,8 @@ namespace StockVentas
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
                 DelEventosValidacion();
+                insertando = false;
+                editando = false;
                 txtParametros.Focus();
             }
 
@@ -242,6 +284,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                insertando = true;                
             }
 
             if (state == FormState.edicion)
@@ -260,6 +303,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                editando = true;
             }
         }
 

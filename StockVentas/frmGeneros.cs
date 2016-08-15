@@ -14,6 +14,20 @@ namespace StockVentas
     public partial class frmGeneros : Form
     {
         private DataTable tblGeneros;
+        bool editando;
+        bool insertando;
+        string buscado = string.Empty;
+        private const int CP_NOCLOSE_BUTTON = 0x200;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams myCp = base.CreateParams;
+                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+                return myCp;
+            }
+        } 
 
         public enum FormState
         {
@@ -100,31 +114,21 @@ namespace StockVentas
             if (MessageBox.Show("¿Desea borrar este registro?", "Trend Gestión", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bindingSource1.RemoveCurrent();
-                bindingSource1.EndEdit();
+                Grabar();
             }
-            SetStateForm(FormState.inicial); 
+            SetStateForm(FormState.inicial);
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                bindingSource1.EndEdit();
-                bindingSource1.Position = 0;
-                bindingSource1.Sort = "DescripcionGEN";
-                SetStateForm(FormState.inicial);
-                bindingSource1.RemoveFilter();
-            }
-            catch (ConstraintException)
-            {
-                string mensaje = "No se puede agregar el género '" + txtDescripcionGEN.Text.ToUpper() + "' porque ya existe";
-                MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtDescripcionGEN.Focus();
-            }
+            buscado = txtDescripcionGEN.Text;
+            Grabar();
+            SetStateForm(FormState.inicial);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            if (insertando) bindingSource1.RemoveCurrent();
             bindingSource1.CancelEdit();
             SetStateForm(FormState.inicial);
         }
@@ -136,14 +140,46 @@ namespace StockVentas
 
         private void frmGeneros_FormClosing(object sender, FormClosingEventArgs e)
         {
-         //   bindingSource1.EndEdit();
-            if (tblGeneros.GetChanges() != null)
-            {
-                frmProgress progreso = new frmProgress(tblGeneros, "frmGeneros", "grabar");
-                progreso.ShowDialog();
-            }
-         //   bindingSource1.RemoveFilter();
+            bindingSource1.RemoveFilter();
         }
+
+        private void Grabar()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                bindingSource1.EndEdit();
+                if (tblGeneros.GetChanges() != null)
+                {
+                    BL.GenerosBLL.GrabarDB(tblGeneros);
+                }
+                bindingSource1.RemoveFilter();
+                int itemFound = bindingSource1.Find("DescripcionGEN", buscado);
+                bindingSource1.Position = itemFound;
+            }
+            catch (ConstraintException)
+            {
+                string mensaje;
+                if (insertando)
+                {
+                    mensaje = "No se puede agregar el género '" + txtDescripcionGEN.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.RemoveCurrent();
+                }
+
+                if (editando)
+                {
+                    mensaje = "No se puede modificar el género  a '" + txtDescripcionGEN.Text.ToUpper() + "' porque ya existe";
+                    MessageBox.Show(mensaje, "Trend", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bindingSource1.CancelEdit();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Cursor.Current = Cursors.Arrow;
+        } 
 
         void binding_Format(object sender, ConvertEventArgs e)
         {
@@ -220,6 +256,8 @@ namespace StockVentas
                 btnCancelar.Enabled = false;
                 btnSalir.Enabled = true;
                 DelEventosValidacion();
+                insertando = false;
+                editando = false;
                 txtParametros.Focus();
             }
 
@@ -237,6 +275,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                insertando = true;                
             }
 
             if (state == FormState.edicion)
@@ -252,6 +291,7 @@ namespace StockVentas
                 btnCancelar.Enabled = true;
                 btnSalir.Enabled = false;
                 AddEventosValidacion();
+                editando = true;
             }
         }
 

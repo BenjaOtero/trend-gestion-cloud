@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data;
+using MySql.Data.MySqlClient;
 using BL;
 using Entities;
 using System.Media;
@@ -34,7 +35,6 @@ namespace StockVentas
         DataView viewOrigen;
         DataView viewDestino;
         public string PK = string.Empty;
-        frmProgress progreso;
         int idMov;
         int claveDetalle;
         Random rand;
@@ -42,6 +42,7 @@ namespace StockVentas
         DataRowCollection cfilas;
         DataRow nuevaFila;
         bool imprimePrecios;
+        private int? codigoError = null;
 
         public frmStockEntradas()
         {
@@ -381,10 +382,11 @@ namespace StockVentas
 
         private void grabar()
         {
+            Cursor.Current = Cursors.WaitCursor;
             int intDestino = Convert.ToInt32(cmbDestino.SelectedValue.ToString());
             DataRow newRowStockMov = tblStockMov.NewRow();
             newRowStockMov["IdMovMSTK"] = idMov.ToString();
-            newRowStockMov["FechaMSTK"] = DateTime.Today;
+            newRowStockMov["FechaMSTK"] = dateTimePicker1.Value;
             newRowStockMov["OrigenMSTK"] = 1;
             newRowStockMov["DestinoMSTK"] = intDestino;
             newRowStockMov["CompensaMSTK"] = 0;
@@ -419,8 +421,24 @@ namespace StockVentas
                 }
             }
             rowView.EndEdit();
-            progreso = new frmProgress(dsStockMov, "frmStockEntradas", "grabar");
-            progreso.ShowDialog();
+            if (tblEntradasDetalle.GetChanges() == null) return;
+            BL.TransaccionesBLL.GrabarStockMovimientos(dsStockMov, ref codigoError);
+            Cursor.Current = Cursors.WaitCursor;
+            switch (codigoError)
+            {
+                case null:
+                    break;
+                case 0:
+                    MessageBox.Show("Procedure or function cannot be found in database. No se grabaron los datos. Consulte al administrador del sistema.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case 1042:
+                    MessageBox.Show("Unable to connect to any of the specified MySQL hosts. No se grabaron los datos. Consulte al administrador del sistema.", "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    MessageBox.Show("Se produjo un error inesperado. No se grabaron los datos. Consulte al administrador del sistema."
+                                    , "Trend", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
         }
 
         private bool ImprimirEtiquetas()

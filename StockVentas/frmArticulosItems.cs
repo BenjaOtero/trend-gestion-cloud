@@ -17,8 +17,8 @@ namespace StockVentas
         int clave;
         bool editando;
         bool insertando;
-        string descripcion = string.Empty;
-        private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar de frmProgress
+        string buscado = string.Empty;
+        private const int CP_NOCLOSE_BUTTON = 0x200;  //junto con protected override CreateParams inhabilitan el boton cerrar del formularios
         
         protected override CreateParams CreateParams
         {
@@ -86,13 +86,11 @@ namespace StockVentas
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             bindingSource1.AddNew();
-            // tildo el checkbox para disparar el evento parse del objeto bind
             Random rand = new Random();
             clave = rand.Next(1, 999);
             bool existe = true;
             while (existe == true)
             {
-              //  DataRow foundRow = tblArticulosItems.Rows.Find(clave);
                 DataRow[] foundRow2 = tblArticulosItems.Select("IdItemITE =" + clave);
                 if (foundRow2.Count() == 0)
                 {
@@ -129,7 +127,7 @@ namespace StockVentas
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
-            descripcion = txtDescripcionITE.Text;            
+            buscado = txtDescripcionITE.Text;            
             Grabar();
             SetStateForm(FormState.inicial);
         }
@@ -168,6 +166,7 @@ namespace StockVentas
                         break;
                 }
             }*/
+            bindingSource1.RemoveFilter();
         }
 
         private void Grabar()
@@ -181,7 +180,7 @@ namespace StockVentas
                     BL.ArticulosItemsBLL.GrabarDB(tblArticulosItems);
                 }
                 bindingSource1.RemoveFilter();
-                int itemFound = bindingSource1.Find("DescripcionITE", descripcion);
+                int itemFound = bindingSource1.Find("DescripcionITE", buscado);
                 bindingSource1.Position = itemFound;
             }
             catch (ConstraintException)

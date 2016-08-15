@@ -6,41 +6,10 @@
 -ver contraseñas 8953#AFjn
 -ofuscar codigo
 -desarrollar ayuda
--
-    	public class ArticulosDAL
-      
-        public static void InsertarDT(DataTable tabla, Entities.Articulos entidad)
-        {
-            DataRowCollection cfilas = tabla.Rows;
-            DataRow nuevaFila;
-            try
-            {
-                nuevaFila = tabla.NewRow();
-                nuevaFila[0] = entidad.IdArticulo.ToString();
-                nuevaFila[1] = entidad.IdItem.ToString();
-                nuevaFila[2] = entidad.IdGenero.ToString();
-                nuevaFila[3] = entidad.IdColor;
-                nuevaFila[4] = entidad.Talle.ToString();
-                nuevaFila[5] = entidad.IdProveedor.ToString();
-                nuevaFila[6] = entidad.Descripcion.ToString();
-                nuevaFila[7] = entidad.DescripcionWeb.ToString();
-                nuevaFila[8] = entidad.PrecioCosto.ToString();
-                nuevaFila[9] = entidad.PrecioPublico.ToString();
-                nuevaFila[10] = entidad.PrecioMayor.ToString();
-                nuevaFila[11] = entidad.Fecha;
-                nuevaFila[12] = entidad.Imagen.ToString();
-                nuevaFila[13] = entidad.ImagenBack.ToString();
-                nuevaFila[14] = entidad.ImagenColor.ToString();
-                nuevaFila[15] = entidad.ActivoWeb;                 // DÁ ERROR
-                nuevaFila[16] = entidad.NuevoWeb;
-                nuevaFila[17] = entidad.Proveedor;
-                nuevaFila[18] = entidad.IdAlicuota;
-                cfilas.Add(nuevaFila);
-            }
+-frmAlicuotasIva, txtPorcentajeALI_KeyPress (permitir un solo punto y dos decimales)
 
 
 prever caida servicio mysql y reiniciarlo
-
 probar importar datos
 probar y refactorizar exportar datos
 
