@@ -609,3 +609,7 @@ C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\GenerateResource.write.1.
 C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\StockVentas.HaberesRpt.resources
 C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\StockVentas.frmMarketingEmail.resources
 C:\Trend\Gestion-cloud\trunk\StockVentas\obj\x86\Debug\StockVentas.frmPopupTrend.resources
+C:\Trend\Gestion-desktop\trend-gestion-cloud\StockVentas\bin\Debug\StockVentas.exe.config
+C:\Trend\Gestion-desktop\trend-gestion-cloud\StockVentas\obj\x86\Debug\StockVentas.csproj.ResolveComReference.cache
+C:\Trend\Gestion-desktop\trend-gestion-cloud\StockVentas\obj\x86\Debug\StockVentas.exe
+C:\Trend\Gestion-desktop\trend-gestion-cloud\StockVentas\obj\x86\Debug\StockVentas.pdb

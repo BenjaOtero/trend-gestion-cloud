@@ -18,6 +18,7 @@ namespace DAL
 
         public static MySqlConnection GetConnection()
         {
+            int a = 0;
             const string server = "ns21a.cyberneticos.com";
             const string user = "ncsoftwa_re";
             string db = ConfigurationManager.ConnectionStrings["DBMain"].ConnectionString;
